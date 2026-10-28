@@ -1,0 +1,13 @@
+# локальные настройки инструментов
+.claude/
+.vscode/
+.idea/
+
+# системный мусор
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# прочее
+node_modules/
+*.log
