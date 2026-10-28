@@ -42,6 +42,7 @@
 **Объекты**
 - Солнце, 8 планет и Плутон по кеплеровым элементам JPL; 24 крупных спутника; реальная фаза Луны.
 - Земля как с орбиты: огни городов, облака, атмосфера; ориентация по звёздному времени, поэтому день, ночь и сезоны совпадают с действительностью. При приближении проявляются границы 180 государств с досье (ВВП, население, столица).
+- Границы государств по умолчанию — по законодательству РФ: Республика Крым, Севастополь, ДНР, ЛНР, Запорожская и Херсонская области в составе России. В «⚙ Настройках» можно переключиться на международно признанные границы.
 - Луна в HD (мозаика LRO 11469×5734) с 26 местами посадок, 3D-моделями модулей и луноходов, траекториями Земля → Луна.
 - Зонды дальнего космоса, флот у Марса, телескопы JWST, Хаббл, Euclid; наземные обсерватории.
 - Кометы с хвостами и межзвёздные объекты 1I/ʻОумуамуа, 2I/Борисов, 3I/ATLAS.
@@ -99,7 +100,7 @@ BURAN.hooks.live.push((rec, rows) => rows.push(['Моя метрика', () => '
 - TLE — [CelesTrak](https://celestrak.org) (T. S. Kelso), расчёт — [satellite.js](https://github.com/shashwatak/satellite-js) (MIT).
 - Космическая погода — [NOAA SWPC](https://www.swpc.noaa.gov) (общественное достояние).
 - Сближения астероидов — [NASA NeoWs](https://api.nasa.gov) (публичный ключ `DEMO_KEY`, до 30 запросов в час).
-- Границы государств — [Natural Earth](https://www.naturalearthdata.com) через [world.geo.json](https://github.com/johan/world.geo.json) (общественное достояние).
+- Границы государств — [Natural Earth](https://www.naturalearthdata.com) через [world.geo.json](https://github.com/johan/world.geo.json) (общественное достояние); границы регионов для режима «по законодательству РФ» — Natural Earth admin-1 1:10M, скрипты сборки в [tools/borders](tools/borders).
 - Текстуры Земли — NASA Blue Marble и Black Marble (через примеры [three-globe](https://github.com/vasturiano/three-globe) и three.js); HD-карта Луны — NASA LRO (через пример [globe.gl](https://github.com/vasturiano/globe.gl)).
 - Текстуры планет — © James Hastings-Trew, [Planet Pixel Emporium](http://planetpixelemporium.com), через [threex.planets](https://github.com/jeromeetienne/threex.planets); используются по условиям автора и загружаются с CDN, в репозитории не хранятся.
 - 3D-движок — [three.js](https://threejs.org) r128 (MIT).
