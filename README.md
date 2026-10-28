@@ -1,12 +1,20 @@
 # BURAN GALAXY — живая 3D-карта Солнечной системы
 
+> [!WARNING]
+> **Не открывается GitHub Pages?** У части провайдеров (в том числе российских) адреса `*.github.io` недоступны: страница бесконечно грузится или выдаёт ошибку соединения. Сам сайт при этом работает.
+>
+> **Откройте карту через зеркало:** [**raw.githack.com/…/BURAN_GALAXY/main/index.html**](https://raw.githack.com/greenredapple1910-arch/BURAN_GALAXY/main/index.html). Это тот же `index.html` из этого репозитория. При первом заходе нажмите «Open the page» на промежуточной странице.
+>
+> Основной адрес: https://greenredapple1910-arch.github.io/BURAN_GALAXY/
+
 **Открытая интерактивная карта Солнечной системы в реальном времени.** Планеты, спутники, зонды, кометы и тысячи спутников Земли — по данным NASA, NOAA и CelesTrak. Интерфейс в стиле Bloomberg-терминала, графика в духе Universe Sandbox. Один HTML-файл, без сборки и установки.
 
 ![Интерфейс: ночная Европа в огнях городов, досье Земли, космическая погода](docs/screenshots/ui-earth.jpg)
 
 ## Запуск
 
-- **Онлайн:** откройте страницу проекта на GitHub Pages (см. ниже, как включить).
+- **Онлайн:** https://greenredapple1910-arch.github.io/BURAN_GALAXY/
+- **Зеркало, если GitHub Pages недоступен:** https://raw.githack.com/greenredapple1910-arch/BURAN_GALAXY/main/index.html (на промежуточной странице нажмите «Open the page»).
 - **Локально:** скачайте репозиторий и откройте `index.html` двойным щелчком.
 - **Через локальный сервер** (так стабильнее работают живые данные):
 
@@ -111,3 +119,5 @@ BURAN.hooks.live.push((rec, rows) => rows.push(['Моя метрика', () => '
 ## English summary
 
 **BURAN GALAXY** is an open-source, real-time 3D map of the Solar System in a single HTML file: planets and moons from JPL orbital elements, a photoreal Earth with city lights and a true day/night terminator, an HD Moon with 26 landing sites, live satellites (ISS, Tiangong, Hubble and 15,000+ objects including Starlink, GNSS constellations and debris) propagated from CelesTrak TLEs with SGP4, NOAA space weather with Kp-driven aurorae, NASA near-Earth asteroid approaches, comets with tails, interstellar objects, asteroid and Kuiper belts, the heliosphere and a real celestial sphere. The interface is in Russian and styled after a Bloomberg terminal. Open `index.html` in a browser (internet connection required for libraries, textures and live data). Licensed under MIT.
+
+Live: https://greenredapple1910-arch.github.io/BURAN_GALAXY/ · Mirror (if `*.github.io` is blocked on your network): https://raw.githack.com/greenredapple1910-arch/BURAN_GALAXY/main/index.html
