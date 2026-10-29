@@ -1,4 +1,4 @@
-# Снимок данных для карты: TLE CelesTrak и каталог SATCAT публикуются в ветку data.
+# Снимок данных для карты: TLE CelesTrak, каталог SATCAT и ближайшие запуски (Launch Library 2) публикуются в ветку data.
 # Карта читает их через jsDelivr / raw.githack / raw.githubusercontent, поэтому посетители не нагружают CelesTrak.
 name: data snapshot
 
@@ -32,7 +32,7 @@ jobs:
             git --work-tree=out checkout FETCH_HEAD -- .
           fi
 
-      - name: Fetch CelesTrak
+      - name: Fetch CelesTrak and Launch Library 2
         run: python3 tools/data/fetch_data.py out
 
       - name: Publish to data branch
