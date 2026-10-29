@@ -761,9 +761,18 @@ button{font-family:inherit;}
   #llTable th:nth-child(4), #llTable td:nth-child(4), #llTable th:nth-child(5), #llTable td:nth-child(5){display:none;}
 }
 #rpDesc.clamp{display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden; padding-bottom:0; margin-bottom:8px;}
-.rpMore{display:block; background:none; border:none; color:var(--amber2); font-family:inherit; font-size:10px; letter-spacing:1px;
+.rpMore{display:none; background:none; border:none; color:var(--amber2); font-family:inherit; font-size:10px; letter-spacing:1px;
   padding:0 10px 6px; cursor:pointer;}
 .rpMore:hover{color:#fff;}
+/* v0.12: вкладки «Описание / Запуск» в досье */
+#rpTabs{display:none; margin:8px 10px 4px;}
+#rpTabs button{flex:1; background:#141414; border:1px solid var(--line); color:var(--amber2); font-family:inherit; font-size:11px;
+  letter-spacing:1px; padding:4px 6px; cursor:pointer; white-space:nowrap;}
+#rpTabs button+button{margin-left:-1px;}
+#rpTabs button:hover{border-color:var(--amber-dim); color:#fff;}
+#rpTabs button.on{background:var(--amber); color:#000; border-color:var(--amber); font-weight:bold;}
+#rpPane{display:none; padding-top:2px;}
+#rpPane .faBox:first-child>.rpSecT:first-child{margin-top:4px;}
 </style>
 </head>
 <body>
@@ -856,13 +865,16 @@ button{font-family:inherit;}
         <button id="btnClose" title="Закрыть досье [Esc]">✕</button>
       </div>
       <div id="rpScroll">
+        <div id="rpTabs"><button data-t="d" class="on">ОПИСАНИЕ</button><button data-t="l">▲ ЗАПУСК</button></div>
+        <div class="rpSecT" id="rpDescT">ОПИСАНИЕ</div>
+        <div id="rpDesc"></div>
+        <button class="rpMore" id="rpMore">▾ ПОДРОБНЕЕ</button>
+        <div id="rpPane"></div>
+        <div id="rpApprox">ⓘ ПОЛОЖЕНИЕ ОБЪЕКТА РАСЧЁТНОЕ / ПРИБЛИЖЁННОЕ</div>
         <div class="rpSecT">ТЕЛЕМЕТРИЯ (РАСЧЁТ В РЕАЛЬНОМ ВРЕМЕНИ)</div>
         <table id="rpLive"></table>
         <div class="rpSecT">ХАРАКТЕРИСТИКИ</div>
         <table id="rpFacts"></table>
-        <div class="rpSecT">ОПИСАНИЕ</div>
-        <div id="rpDesc"></div>
-        <div id="rpApprox">ⓘ ПОЛОЖЕНИЕ ОБЪЕКТА РАСЧЁТНОЕ / ПРИБЛИЖЁННОЕ</div>
       </div>
     </div>
   </div>
@@ -2117,7 +2129,24 @@ const VERSIONS = [
   'Числа в досье Земли, группировки и бегущей строке — из живого каталога (≈15,9 тыс. работающих аппаратов, ≈34,8 тыс. объектов на орбите); мусор из SATCAT подгружается в фоне — счётчик не прыгает',
   'Размер интерфейса (⚙ → «Интерфейс»: авто, 100–150 %), настройки разбиты на группы; описание в досье — сразу под заголовком, длинное сворачивается',
   'Телефон: досье и каталог открываются шторкой снизу, карта остаётся видна; инструменты свёрнуты в кнопку «⋯»',
-  'Окно миссий: прошедшие плановые даты опущены вниз с пометкой; название проекта везде — BURAN GALAXY; в меню слоёв клавиши по порядку и новый слой «Ближайшие запуски»']}
+  'Окно миссий: прошедшие плановые даты опущены вниз с пометкой; название проекта везде — BURAN GALAXY; в меню слоёв клавиши по порядку и новый слой «Ближайшие запуски»']},
+{v:'0.12', date:'29.10.2026', title:'Фон без путаницы со спутниками и понятное досье',
+ items:['Четыре стиля фона (⚙ → «Стиль фона»): «Фото» — вдали полная фотопанорама ESO со звёздами, у Земли звёзды растворяются; «Туманности» — Млечный Путь без звёзд, с пылевыми прожилками; «Фокус» — мягкое свечение, как фон не в фокусе; «Сетка» — тёмное небо с сеткой небесных координат, экватором и эклиптикой',
+  'У Земли и в виде с МКС звёзд на фоне нет ни в одном стиле — все точки там спутники. Звёзды с панорамы убирает фильтр на видеокарте один раз при загрузке (минимум, затем максимум по окрестности ±5 пикселей): точки исчезают, туманности остаются',
+  'Фон на четверть темнее, яркость — ползунок ⚙ → «Яркость фона». У Земли фон приглушается сам, при выбранном спутнике или группировке — ещё сильнее и мягче, с плавным переходом',
+  'Выбран спутник — соседние аппараты в тени Земли больше не тонут во тьме: затенение ослаблено, мелкие спутники рядом видны',
+  'Мусор — только в режиме «☄ Мусор»: в режиме «Спутники» обломки, ступени и мёртвые аппараты больше не рисуются полупрозрачной россыпью; в режиме «Мусор» работающие спутники приглушены, чтобы мусор был на первом плане. История орбиты и легенда раскраски считают то, что на карте',
+  'Досье: сверху описание, рядом вкладка «▲ ЗАПУСК» (у пусков — «▲ РАКЕТА»): ракета, дата, космодром, итог, ссылки и объекты того же пуска. Ниже — телеметрия и характеристики, в конце — вид с МКС, модули станции, выпущенные с борта аппараты и пояснение к линиям на глобусе',
+  'Компоновка: легенда раскраски на узких экранах поднимается над переключателем «Земля / Спутники / Мусор», полосой истории и подсказкой и больше не наезжает на них']},
+{v:'0.13', date:'29.10.2026', title:'Режим Земли не пропадает, спутники и мусор — на разных вкладках',
+ items:['Исправлено: при облёте Земли на части ракурсов пропадали переключатель «Земля / Спутники / Мусор», выбор спутников и плашка ближайшего запуска, а у Земли появлялись звёзды фона. Причина — Луна за спиной камеры: её проверка срабатывала, даже когда камера держит Землю. Теперь Луна учитывается только для свободной камеры',
+  'Вкладки разведены полностью: в режиме «Спутники» — только работающие аппараты, в режиме «☄ Мусор» — только обломки, ступени и мёртвые спутники; станции и телескопы на орбите (МКС, «Тяньгун», «Хаббл», Chandra, TESS) в режиме «Мусор» тоже скрыты',
+  'Если вкладку переключили вручную, а выбран объект другой вкладки, досье закрывается — не остаётся карточки аппарата, которого нет на карте',
+  'История орбиты в режиме «Мусор» считает только мусор']},
+{v:'0.14', date:'29.10.2026', title:'Честная история орбиты и тусклые границы',
+ items:['История орбиты (J): станции, телескопы и зонды появляются в год запуска — «Хаббл» в 1990-м, МКС в 1998-м, «Тяньгун» в 2021-м — а не висят над Землёй с 1957 года',
+  'История в режиме «Мусор»: дымка мелкого мусора (модель ≈1 млн неотслеживаемых обломков) больше не видна с самого начала — она густеет вместе с отслеживаемым мусором; подпись «ИСЗ LIVE» с сегодняшними числами на время истории скрыта',
+  'Границы стран в режимах «Спутники» и «Мусор» плавно гаснут до ≈15 % и не спорят с точками; в режиме «Земля» — прежняя яркость']}
 ];
 </script>
 <script>
@@ -3062,6 +3091,7 @@ function llToV(lat,lon,r){
   return [-Math.cos(ph)*st*r, Math.cos(th)*r, Math.sin(ph)*st*r];
 }
 let earthPick=null; // модуль v0.8: 'earth' — страны кликабельны и без выбора Земли
+let bordOp=0.55;
 function bordersActive(){
   return countriesReady && (selected===byId.earth||!!selCountry||earthPick==='earth') &&
     camera.position.distanceTo(worldPos(byId.earth))<EARTH_R*24;
@@ -3818,8 +3848,11 @@ function frame(nowMs){
     const full=(selected===byId.earth||!!selCountry||earthPick==='earth');
     const on=full||earthPick==='sats'; // в режиме «Спутники» границы — тонкая подложка, как на satellitemap.space
     const o=on?clamp((EARTH_R*24-dE)/(EARTH_R*10),0,1):0;
+    // v0.14: в режимах «Спутники» и «Мусор» границы гаснут до ≈15 %, чтобы не спорить с точками; переход плавный
+    const bt=earthPick==='sats'&&!selCountry?0.15:(full?0.55:0.3);
+    bordOp+=(bt-bordOp)*Math.min(1,dt*4);
     bordersMesh.visible=o>0.02;
-    bordersMesh.material.opacity=(full?0.55:0.3)*o;
+    bordersMesh.material.opacity=bordOp*o;
     if(hoverMesh.visible&&o<=0.02) hoverMesh.visible=false;
     if(selBorderMesh) selBorderMesh.visible=o>0.02&&!!selCountry;
     // спутники у Земли больше не гаснут при приближении (баг v0.7: Starlink пропадал на крупном плане)
@@ -5082,10 +5115,12 @@ const SG_START={g_starlink:'2019-05-24', g_oneweb:'2019-02-27', g_gps:'1978-02-2
   g_beidou:'2000-10-31', g_geo:'1964-08-19', g_leo:'1957-10-04', g_debris:'1957-10-04', swarm:'1957-10-04'};
 Object.keys(SG_START).forEach(id=>{ if(byId[id]) byId[id].launchMs=Date.parse(SG_START[id]+'T00:00:00Z'); });
 function timeVisCheck(){
-  const t=B.getSim(); let ch=false;
+  // во время «Истории орбиты» (J) — год на её шкале, а не модельное время: станции и телескопы появляются в год запуска
+  const t=B.timeOverride!=null?B.timeOverride:B.getSim(); let ch=false;
   B.recs.forEach(r=>{ if(r.launchMs==null) return; const h=t<r.launchMs; if(r.hiddenByTime!==h){ r.hiddenByTime=h; ch=true; } });
   if(ch) B.applyVisibility();
 }
+B.timeVisCheck=timeVisCheck;
 const TM=[
  ['1957-10-04T19:28','Спутник-1','Первый искусственный спутник Земли — начало космической эры.','earth',60],
  ['1961-04-12T06:07','Гагарин, «Восток-1»','Первый человек в космосе: 108 минут, один виток.','earth',60],
@@ -6087,17 +6122,19 @@ let hlTest=null, hlLabel='';     // подсветка: поиск, катего
 let satsOn=true;                  // слой «0 · Все спутники Земли»
 function satColor(s){ return s.cls==='nav'?NAV_CSS[s.nav]||NAV_CSS.other:CLS_BY[s.cls].css; }
 function shown(s){ return !s.bad&&!hiddenCls.has(s.cls)&&(!SH.vis||SH.vis(s)); }
+// что сейчас на карте: в режиме «Мусор» — только обломки, ступени и мёртвые спутники, в остальных — только работающие аппараты
+function onMap(s){ return shown(s)&&(mode==='deb')===isJunk(s); }
 const BASE_SZ={station:1.9, geo:1.3, nav:1.3, deb:0.85, rb:1.0, dead:0.95};
 function restyle(){
   if(!cloud) return;
   let hn=0, vn=0;
   for(let i=0;i<N;i++){
-    const s=cat.list[i], vis=shown(s), hl=hlTest?hlTest(s):false;
+    const s=cat.list[i], vis=onMap(s), hl=hlTest?hlTest(s):false;
     if(vis){ vn++; if(hl) hn++; }
     _col.set(SH.col?SH.col(s):satColor(s)); colA[i*3]=_col.r; colA[i*3+1]=_col.g; colA[i*3+2]=_col.b;
     const base=BASE_SZ[s.cls]||1;
     sizeA[i]=hlTest?(hl?base*1.35:base*0.8):base;
-    alphaA[i]=!vis?0:(hlTest?(hl?1:0.13):(isJunk(s)?(mode==='sats'?0.32:0.6):0.95));
+    alphaA[i]=!vis?0:(hlTest?(hl?1:0.13):(mode==='deb'?0.8:0.95));
   }
   visCount=vn; hlCount=hn;
   const at=cloud.geometry.attributes; at.acol.needsUpdate=at.asize.needsUpdate=at.aalpha.needsUpdate=true;
@@ -6436,8 +6473,10 @@ const _M=new THREE.Matrix4(), _Mi=new THREE.Matrix4(), _c=new THREE.Vector3();
 function nearEarth(){
   const f=B.getFollow();
   if(f&&f!==EARTH&&(f===MOON||f.kindType==='site'||(f.parentRec&&f.parentRec!==EARTH))) return false; // у Луны и других тел — обычный выбор
-  const cp=camera.position, dE=cp.distanceTo(B.worldPos(EARTH)), dM=cp.distanceTo(B.worldPos(MOON));
-  if(dM<MOON.visR*8&&dM<dE) return false;
+  const cp=camera.position, dE=cp.distanceTo(B.worldPos(EARTH));
+  // v0.13: Луна рядом важна только для свободной камеры. Если камера держит Землю или её спутник, а Луна оказалась
+  // за спиной, режим Земли раньше выключался — пропадали переключатель внизу, выбор спутников и плашка запуска
+  if(!f){ const dM=cp.distanceTo(B.worldPos(MOON)); if(dM<MOON.visR*8&&dM<dE) return false; }
   return dE<eR*26;
 }
 function catInTime(){ return cat.ready&&Math.abs(B.getSim()-cat.epoch)<30*DAY_MS; }
@@ -6486,6 +6525,15 @@ hooks.click.push(function(e,hov){
 // у Земли в режиме «Земля» аппараты не перехватывают щелчок у стран
 B.recs.forEach(r=>{ if(r.parentRec===EARTH&&(r.kindType==='station'||r.kindType==='orbiter'||r.kindType==='swarm'||r.kindType==='lagrange')){
   const o=r.pickCheck; r.pickCheck=()=>(!o||o())&&!(nearE&&mode==='earth'&&cat.ready); } });
+// v0.13: станции и телескопы на орбите Земли — тоже работающие аппараты; в режиме «Мусор» их модели, подписи и орбиты скрыты
+const EARTH_CRAFT=B.recs.filter(r=>r.parentRec===EARTH&&(r.kindType==='station'||r.kindType==='orbiter'));
+const craftOff=r=>mode==='deb'&&cat.ready&&B.getSelected()!==r;
+EARTH_CRAFT.forEach(r=>{ const lc=r.labelCheck, pc=r.pickCheck; r.labelCheck=()=>(!lc||lc())&&!craftOff(r); r.pickCheck=()=>(!pc||pc())&&!craftOff(r); });
+let craftHid=false;
+hooks.vis.push(function(){
+  const hide=mode==='deb'&&cat.ready; if(!hide&&!craftHid) return; craftHid=hide;
+  EARTH_CRAFT.forEach(r=>{ const h=craftOff(r); r.node.visible=!h&&!r.hiddenByTime; if(h&&r.orbit) r.orbit.visible=false; });
+});
 
 /* ── Плавающий переключатель режимов ───────────────────────────────── */
 const modeSw=mk('div'); modeSw.id='modeSw';
@@ -6506,7 +6554,10 @@ function setMode(m,user){
   if(m==='deb'){ loadApprox().catch(()=>{}); if(!haze) buildHaze(); }
   // вкладка списка следует за режимом: «Мусор» ↔ «КОСМИЧЕСКИЙ МУСОР», «Спутники» ↔ «АППАРАТЫ»
   if(m!=='earth'&&(m==='deb')!==(satKind==='deb')) setKind(m==='deb'?'deb':'act',true);
-  restyle(); refreshHL();
+  // переключили вкладку вручную, а выбран объект «чужой» вкладки — досье закрываем (его точки на карте больше нет)
+  const sel=B.getSelected();
+  if(user&&changed&&m!=='earth'&&sel&&((sel.kindType==='sat'&&isJunk(sel.sat)!==(m==='deb'))||(m==='deb'&&EARTH_CRAFT.indexOf(sel)>=0))) B.select(null);
+  restyle(); refreshHL(); B.applyVisibility();
 }
 setMode('sats');
 /* ── Модель мелкого мусора: ≈1 млн фрагментов крупнее 1 см (оценка ESA) не отслеживаются поштучно.
@@ -6658,8 +6709,24 @@ function openSat(s,fly){
 
 /* ════ 6. ДОСЬЕ: СПУТНИК, ЗАПУСК, РАКЕТА (FLIGHT ATLAS) ═════════════ */
 const rp=B.rp;
-const xBox=mk('div'); xBox.id='rpExtra'; xBox.style.display='none';
-(function(){ const factsHdr=rp.facts.previousElementSibling; factsHdr.parentNode.insertBefore(xBox,factsHdr); })();
+const xBox=mk('div'); xBox.id='rpExtra'; xBox.style.display='none'; rp.facts.after(xBox);
+// v0.12: досье сверху вниз — описание (рядом вкладка «▲ ЗАПУСК»: ракета, дата, космодром, итог, объекты того же пуска),
+// телеметрия, характеристики, затем модули станции, связанные объекты и пояснения к линиям на глобусе
+const rpTabs=$('rpTabs'), rpPane=$('rpPane'), rpMore=$('rpMore'), rpDescT=$('rpDescT');
+let rpTab='d', rpOpen=false, rpFor=null;
+function syncRp(){
+  const tabs=rpPane.children.length>0, d=rpTab==='d'||!tabs;
+  rpTabs.style.display=tabs?'flex':'none'; rpDescT.style.display=tabs?'none':'';
+  if(tabs) rpTabs.children[1].textContent=rpPane.firstChild.dataset.tab;
+  [...rpTabs.children].forEach(b=>b.classList.toggle('on',b.dataset.t===(d?'d':'l')));
+  rp.desc.style.display=d?'':'none'; rpPane.style.display=d?'none':'block';
+  rp.desc.classList.toggle('clamp',!rpOpen); rpMore.textContent=rpOpen?'▴ СВЕРНУТЬ':'▾ ПОДРОБНЕЕ';
+  const chk=()=>{ rpMore.style.display=d&&(rpOpen||rp.desc.scrollHeight>rp.desc.clientHeight+4)?'block':'none'; };
+  chk(); requestAnimationFrame(chk);
+}
+rpTabs.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b){ rpTab=b.dataset.t; syncRp(); } });
+rpMore.addEventListener('click',()=>{ rpOpen=!rpOpen; syncRp(); });
+new MutationObserver(()=>{ rpOpen=false; syncRp(); }).observe(rp.desc,{childList:true, characterData:true, subtree:true});
 function setFactsTable(rows){
   rp.facts.innerHTML='';
   rows.forEach(f=>{ const tr=mk('tr'), a=mk('td',null,f[0]), b=mk('td',null,f[1]); tr.appendChild(a); tr.appendChild(b); rp.facts.appendChild(tr); });
@@ -6667,7 +6734,7 @@ function setFactsTable(rows){
 let selToken=0;
 function faBlock(x,opt){
   opt=opt||{};
-  const box=mk('div','faBox');
+  const box=mk('div','faBox'); box.dataset.tab=opt.tab||'▲ ЗАПУСК';
   const hdr=mk('div','rpSecT',opt.title||'ЗАПУСК И РАКЕТА · FLIGHT ATLAS'); box.appendChild(hdr);
   if(!x){ const p=mk('div','faNote',opt.note||'Запуск не найден в базе Flight Atlas.'); box.appendChild(p);
     if(opt.cospar){ const a=mk('a','faBadge','◈ ИСКАТЬ НА SPACE ATLAS ↗'); a.href=SA_PAGE(opt.cospar); a.target='_blank'; a.rel='noopener'; box.appendChild(a); }
@@ -6694,6 +6761,7 @@ function objectsBlock(lc,exceptNorad){
   if(!L.length) return null;
   const st=exceptNorad&&ST_LC[lc];
   const box=mk('div','faBox'); box.appendChild(mk('div','rpSecT',(st?'ВЫПУЩЕНЫ С БОРТА '+st:(exceptNorad?'ТЕМ ЖЕ ПУСКОМ НА ОРБИТЕ':'ОБЪЕКТЫ ЭТОГО ПУСКА НА ОРБИТЕ'))+' · '+L.length));
+  if(exceptNorad&&!st) box.dataset.tab='▲ ЗАПУСК';
   if(st) box.appendChild(mk('div','faNote','Кубсаты и малые аппараты, которые экипаж или манипулятор выпустил со станции, получают её международное обозначение '+lc+' — поэтому они «из того же пуска», хотя прилетели на грузовых кораблях много позже.'));
   const lst=mk('div','faObjs');
   L.slice().sort((a,b)=>a.cospar.localeCompare(b.cospar)).slice(0,60).forEach(s=>{
@@ -6720,10 +6788,13 @@ function modulesBlock(norad){
     d.title='NORAD '+s.norad; lst.appendChild(d); });
   box.appendChild(lst); return box;
 }
-function fillExtra(nodes){ xBox.innerHTML=''; nodes.filter(Boolean).forEach(n=>xBox.appendChild(n)); xBox.style.display=xBox.children.length?'block':'none'; }
-function loadingBox(t){ const b=mk('div','faBox'); b.appendChild(mk('div','rpSecT',t||'ЗАПУСК И РАКЕТА · FLIGHT ATLAS')); b.appendChild(mk('div','faNote','загрузка истории запусков…')); return b; }
+function fillExtra(nodes){ xBox.innerHTML=''; rpPane.innerHTML='';
+  nodes.filter(Boolean).forEach(n=>(n.dataset.tab?rpPane:xBox).appendChild(n));
+  xBox.style.display=xBox.children.length?'block':'none'; syncRp(); }
+function loadingBox(t){ const b=mk('div','faBox'); b.dataset.tab='▲ ЗАПУСК'; b.appendChild(mk('div','rpSecT',t||'ЗАПУСК И РАКЕТА · FLIGHT ATLAS')); b.appendChild(mk('div','faNote','загрузка истории запусков…')); return b; }
 hooks.select.push(function(r){
   const tok=++selToken;
+  if(r!==rpFor){ rpFor=r; rpTab='d'; }
   if(!r){ fillExtra([]); return; }
   if(r.kindType==='sat'){
     const s=r.sat;
@@ -6745,7 +6816,7 @@ hooks.select.push(function(r){
   const btn=$('btnCmpAdd'); if(btn) btn.style.display=r.kindType==='launch'?'none':'';
   if(r.kindType==='launch'){
     rp.status.style.color=r.status==='OK'?'var(--green)':(r.status==='FAIL'?'var(--red)':'var(--amber2)');
-    fillExtra([faBlock(r.fa,{title:'РАКЕТА-НОСИТЕЛЬ · FLIGHT ATLAS', noDesc:true}), r.fa.cospar&&cat.ready?objectsBlock(r.fa.cospar,0):null]);
+    fillExtra([faBlock(r.fa,{title:'РАКЕТА-НОСИТЕЛЬ · FLIGHT ATLAS', noDesc:true, tab:'▲ РАКЕТА'}), r.fa.cospar&&cat.ready?objectsBlock(r.fa.cospar,0):null]);
     return;
   }
   const faId=FA_REC[r.id];
@@ -7230,9 +7301,14 @@ B.sound={ on:()=>!AS.mute, set:on=>setMuted(!on), blips:()=>!!AS.blips, next:nex
   skyRows:function(b,row,sw){
     b.appendChild(row('Фон неба','Фотопанорама Млечного Пути ESO / S. Brunier (CC BY 4.0) вместо нарисованных звёзд',sw(skyOn,on=>setSky(on))));
     if(SKY_LOD){ const sg=mk('div','seg');
-      [['few','ЯРКИЕ'],['more','БОЛЬШЕ'],['all','ВСЕ']].forEach(o=>{ const x=mk('button',skyStars===o[0]?'on':'',o[1]);
-        x.addEventListener('click',()=>{ setSkyStars(o[0]); [...sg.children].forEach(y=>y.classList.toggle('on',y===x)); }); sg.appendChild(x); });
-      b.appendChild(row('Звёзды на фоне','Слабые звёзды панорамы сливаются в зернистую россыпь — по умолчанию видны только яркие',sg)); }
+      [['photo','ФОТО','вдали — вся панорама со звёздами, у Земли звёзды растворяются'],['starless','ТУМАННОСТИ','Млечный Путь без звёзд: пылевые прожилки и туманности'],
+       ['focus','ФОКУС','Млечный Путь мягким свечением, как фон не в фокусе'],['grid','СЕТКА','тёмное небо с сеткой небесных координат и эклиптикой']].forEach(o=>{
+        const x=mk('button',skyStyle===o[0]?'on':'',o[1]); x.title=o[2];
+        x.addEventListener('click',()=>{ setSkyStyle(o[0]); [...sg.children].forEach(y=>y.classList.toggle('on',y===x)); }); sg.appendChild(x); });
+      b.appendChild(row('Стиль фона','У Земли звёзд на фоне нет ни в одном стиле — точки там только спутники',sg)); }
+    const br=mk('input'); br.type='range'; br.min='20'; br.max='100'; br.value=String(Math.round(skyBr*100)); br.className='volR';
+    br.addEventListener('input',()=>{ skyBr=br.value/100; try{ localStorage.setItem('buran_sky_bright',String(skyBr)); }catch(e){} });
+    b.appendChild(row('Яркость фона','У Земли фон приглушается сам, при выбранном спутнике — сильнее',br));
   },
   settingsRows:function(b,row,sw){
     b.appendChild(row('Музыка','Космический эмбиент: Scott Buckley и др., Wikimedia Commons (CC BY / CC0)',sw(!!AS.music,on=>{ AS.music=on?1:0; saveAS(); if(on) play(); else pause(); })));
@@ -7555,6 +7631,8 @@ hooks.post.push(function(dt){
     const dE=camera.position.distanceTo(B.worldPos(EARTH))/eR;
     satMat.uniforms.pxr.value=renderer.getPixelRatio();
     satMat.uniforms.szk.value=pointScale(); updSunUniform();
+    // v0.12: у выбранного спутника соседи в тени Земли не тонут во тьме — затенение слабее
+    const shK=skyFocus()===2?0.3:0.72; satMat.uniforms.shadowK.value+=(shK-satMat.uniforms.shadowK.value)*Math.min(1,dt*3);
     // v0.11: камера смотрит на Землю издалека — объекты высоких орбит рядом с камерой гаснут, кольцо ГСО остаётся
     const fw=B.getFollow(), nk=(!pov&&(!fw||fw===EARTH))?clamp((dE-3.5)/2.5,0,1):0;
     satMat.uniforms.nearA.value=0.22*dE*eR*nk; satMat.uniforms.nearB.value=0.55*dE*eR*nk;
@@ -7609,7 +7687,7 @@ $('wSats').addEventListener('click',()=>{ $('welcomeOv').style.display='none'; B
   x.fillStyle=g; x.fillRect(0,0,64,64); const tex=new THREE.CanvasTexture(c);
   const stars=[]; B.skyGroup.traverse(o=>{ if(o.isPoints&&o.material&&o.material.sizeAttenuation===false) stars.push(o); });
   stars.forEach(p=>{ const m=p.material; m.map=tex; m.size*=2.4; m.userData.op=m.opacity*0.55; m.opacity=m.userData.op; m.needsUpdate=true; });
-  let k0=-1; hooks.post.push(()=>{ const k=nearE?0.5:1; if(k!==k0){ k0=k; stars.forEach(p=>{ p.material.opacity=p.material.userData.op*k; }); } });
+  let k0=-1; hooks.post.push(()=>{ const fk=skyFocus(), k=fk===2?0.25:(fk===1?0.5:1); if(k!==k0){ k0=k; stars.forEach(p=>{ p.material.opacity=p.material.userData.op*k; }); } });
 })();
 /* ════ 12. ФОН И БЛИК: ПАНОРАМА МЛЕЧНОГО ПУТИ ESO, ДИНАМИЧЕСКИЙ БЛИК СОЛНЦА ══════
    Фон — фотопанорама всего неба ESO / S. Brunier («The Milky Way panorama», eso0932a, CC BY 4.0),
@@ -7620,34 +7698,98 @@ function eqDirV(raH,decD){ const a=raH*15*D2R, d=decD*D2R, xe=Math.cos(d)*Math.c
   const y=ye*Math.cos(OBLQ)+ze*Math.sin(OBLQ), z=-ye*Math.sin(OBLQ)+ze*Math.cos(OBLQ); return new THREE.Vector3(xe,z,-y).normalize(); }
 const GAL_C=eqDirV(17+45/60+40/3600,-28.94), GAL_N=eqDirV(12+51/60+26/3600,27.13);
 const GAL_X=GAL_C.clone().sub(GAL_N.clone().multiplyScalar(GAL_C.dot(GAL_N))).normalize(), GAL_Y=new THREE.Vector3().crossVectors(GAL_N,GAL_X).normalize();
-// v0.11: панорама 4000×2000 на экране растянута, и миллионы слабых звёзд превращались в зернистую «кашу».
-// Теперь фон = мягкое свечение (уровень мипмапа, среднее по 5 точкам) + только звёзды заметно ярче окружения;
-// чёрная точка гасит шум тёмного неба. Нужен textureLod (WebGL2 или расширение) — иначе прежний шейдер.
+// v0.12: стили фона (⚙ «Стиль фона»). Главное правило — у Земли на фоне нет точек, похожих на спутники:
+//   photo    — вдали полная фотопанорама со звёздами, у Земли звёзды растворяются в версии без звёзд;
+//   starless — Млечный Путь без звёзд: пылевые прожилки и туманности (звёзды убирает фильтр на видеокарте при загрузке);
+//   focus    — Млечный Путь мягким свечением, как фон не в фокусе объектива;
+//   grid     — тёмное небо с тонкой сеткой небесных координат, экватором и эклиптикой; Млечный Путь приглушён.
+// Все стили, кроме полной фотопанорамы вдали, рисуются по версии без звёзд — тёмное небо остаётся чёрным, а не серой дымкой.
+// У Земли фон темнеет, при выбранном спутнике или группировке — ещё темнее и мягче.
+// Нужен textureLod (WebGL2 или расширение) — иначе прежний простой шейдер.
 const SKY_LOD=renderer.capabilities.isWebGL2||!!renderer.extensions.get('EXT_shader_texture_lod');
-const SKY_STARS={few:0.26, more:0.13, all:0};
-let skyStars=(function(){ try{ const v=localStorage.getItem('buran_sky_stars'); return SKY_STARS[v]!=null?v:'few'; }catch(e){ return 'few'; } })();
+const SKY_STY={photo:0, starless:1, focus:2, grid:3};
+let skyStyle=(function(){ try{ const v=localStorage.getItem('buran_sky_style'); return SKY_STY[v]!=null?v:'photo'; }catch(e){ return 'photo'; } })();
+let skyBr=(function(){ try{ const v=parseFloat(localStorage.getItem('buran_sky_bright')); return v>=0.2&&v<=1?v:0.75; }catch(e){ return 0.75; } })();
+const SKY_EQ=new THREE.Matrix3().set(1,0,0, 0,-Math.sin(OBLQ),-Math.cos(OBLQ), 0,Math.cos(OBLQ),-Math.sin(OBLQ)); // сцена → экваториальные
+const SKY_FS='uniform sampler2D tex; uniform sampler2D sl; uniform vec3 gX; uniform vec3 gY; uniform vec3 gZ; uniform float gain; uniform float gG; uniform float bp;\n'+
+  'uniform vec2 px; uniform vec2 pxS; uniform float nE; uniform float nS; uniform mat3 eqM; varying vec3 vD;\n'+
+  // мягкое размытие: 12 выборок по диску (спираль золотого угла) на уровне мипмапа L; ax — поправка на растяжение панорамы к полюсам
+  'vec3 disc(sampler2D t,vec2 uv,vec2 o,float L){ vec3 g=vec3(0.0);\n'+
+  ' for(int i=0;i<12;i++){ float f=float(i)+0.5; float a=f*2.39996; g+=texture2DLodEXT(t,uv+o*sqrt(f/12.0)*vec2(cos(a),sin(a)),L).rgb; }\n'+
+  ' return g/12.0; }\n'+
+  'vec3 soft(vec2 uv,vec2 ax,float L){\n'+
+  '#if SL==1\n'+
+  ' return disc(sl,uv,pxS*exp2(L)*1.6*ax,L);\n'+
+  '#else\n'+
+  ' float M=L+2.4; vec3 c=disc(tex,uv,px*exp2(M)*1.6*ax,M); return max(c-vec3(bp),0.0)/(1.0-bp);\n'+
+  '#endif\n'+
+  '}\n'+
+  'void main(){ vec3 d=normalize(vD); float l=atan(dot(d,gY),dot(d,gX)); float b=asin(clamp(dot(d,gZ),-1.0,1.0));\n'+
+  ' vec2 uv=vec2(0.5-l/6.2831853,0.5+b/3.1415927), ax=vec2(1.0/max(cos(b),0.3),1.0); vec3 c; vec3 gc=vec3(0.0);\n'+
+  '#if STY==0\n'+
+  ' c=texture2DLodEXT(tex,uv,0.0).rgb; if(nE>0.001) c=mix(c,soft(uv,ax,0.8+2.4*nS),nE);\n'+
+  '#elif STY==1\n'+
+  ' c=soft(uv,ax,0.8+2.4*nS);\n'+
+  '#elif STY==2\n'+
+  ' c=soft(uv,ax,2.8+1.2*nS);\n'+
+  '#else\n'+
+  ' c=soft(uv,ax,1.2+2.0*nS)*0.45;\n'+
+  // сетка: прямое восхождение каждый 1 ч (15°), склонение каждые 15°; у полюсов линии часов гаснут
+  ' vec3 q=eqM*d; float dc=asin(clamp(q.z,-1.0,1.0))*3.8197186;\n'+
+  ' float ra=atan(q.y,q.x)*3.8197186, ra2=atan(-q.y,-q.x)*3.8197186, fr=min(fwidth(ra),fwidth(ra2)), fd=fwidth(dc);\n'+
+  ' float gr=(1.0-smoothstep(0.0,fr*1.2,abs(fract(ra-0.5)-0.5)))*smoothstep(5.6,4.9,abs(dc));\n'+
+  ' float gd=1.0-smoothstep(0.0,fd*1.2,abs(fract(dc-0.5)-0.5)), eq=1.0-smoothstep(0.0,fd*1.8,abs(dc));\n'+
+  ' float be=asin(clamp(d.y,-1.0,1.0))*3.8197186, ec=1.0-smoothstep(0.0,fwidth(be)*1.8,abs(be));\n'+
+  ' gc=vec3(1.0,0.62,0.05)*0.11*max(gr,gd)+vec3(0.3,0.8,0.9)*0.2*eq+vec3(1.0,0.66,0.12)*0.38*ec;\n'+
+  '#endif\n'+
+  ' c=pow(max(c,0.0),vec3(1.08))*gain+gc*gG; gl_FragColor=vec4(c,1.0); }';
 const skyMat=new THREE.ShaderMaterial({
-  uniforms:{tex:{value:null}, gX:{value:GAL_X}, gY:{value:GAL_Y}, gZ:{value:GAL_N}, gain:{value:0},
-    thr:{value:SKY_STARS[skyStars]}, bp:{value:0.035}, gL:{value:2.0}, px:{value:new THREE.Vector2(1/4000,1/2000)}},
+  defines:{STY:SKY_STY[skyStyle], SL:0},
+  uniforms:{tex:{value:null}, sl:{value:null}, gX:{value:GAL_X}, gY:{value:GAL_Y}, gZ:{value:GAL_N}, gain:{value:0}, gG:{value:0}, bp:{value:0.035},
+    px:{value:new THREE.Vector2(1/4000,1/2000)}, pxS:{value:new THREE.Vector2(1/4000,1/2000)}, nE:{value:0}, nS:{value:0}, eqM:{value:SKY_EQ}},
   vertexShader:'varying vec3 vD; void main(){ vD=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
-  fragmentShader:SKY_LOD?
-    'uniform sampler2D tex; uniform vec3 gX; uniform vec3 gY; uniform vec3 gZ; uniform float gain; uniform float thr; uniform float bp; uniform float gL; uniform vec2 px; varying vec3 vD;\n'+
-    'void main(){ vec3 d=normalize(vD); float l=atan(dot(d,gY),dot(d,gX)); float b=asin(clamp(dot(d,gZ),-1.0,1.0));\n'+
-    ' vec2 uv=vec2(0.5-l/6.2831853,0.5+b/3.1415927); vec3 s=texture2DLodEXT(tex,uv,0.0).rgb; vec3 c=s;\n'+
-    ' if(thr>0.0){ vec2 o=px*2.0;\n'+
-    '  vec3 g=texture2DLodEXT(tex,uv,gL).rgb*0.4+0.15*(texture2DLodEXT(tex,uv+vec2(o.x,0.0),gL).rgb+texture2DLodEXT(tex,uv-vec2(o.x,0.0),gL).rgb+\n'+
-    '    texture2DLodEXT(tex,uv+vec2(0.0,o.y),gL).rgb+texture2DLodEXT(tex,uv-vec2(0.0,o.y),gL).rgb);\n'+
-    '  vec3 st=max(s-g,0.0); float pl=max(max(st.r,st.g),st.b);\n'+
-    '  c=g+st*smoothstep(thr,thr*2.0,pl); c=max(c-vec3(bp),0.0)/(1.0-bp); }\n'+
-    ' c=pow(c,vec3(1.08))*gain; gl_FragColor=vec4(c,1.0); }'
+  fragmentShader:SKY_LOD?SKY_FS
    :'uniform sampler2D tex; uniform vec3 gX; uniform vec3 gY; uniform vec3 gZ; uniform float gain; varying vec3 vD;\n'+
     'void main(){ vec3 d=normalize(vD); float l=atan(dot(d,gY),dot(d,gX)); float b=asin(clamp(dot(d,gZ),-1.0,1.0));\n'+
     ' vec3 c=texture2D(tex,vec2(0.5-l/6.2831853,0.5+b/3.1415927)).rgb;\n'+
     ' c=pow(c,vec3(1.08))*gain; gl_FragColor=vec4(c,1.0); }',
   side:THREE.BackSide, depthTest:false, depthWrite:false
 });
-if(SKY_LOD&&!renderer.capabilities.isWebGL2) skyMat.extensions={shaderTextureLOD:true};
-function setSkyStars(v){ if(SKY_STARS[v]==null) return; skyStars=v; skyMat.uniforms.thr.value=SKY_STARS[v]; try{ localStorage.setItem('buran_sky_stars',v); }catch(e){} }
+if(SKY_LOD&&!renderer.capabilities.isWebGL2) skyMat.extensions={shaderTextureLOD:true, derivatives:true};
+// звёзды убирает морфологическое «открытие» на видеокарте: минимум по окрестности ±SL_R текселей, затем максимум.
+// Точки меньше окна исчезают, протяжённые туманности и пылевые прожилки остаются. Считается один раз после загрузки панорамы.
+const SL_R=5;
+let slRT=null;
+function buildStarless(src){
+  const W=src.image.width, H=src.image.height, k=W>4600?0.5:1, w=Math.round(W*k), h=Math.round(H*k);
+  const opt=m=>({wrapS:THREE.RepeatWrapping, minFilter:m?THREE.LinearMipmapLinearFilter:THREE.LinearFilter, magFilter:THREE.LinearFilter,
+    generateMipmaps:m, depthBuffer:false, stencilBuffer:false});
+  const A=new THREE.WebGLRenderTarget(w,h,opt(false)), O=new THREE.WebGLRenderTarget(w,h,opt(true));
+  const mat=new THREE.ShaderMaterial({uniforms:{t:{value:null}, dir:{value:new THREE.Vector2()}, mx:{value:0}},
+    vertexShader:'varying vec2 vU; void main(){ vU=uv; gl_Position=vec4(position.xy,0.0,1.0); }',
+    fragmentShader:'uniform sampler2D t; uniform vec2 dir; uniform float mx; varying vec2 vU;\n'+
+      'void main(){ vec3 m=texture2D(t,vU).rgb; for(int i=1;i<='+SL_R+';i++){ vec3 a=texture2D(t,vU+dir*float(i)).rgb; vec3 c=texture2D(t,vU-dir*float(i)).rgb;\n'+
+      '  m=mx>0.5?max(m,max(a,c)):min(m,min(a,c)); } gl_FragColor=vec4(m,1.0); }',
+    depthTest:false, depthWrite:false});
+  const sc=new THREE.Scene(), cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1), q=new THREE.Mesh(new THREE.PlaneGeometry(2,2),mat);
+  q.frustumCulled=false; sc.add(q);
+  const prev=renderer.getRenderTarget();
+  const pass=(from,to,dx,dy,mx)=>{ mat.uniforms.t.value=from; mat.uniforms.dir.value.set(dx/w,dy/h); mat.uniforms.mx.value=mx; renderer.setRenderTarget(to); renderer.render(sc,cam); };
+  pass(src,A,1,0,0); pass(A.texture,O,0,1,0); pass(O.texture,A,1,0,1); pass(A.texture,O,0,1,1);
+  renderer.setRenderTarget(prev); A.dispose(); mat.dispose(); q.geometry.dispose();
+  return O;
+}
+function makeSL(){
+  try{ const t=buildStarless(skyMat.uniforms.tex.value); if(slRT) slRT.dispose(); slRT=t;
+    skyMat.uniforms.sl.value=t.texture; skyMat.uniforms.pxS.value.set(1/t.width,1/t.height); skyMat.defines.SL=1; }
+  catch(e){ console.warn('starless sky:',e); skyMat.defines.SL=0; }
+  skyMat.needsUpdate=true;
+}
+function setSkyStyle(v){
+  if(SKY_STY[v]==null) return; skyStyle=v; try{ localStorage.setItem('buran_sky_style',v); }catch(e){}
+  skyMat.defines.STY=SKY_STY[v]; skyMat.needsUpdate=true;
+  if(SKY_LOD&&!slRT&&skyMat.uniforms.tex.value) makeSL();
+}
 const skySphere=new THREE.Mesh(new THREE.SphereGeometry(70000,64,32),skyMat);
 skySphere.renderOrder=-1000; skySphere.frustumCulled=false; skySphere.visible=false; B.skyGroup.add(skySphere);
 // прежний процедурный фон (точечные звёзды, Млечный Путь, туманности) — запасной, если панорама не загрузилась
@@ -7663,7 +7805,9 @@ function loadSky(){
     if(SKY_LOD) t.wrapS=THREE.RepeatWrapping;
     if(t.image&&t.image.width) skyMat.uniforms.px.value.set(1/t.image.width,1/t.image.height);
     if(skyMat.uniforms.tex.value) skyMat.uniforms.tex.value.dispose();
-    skyMat.uniforms.tex.value=t; applySky();
+    skyMat.uniforms.tex.value=t;
+    if(SKY_LOD) makeSL();
+    applySky();
   },undefined,()=>{ skyQ=''; applySky(); });
 }
 function applySky(){
@@ -7672,12 +7816,21 @@ function applySky(){
 }
 function setSky(on){ skyOn=on; try{ localStorage.setItem('buran_sky',on?'1':'0'); }catch(e){} if(on) loadSky(); applySky(); }
 if(skyOn) loadSky();
-let skyG=0;
+let skyG=0, skyE=0, skyS=0;
+const SAT_KINDS={sat:1, station:1, orbiter:1, satgroup:1, swarm:1};
+function skyFocus(){ // 0 — космос, 1 — камера у Земли (и вид с МКС), 2 — выбран спутник или группировка
+  if(!nearE) return 0; if(pov) return 1;
+  const s=B.getSelected(), f=B.getFollow();
+  return (s&&SAT_KINDS[s.kindType])||(f&&SAT_KINDS[f.kindType])?2:1;
+}
 hooks.post.push(function(dt){
+  const fk=skyFocus(), k=Math.min(1,dt*2.5);
+  skyE+=((fk>0?1:0)-skyE)*k; skyS+=((fk>1?1:0)-skyS)*k;
   if(!skySphere.visible) return;
-  // яркость фона: у Земли тише (чтобы не спорить со спутниками), при узком угле обзора — ещё тише (панорама растянута)
-  const target=0.92*(nearE&&!pov?0.6:1)*clamp(Math.sqrt(fovCur/FOV0),0.35,1);
-  skyG+=(target-skyG)*Math.min(1,dt*3); skyMat.uniforms.gain.value=skyG;
+  // яркость: у Земли тише, при выбранном спутнике ещё тише — точки спутников не теряются на фоне; при узком угле обзора тоже тише
+  const fv=clamp(Math.sqrt(fovCur/FOV0),0.35,1), u=skyMat.uniforms, target=0.92*skyBr*(1-0.4*skyE)*(1-0.5*skyS)*fv;
+  skyG+=(target-skyG)*Math.min(1,dt*3); u.gain.value=skyG; u.gG.value=skyBr*(1-0.4*skyS)*fv;
+  u.nE.value=skyE; u.nS.value=skyS;
 });
 
 /* ── Динамический блик Солнца (lens flare) ─────────────────────────────
@@ -7772,7 +7925,7 @@ window.__v8={cat:cat, satRec:satRec, openSat:openSat, openLaunch:openLaunch, loa
   togglePov:togglePov, pov:()=>pov, showTab:showTab, restyle:restyle, IDB:IDB, sound:B.sound, pickSat:pickSat, buildLunarTraj:buildLunarTraj, tj:()=>tj,
   // v0.11: для части 6 (запуски, история орбиты, раскраска)
   loadSnapshot:loadSnapshot, snapFile:snapFile, padOf:padOf, ORBIT_RU:ORBIT_RU, SH:SH, satMat:satMat, setHighlight:setHighlight, refreshHL:refreshHL,
-  isJunk:isJunk, CLS_BY:CLS_BY, satColor:satColor, nearE:()=>nearE, cloud:()=>cloud, loadApprox:loadApprox, toggleSats:toggleSats, satsOn:()=>satsOn,
+  isJunk:isJunk, onMap:onMap, CLS_BY:CLS_BY, satColor:satColor, nearE:()=>nearE, cloud:()=>cloud, haze:()=>haze, loadApprox:loadApprox, toggleSats:toggleSats, satsOn:()=>satsOn,
   hlTest:()=>hlTest, catInTime:catInTime, fmtDate:fmtDate};
 })();
 </script>
@@ -8100,14 +8253,15 @@ const histBar=mk('div'); histBar.id='histBar';
 histBar.innerHTML='<div class="hbTop"><span>⏳ ИСТОРИЯ ОРБИТЫ</span><span class="hbNote">точки появляются в год запуска · видны только объекты, которые летают сейчас</span>'+
   '<div id="hbSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div><button id="hbX" title="Выйти [J / Esc]">✕</button></div>'+
   '<div class="hbMain"><button id="hbPlay" title="Пауза / пуск">❚❚</button><div id="hbYear">1957</div>'+
-  '<div class="hbStat"><b id="hbN">0</b> объектов на орбите<small id="hbAdd"></small></div></div>'+
+  '<div class="hbStat"><b id="hbN">0</b> <span id="hbNl">объектов на орбите</span><small id="hbAdd"></small></div></div>'+
   '<input type="range" id="hbR" min="1957.5" max="2027" step="0.01" value="1957.5"><div class="hbScale"><span>1957</span><span>1970</span><span>1990</span><span>2010</span><span>сейчас</span></div>'+
   '<div id="hbEv"></div>';
 vp.appendChild(histBar);
 ['mousedown','mouseup','wheel','dblclick','click'].forEach(ev=>histBar.addEventListener(ev,e=>e.stopPropagation()));
 const yNow=()=>{ const d=new Date(); return d.getUTCFullYear()+(d.getUTCMonth()+d.getUTCDate()/31)/12; };
-let hist=null, fyS=null, hbK=1;
-function buildFy(){ const L=V8.cat.list.filter(s=>!s.bad&&s.fy).map(s=>s.fy); fyS=new Float32Array(L).sort(); }
+let hist=null, fyS=null, hbK=1, fyMode='';
+function buildFy(){ fyMode=V8.mode(); const L=V8.cat.list.filter(s=>s.fy&&V8.onMap(s)).map(s=>s.fy); fyS=new Float32Array(L).sort();
+  $('hbNl').textContent=fyMode==='deb'?'объектов мусора':'работающих спутников'; }
 function cntTo(y){ if(!fyS) return 0; let lo=0, hi=fyS.length; while(lo<hi){ const m=(lo+hi)>>1; if(fyS[m]<=y) lo=m+1; else hi=m; } return lo; }
 function histOpen(){
   const c=V8.cat; if(!c.ready){ toast('КАТАЛОГ СПУТНИКОВ ЕЩЁ ЗАГРУЖАЕТСЯ…','',2500); return; }
@@ -8117,12 +8271,21 @@ function histOpen(){
   if(colMode!=='type'&&colMode!=='year') setColor('year');
   B.select(null);
   B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:EARTH, toR:eR*15}); B.setFollow(EARTH);
-  if(V8.mode()!=='sats') V8.setMode('sats');
+  if(V8.mode()==='earth') V8.setMode('sats');
   buildFy(); hist={y:1957.5, play:true, ev:-1};
   V8.satMat.uniforms.uYearOn.value=1; document.body.classList.add('histOn'); $('rHist')&&$('rHist').classList.add('on'); msHist.classList.add('on');
+  B.timeOverride=yMs(hist.y); B.timeVisCheck(); histHaze();
 }
 function histClose(){ if(!hist) return; hist=null; V8.satMat.uniforms.uYearOn.value=0; document.body.classList.remove('histOn');
-  $('rHist')&&$('rHist').classList.remove('on'); msHist.classList.remove('on'); }
+  $('rHist')&&$('rHist').classList.remove('on'); msHist.classList.remove('on');
+  B.timeOverride=null; B.timeVisCheck(); histHaze(); }
+// год шкалы → время; станции, телескопы и зонды появляются в год запуска (как в машине времени)
+const yMs=y=>{ const Y=Math.floor(y); return Date.UTC(Y,0,1)+(y-Y)*365.2425*DAY_MS; };
+// дымка мелкого мусора (модель) густеет вместе с отслеживаемым мусором: доля точек = доля обломков, уже летающих к этому году
+function histHaze(){ const hz=V8.haze&&V8.haze(); if(!hz) return; const n=hz.geometry.attributes.position.count;
+  hz.geometry.setDrawRange(0,hist&&fyS&&fyS.length?Math.round(n*cntTo(hist.y)/fyS.length):n); }
+// подпись «ИСЗ LIVE: …» с сегодняшними числами во время истории не нужна — счётчик внизу
+(function(){ const sw=B.byId.swarm; if(!sw) return; const lc=sw.labelCheck; sw.labelCheck=()=>(!lc||lc())&&!hist; })();
 function histToggle(){ if(hist) histClose(); else histOpen(); }
 $('hbX').addEventListener('click',histClose);
 $('hbPlay').addEventListener('click',()=>{ if(!hist) return; if(!hist.play&&hist.y>=yNow()-0.01) hist.y=1957.5; hist.play=!hist.play; });
@@ -8134,7 +8297,9 @@ hooks.post.push(function(dt){
   const end=yNow();
   if(hist.play){ const y=hist.y, rate=(y<1990?4.2:(y<2015?2.2:0.8))*hbK; hist.y=Math.min(end,y+dt*rate); if(hist.y>=end) hist.play=false; }
   V8.satMat.uniforms.uYear.value=hist.y;
+  if(V8.mode()!==fyMode) buildFy();
   hbUi-=dt; if(hbUi>0) return; hbUi=0.06;
+  B.timeOverride=yMs(hist.y); B.timeVisCheck(); histHaze();
   $('hbPlay').textContent=hist.play?'❚❚':'▶';
   $('hbYear').textContent=hist.y>=end-0.01?'СЕЙЧАС':String(Math.floor(hist.y));
   $('hbR').value=String(hist.y);
@@ -8178,7 +8343,7 @@ function setColor(m){
 }
 function renderLeg(){
   const D=COLS[colMode]; colLeg.classList.toggle('on',!!D&&V8.nearE()); if(!D){ colLeg.innerHTML=''; return; }
-  const L=V8.cat.list.filter(s=>!s.bad&&!s.mod), cnt=D.g.map(()=>0); L.forEach(s=>cnt[grpIdx(D,s)]++);
+  const L=V8.cat.list.filter(s=>!s.mod&&V8.onMap(s)), cnt=D.g.map(()=>0); L.forEach(s=>cnt[grpIdx(D,s)]++);
   colLeg.innerHTML='<div class="clT"><span>◐ ЦВЕТ: '+D.name+'</span><button title="Обычная раскраска [V]">✕</button></div>';
   colLeg.querySelector('button').addEventListener('click',()=>setColor('type'));
   D.g.forEach((g,i)=>{ if(!cnt[i]) return; const r=mk('div','clR'+(colPick===i?' on':'')); const d=mk('i'); d.style.background=g[1]; d.style.color=g[1];
@@ -8189,9 +8354,17 @@ function renderLeg(){
     colLeg.appendChild(r); });
   colLeg.appendChild(mk('div','clN',D.note));
 }
-let legT=0, legNear=null;
+let legT=0, legNear=null, legMode='', legLift=-1, legChk=0;
 hooks.post.push(function(dt){ const ne=V8.nearE()&&V8.cat.ready; if(ne!==legNear){ legNear=ne; colLeg.classList.toggle('on',ne&&colMode!=='type'); }
-  legT+=dt; if(legT>20&&colMode!=='type'&&ne){ legT=0; renderLeg(); } });
+  if(V8.mode()!==legMode){ legMode=V8.mode(); if(colMode!=='type') renderLeg(); }
+  legT+=dt; if(legT>20&&colMode!=='type'&&ne){ legT=0; renderLeg(); }
+  // узкий экран: легенда поднимается над переключателем «Земля / Спутники / Мусор», полосой истории и подсказкой, если пересекается с ними
+  legChk-=dt; if(legChk>0||!colLeg.classList.contains('on')) return; legChk=0.4;
+  const vb=vp.getBoundingClientRect(), b=colLeg.getBoundingClientRect(); let top=vb.bottom;
+  [ms&&ms.classList.contains('show')?ms:null, hist?histBar:null, $('hint')].forEach(el=>{ if(!el||!el.offsetParent) return; const a=el.getBoundingClientRect();
+    if(a.width&&a.right+8>b.left&&a.left-8<b.right) top=Math.min(top,a.top); });
+  const lift=top<vb.bottom?Math.round(vb.bottom-top+8):0;
+  if(lift!==legLift){ legLift=lift; colLeg.style.bottom=lift?lift+'px':''; } });
 function cycleColor(){ const m=COL_ORDER[(COL_ORDER.indexOf(colMode)+1)%COL_ORDER.length]; setColor(m); toast('◐ ЦВЕТ ТОЧЕК: '+COL_NM[m],'ok',1800); }
 
 /* ── кнопки у переключателя режимов, кнопки на панели инструментов, клавиши ── */
@@ -8221,26 +8394,15 @@ hooks.key.push(function(e){
 setColor(colMode);
 // справка
 (function(){ const hb=$('helpBox'); if(!hb) return; const sec=mk('div','hsec');
-  sec.innerHTML='<h3>НОВОЕ В v0.11</h3><table>'+
+  sec.innerHTML='<h3>НОВОЕ В v0.11–0.12</h3><table>'+
    '<tr><td>R · ▲ ЗАПУСКИ</td><td>ближайшие запуски со всего мира с обратным отсчётом (Launch Library 2); площадки светятся на глобусе, щелчок — досье запуска</td></tr>'+
    '<tr><td>J · ⏳ ИСТОРИЯ ОРБИТЫ</td><td>как заполнялась орбита с 1957 года: точки вспыхивают в год запуска, внизу — счётчик и вехи; Пробел — пауза</td></tr>'+
    '<tr><td>V · ◐ ЦВЕТ</td><td>раскраска точек: назначение → страна → год запуска → высота; щелчок по строке легенды подсвечивает группу</td></tr>'+
    '<tr><td>/ · поиск</td><td>командная строка ищет и по каталогу: имя, NORAD, COSPAR, русские названия («Космос-2251», «Наука»)</td></tr>'+
-   '<tr><td>⚙ Звёзды на фоне</td><td>сколько звёзд панорамы показывать: только яркие (по умолчанию), больше или все</td></tr></table>';
+   '<tr><td>⚙ Стиль фона</td><td>фото, туманности, фокус или сетка; у Земли звёзд на фоне нет — точки там только спутники</td></tr>'+
+   '<tr><td>☄ Мусор</td><td>обломки, ступени и мёртвые спутники видны только в режиме «Мусор» (G)</td></tr>'+
+   '<tr><td>Досье</td><td>сверху описание, рядом вкладка «▲ ЗАПУСК»: ракета, космодром, итог и объекты того же пуска</td></tr></table>';
   hb.insertBefore(sec,hb.children[1]||null); })();
-/* ── досье: описание — сразу под заголовком (было внизу, под длинной телеметрией) ── */
-(function(){
-  const sc=$('rpScroll'), d=$('rpDesc'); if(!sc||!d) return;
-  const hdr=d.previousElementSibling, ap=$('rpApprox');
-  const more=mk('button','rpMore','▾ ПОДРОБНЕЕ'); more.style.display='none';
-  sc.insertBefore(hdr,sc.firstChild); hdr.after(d); d.after(more); if(ap) more.after(ap);
-  let open=false;
-  const chk=()=>{ d.classList.toggle('clamp',!open); more.textContent=open?'▴ СВЕРНУТЬ':'▾ ПОДРОБНЕЕ';
-    requestAnimationFrame(()=>{ more.style.display=(open||d.scrollHeight>d.clientHeight+4)?'block':'none'; }); };
-  more.addEventListener('click',()=>{ open=!open; chk(); });
-  new MutationObserver(()=>{ open=false; chk(); }).observe(d,{childList:true, characterData:true, subtree:true});
-  chk();
-})();
 window.__v11={LN:()=>LN, loadLaunches:loadLaunches, pads:pads, histOpen:histOpen, histClose:histClose, hist:()=>hist, setColor:setColor, colMode:()=>colMode, upRec:upRec};
 })();
 </script>
