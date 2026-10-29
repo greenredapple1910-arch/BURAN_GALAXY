@@ -283,6 +283,10 @@ button{font-family:inherit;}
 .verTitle{color:#fff; letter-spacing:.5px;}
 .verItem ul{margin:0; padding-left:18px;}
 .verItem li{font-size:11px; color:#b5b5b5; line-height:16px;}
+.verImgs{display:flex; gap:6px; flex-wrap:wrap; margin:4px 0 6px;}
+.verImgs a{display:block; line-height:0; border:1px solid var(--line2); max-width:100%;}
+.verImgs a:hover{border-color:var(--amber);}
+.verImgs img{display:block; max-width:100%; max-height:230px; width:auto; height:auto;}
 
 /* ── v0.4: КОМАНДНАЯ СТРОКА <GO> ─────────── */
 #cmdWrap{position:relative; flex:1; max-width:460px; min-width:180px; display:flex; align-items:center;
@@ -774,20 +778,20 @@ button{font-family:inherit;}
 #rpPane{display:none; padding-top:2px;}
 #rpPane .faBox:first-child>.rpSecT:first-child{margin-top:4px;}
 /* ── v0.15: у Луны — переключатель «Спутники / Миссии / Всё вместе» ── */
-#moonSw{position:absolute; left:50%; bottom:14px; transform:translateX(-50%) translateY(8px); z-index:8; display:flex; opacity:0;
+.hubSw{position:absolute; left:50%; bottom:14px; transform:translateX(-50%) translateY(8px); z-index:8; display:flex; opacity:0;
   pointer-events:none; transition:opacity .25s, transform .25s; background:rgba(6,6,6,.92); border:1px solid #2f5670;
   box-shadow:0 0 22px rgba(0,0,0,.85), 0 0 14px rgba(127,216,255,.12);}
-#moonSw.show{opacity:1; transform:translateX(-50%); pointer-events:auto;}
-#moonSw button{background:transparent; border:none; color:var(--dim); font-family:inherit; cursor:pointer; padding:5px 14px 4px;
+.hubSw.show{opacity:1; transform:translateX(-50%); pointer-events:auto;}
+.hubSw button{background:transparent; border:none; color:var(--dim); font-family:inherit; cursor:pointer; padding:5px 14px 4px;
   display:flex; flex-direction:column; align-items:center; min-width:124px; letter-spacing:1px;}
-#moonSw button + button{border-left:1px solid var(--line);}
-#moonSw button b{font-size:12px; font-weight:bold;}
-#moonSw button small{font-size:9.5px; letter-spacing:.3px; color:var(--dim2); margin-top:1px;}
-#moonSw button:hover{color:#bfe9ff;}
-#moonSw button.on{background:#7fd8ff; color:#001018;} #moonSw button.on small{color:#0b3a52;}
-#moonSw button.mx{min-width:96px; background:#071219;} #moonSw button.mx.on{background:#123245; color:#7fd8ff;} #moonSw button.mx.on small{color:#7fb7cf;}
+.hubSw button + button{border-left:1px solid var(--line);}
+.hubSw button b{font-size:12px; font-weight:bold;}
+.hubSw button small{font-size:9.5px; letter-spacing:.3px; color:var(--dim2); margin-top:1px;}
+.hubSw button:hover{color:#bfe9ff;}
+.hubSw button.on{background:#7fd8ff; color:#001018;} .hubSw button.on small{color:#0b3a52;}
+.hubSw button.mx{min-width:96px; background:#071219;} .hubSw button.mx.on{background:#123245; color:#7fd8ff;} .hubSw button.mx.on small{color:#7fb7cf;}
 .moonSwOn #toastBox{bottom:76px;} .moonSwOn #hint{bottom:58px;}
-@media (max-width:700px){ #moonSw{bottom:8px;} #moonSw button{min-width:0; padding:5px 8px 4px;} #moonSw button small{display:none;} }
+@media (max-width:700px){ .hubSw{bottom:8px;} .hubSw button{min-width:0; padding:5px 8px 4px;} .hubSw button small{display:none;} }
 /* полосы времени у Луны: история освоения и полёт миссии */
 .tlBar{position:absolute; left:50%; bottom:64px; transform:translateX(-50%); z-index:9; width:min(780px,94%); display:none;
   background:rgba(6,6,6,.93); border:1px solid #2f5670; box-shadow:0 0 24px rgba(0,0,0,.8),0 0 16px rgba(127,216,255,.10); padding:6px 12px 8px;}
@@ -812,7 +816,7 @@ button{font-family:inherit;}
 .tlEv{min-height:30px; font-size:11.5px; line-height:15px; color:#bfe9ff; transition:opacity .5s; margin-top:3px;}
 .tlEv b{color:#fff; font-weight:normal;}
 .lhOn #hint, .flOn #hint{display:none;} .lhOn #toastBox, .flOn #toastBox{bottom:230px;}
-.flOn #modeSw, .flOn #moonSw, .flOn #colLeg, .lhOn #modeSw{display:none !important;}
+.flOn #modeSw, .flOn .hubSw, .flOn .hubLeg, .flOn #colLeg, .lhOn #modeSw, .lhOn #colLeg{display:none !important;}
 .flWhen{display:flex; flex-direction:column; min-width:210px;}
 .flWhen b{font-size:16px; color:#fff; font-weight:normal; letter-spacing:1px; font-variant-numeric:tabular-nums;}
 .flWhen small{font-size:10.5px; color:var(--dim); font-variant-numeric:tabular-nums;}
@@ -840,12 +844,10 @@ button{font-family:inherit;}
 .stList{flex:1; overflow-y:auto; min-height:0; padding-bottom:10px;}
 .stIntro{padding:8px 10px 6px; font-size:10.5px; line-height:15px; color:var(--dim);}
 .stGrp{padding:9px 10px 3px; font-size:10px; letter-spacing:1px; color:var(--amber); border-bottom:1px solid var(--line2);}
-.stRow{display:block; padding:5px 10px 6px; border-bottom:1px solid #121212; cursor:pointer;}
-.stRow:hover{background:#151007;} .stRow.on{background:#1f1405; box-shadow:inset 2px 0 0 var(--amber);}
-.stRow .t{display:flex; gap:8px; align-items:baseline;} .stRow .t b{color:#e6e6e6; font-weight:normal; font-size:12px; flex:1; min-width:0;}
-.stRow .t i{font-style:normal; color:var(--dim); font-size:10px; font-variant-numeric:tabular-nums; white-space:nowrap;}
-.stRow small{display:block; color:#9a9a9a; font-size:10.5px; line-height:13px; margin-top:1px;}
-.stRow .new{color:#a07cff; font-size:9px; margin-left:6px; white-space:nowrap;}
+/* v0.16: категории — как группы во «Спутниках» (раскрываются), строки — как в «Объектах» */
+.stCat{border-top:1px solid #141414;} .stCat.open{background:#120c03; color:var(--amber2);} .stCat .ch{width:10px;}
+.stRow.row{padding-left:16px;} .stRow .code{width:34px; color:var(--amber-dim); font-variant-numeric:tabular-nums;}
+.stRow .stNew{color:#a07cff;}
 /* история в досье */
 #rpStory{display:none; margin:8px 10px 4px; border:1px solid var(--line); background:#0b0b0b;}
 #rpStory.on{display:block;}
@@ -857,6 +859,61 @@ button{font-family:inherit;}
 #rpStory .sx{padding:5px 8px 7px; color:#cfcfcf; font-size:12px; line-height:17px;}
 #rpStory .sf div{display:flex; justify-content:space-between; gap:10px; font-size:11px; padding:2px 8px; border-top:1px solid #161616;}
 #rpStory .sf span{color:var(--dim);} #rpStory .sf b{color:#e6e6e6; font-weight:normal; text-align:right;}
+/* ── v0.16: полоса эпох под шкалой истории (Земля, Луна, Марс) ── */
+.eraTrack{display:flex; gap:2px; height:13px; margin:4px 0 1px;}
+.eraTrack div{min-width:0; font-size:8.5px; line-height:13px; color:#0a0a0a; text-align:center; overflow:hidden; white-space:nowrap; letter-spacing:.4px; opacity:.4; transition:opacity .3s;}
+.eraTrack div.cur{opacity:1; font-weight:bold;}
+#histBar .eraTrack{margin-top:5px;}
+/* легенда раскраски у Луны и Марса — как у Земли */
+.hubLeg{position:absolute; right:50px; bottom:10px; z-index:8; display:none; background:rgba(6,6,6,.92); border:1px solid var(--line); padding:5px 8px 6px; font-size:10.5px; width:236px;}
+.hubLeg.on{display:block;}
+.hubLeg .clT{color:#7fd8ff; letter-spacing:1px; font-size:10px; margin-bottom:3px; display:flex; justify-content:space-between; gap:8px;}
+.hubLeg .clT button{background:none; border:none; color:var(--dim); cursor:pointer; font-family:inherit; font-size:11px; padding:0;}
+.hubLeg .clT button:hover{color:#bfe9ff;}
+.hubLeg .clR{display:flex; align-items:center; gap:6px; padding:1px 3px; color:#cfcfcf;}
+.hubLeg .clR i{width:9px; height:9px; border-radius:50%; flex:0 0 auto; box-shadow:0 0 6px currentColor;}
+.hubLeg .clR span{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;} .hubLeg .clR em{font-style:normal; color:var(--dim); font-variant-numeric:tabular-nums;}
+.hubLeg .clN{color:var(--dim); font-size:9.5px; margin-top:3px; line-height:12px;}
+.lhOn .hubLeg{bottom:240px;}
+@media (max-width:700px){ .hubLeg{right:6px; bottom:56px; width:200px;} }
+/* единый вид панели слева: поиск одинаковый во всех вкладках, категории — одним стилем */
+.lpSearch input{font-size:12px; padding:4px 6px; font-family:inherit; outline:none;}
+#lncChips.satCats{max-height:none;}
+.vrow.lnc .code{width:50px; font-variant-numeric:tabular-nums;}
+.vrow.lnc .val{max-width:34%;}
+/* ── v0.16: обучение по интерфейсу — подсветка кнопки и карточка с шагами ── */
+#obBlock{position:fixed; inset:0; z-index:9000; display:none; background:transparent;}
+#obHi{position:fixed; z-index:9001; display:none; border:2px solid var(--amber2); border-radius:6px; pointer-events:none;
+  box-shadow:0 0 18px rgba(255,176,0,.55), inset 0 0 10px rgba(255,176,0,.25); transition:left .35s ease, top .35s ease, width .35s ease, height .35s ease;}
+.obOn #obHi.c{display:none;}
+#obBlock .obDim{position:absolute; background:rgba(0,0,0,.62); transition:left .35s ease, top .35s ease, width .35s ease, height .35s ease;}
+#obCard{position:fixed; z-index:9002; display:none; width:320px; background:#0b0b0b; border:1px solid var(--amber); box-shadow:0 8px 30px rgba(0,0,0,.75);
+  padding:10px 12px; font-size:12px; color:#ddd; transition:left .35s ease, top .35s ease;}
+.obOn #obBlock, .obOn #obHi, .obOn #obCard{display:block;}
+#obCard.pulse{animation:obPulse .5s ease-out;}
+@keyframes obPulse{0%{box-shadow:0 0 0 0 rgba(255,176,0,.7);} 100%{box-shadow:0 0 0 14px rgba(255,176,0,0);}}
+#obCard .obTop{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+#obCard .obN{color:var(--amber-dim); font-size:10px; letter-spacing:1px; font-variant-numeric:tabular-nums; white-space:nowrap;}
+#obCard .obT{flex:1; min-width:0; color:var(--amber2); font-weight:normal; letter-spacing:1.5px; font-size:12.5px;}
+#obCard .obX{background:none; border:none; color:var(--dim); font-size:14px; cursor:pointer; font-family:inherit; padding:0 2px;}
+#obCard .obX:hover{color:#fff;}
+#obCard .obTx{line-height:17px; color:#d8d8d8; min-height:34px;}
+#obCard .obDots{display:flex; gap:3px; margin:9px 0 8px;}
+#obCard .obDots i{flex:1; height:3px; background:#2a2a2a;} #obCard .obDots i.on{background:var(--amber);} #obCard .obDots i.done{background:#6b4a00;}
+#obCard .obBtns{display:flex; align-items:center; gap:6px;}
+#obCard .obGrow{flex:1;}
+#obCard .obSkip{background:none; border:none; color:var(--dim); font-family:inherit; font-size:10.5px; cursor:pointer; padding:4px 0; text-decoration:underline; text-underline-offset:2px;}
+#obCard .obSkip:hover{color:#ddd;}
+#obCard .obPrev, #obCard .obNext{background:#141414; border:1px solid var(--line); color:#ddd; font-family:inherit; font-size:11px; padding:5px 10px; cursor:pointer; letter-spacing:.5px; white-space:nowrap;}
+#obCard .obNext{background:var(--amber); color:#000; border-color:var(--amber);}
+#obCard .obPrev:disabled{opacity:.35; cursor:default;}
+#obCard .obPrev:hover:not(:disabled){border-color:var(--amber); color:#fff;} #obCard .obNext:hover{background:var(--amber2);}
+.hGuide{display:block; width:100%; margin:4px 0 12px; padding:8px; background:#1a1205; border:1px solid var(--amber); color:var(--amber2); font-family:inherit; font-size:12px; letter-spacing:1px; cursor:pointer;}
+.hGuide:hover{background:var(--amber); color:#000;}
+#hbEra{display:block; color:var(--dim); font-size:10px;}
+/* полёт к Марсу на телефоне — сверху, как полёт к Луне */
+@media (max-width:700px){ #mflBar{top:112px; bottom:auto;} #mflBar .tlTop{flex-wrap:wrap; row-gap:4px;} #mflBar .tlMain{gap:8px;}
+  #mflBar .mCam button{padding:2px 4px;} #mflBar .tlEv{font-size:10.5px; min-height:0;} #obCard .obTx{font-size:11.5px;} }
 </style>
 </head>
 <body>
@@ -1442,9 +1499,9 @@ const PROBES_ORBIT = [
 { id:'odyssey', parent:'mars', code:'ODY', name:'Mars Odyssey', kind:'orbiter', status:'ACT', agency:'NASA', orbF:1.42, period:0.0822,
   facts:[['Запуск','07.04.2001'],['На орбите Марса','с октября 2001'],['Рекорд','старейший работающий аппарат у другой планеты'],['Открытие','подповерхностный водяной лёд']],
   desc:'Рекордсмен-долгожитель: работает у Марса с 2001 года. Обнаружил огромные запасы водяного льда под поверхностью и продолжает служить ретранслятором.'},
-{ id:'maven', parent:'mars', code:'MVN', name:'MAVEN', kind:'orbiter', status:'ACT', agency:'NASA', orbF:1.58, period:0.1875,
-  facts:[['Запуск','18.11.2013'],['На орбите Марса','с 2014'],['Задача','утечка атмосферы'],['Вывод','Марс потерял атмосферу из-за солнечного ветра']],
-  desc:'Изучает, как солнечный ветер за миллиарды лет «сдул» атмосферу Марса, превратив тёплую влажную планету в холодную пустыню.'},
+{ id:'maven', parent:'mars', code:'MVN', name:'MAVEN', kind:'orbiter', status:'INA', agency:'NASA', orbF:1.58, period:0.1875,
+  facts:[['Запуск','18.11.2013'],['На орбите Марса','с 2014'],['Задача','утечка атмосферы'],['Вывод','Марс потерял атмосферу из-за солнечного ветра'],['Связь потеряна','06.12.2025 · миссия завершена 03.06.2026']],
+  desc:'Почти 11 лет изучал, как солнечный ветер за миллиарды лет «сдул» атмосферу Марса, превратив тёплую влажную планету в холодную пустыню. 6 декабря 2025 года аппарат замолчал, пройдя за Марсом; в июне 2026 года NASA объявило миссию завершённой. На карте виден в годы работы.'},
 { id:'mex', parent:'mars', code:'MEX', name:'Mars Express', kind:'orbiter', status:'ACT', agency:'ESA', orbF:1.74, period:0.304,
   facts:[['Запуск','02.06.2003'],['На орбите Марса','с декабря 2003'],['Открытие','подлёдное озеро у южного полюса'],['Радар','MARSIS']],
   desc:'Первая европейская межпланетная миссия. Радаром нашла признаки жидкого солёного озера подо льдом южного полюса Марса. Работает третье десятилетие.'},
@@ -2017,6 +2074,81 @@ const MOON_SITES = [
  facts:[['Дата','11.04.2019'],['Оператор','SpaceIL (Израиль)'],['Район','Море Ясности'],['Причина','отказ гироскопа → остановка двигателя'],['Бюджет','$100 млн (частный)']],
  route:'Запуск попутной нагрузкой на Falcon 9 → 6 недель раскрутки орбиты у Земли → захват Луной → на снижении отказ гироскопа вызвал остановку главного двигателя — удар о поверхность на 3 400 км/ч.',
  desc:'Первая частная и первая израильская попытка посадки. Разбился на финальном снижении; на борту была библиотека человечества на никелевых дисках.'},
+{id:'ranger7', code:'RG7', name:'Ranger 7', year:'1964', date:'31.07.1964', lat:-10.63, lon:-20.68, prog:'other', status:'OK', traj:'direct',
+ tip:'Первые снимки Луны вблизи · 31.07.1964',
+ facts:[['Дата','31.07.1964'],['Страна','США'],['Тип','удар о поверхность со съёмкой'],['Снимков','4 308'],['Район','Море Познанное']],
+ route:'Прямой перелёт ≈ 68 часов → в последние 17 минут шесть камер снимают Луну → удар со скоростью 2,6 км/с.',
+ desc:'После шести неудач программы Ranger седьмой аппарат передал 4 308 снимков перед ударом — первые кадры Луны с близкого расстояния, в тысячу раз детальнее телескопов. Место падения назвали Морем Познанным.'},
+{id:'ranger8', code:'RG8', name:'Ranger 8', year:'1965', date:'20.02.1965', lat:2.64, lon:24.79, prog:'other', status:'OK', traj:'direct',
+ tip:'Съёмка Моря Спокойствия перед ударом · 1965',
+ facts:[['Дата','20.02.1965'],['Страна','США'],['Тип','удар о поверхность со съёмкой'],['Снимков','7 137'],['Район','Море Спокойствия']],
+ route:'Прямой перелёт → съёмка при падении → удар.',
+ desc:'Передал 7 137 снимков Моря Спокойствия, где через четыре года сел «Аполлон-11».'},
+{id:'ranger9', code:'RG9', name:'Ranger 9', year:'1965', date:'24.03.1965', lat:-12.83, lon:-2.39, prog:'other', status:'OK', traj:'direct',
+ tip:'Падение в кратер Альфонс в прямом эфире · 1965',
+ facts:[['Дата','24.03.1965'],['Страна','США'],['Тип','удар о поверхность со съёмкой'],['Снимков','5 814'],['Район','кратер Альфонс']],
+ route:'Прямой перелёт → съёмка при падении → удар в кратер Альфонс.',
+ desc:'Последний Ranger упал в кратер Альфонс; телеканалы США показывали его снимки в прямом эфире с подписью «Прямо с Луны».'},
+{id:'luna13', code:'L13', name:'Луна-13', year:'1966', date:'24.12.1966', lat:18.87, lon:-62.05, prog:'luna', status:'OK', traj:'direct',
+ tip:'Первый «щуп» лунного грунта · 1966',
+ facts:[['Дата','24.12.1966'],['Страна','СССР'],['Тип','мягкая посадка'],['Район','Океан Бурь']],
+ route:'Прямой перелёт ≈ 3,5 суток → торможение → посадка с амортизирующими баллонами.',
+ desc:'Вторая мягкая посадка СССР: механический грунтомер впервые измерил прочность лунного грунта, а камеры сняли панорамы Океана Бурь.'},
+{id:'surveyor3', code:'SV3', name:'Surveyor 3', year:'1967', date:'20.04.1967', lat:-3.0167, lon:-23.4181, prog:'other', status:'OK', traj:'direct',
+ tip:'Первые раскопки на Луне · 1967',
+ facts:[['Дата','20.04.1967'],['Страна','США'],['Тип','мягкая посадка'],['Район','Океан Бурь'],['Гости','«Аполлон-12», 1969']],
+ route:'Прямой перелёт ≈ 3 суток → торможение → посадка (с двумя отскоками).',
+ desc:'Первым копал лунный грунт ковшом на манипуляторе. В 1969 году к нему пришли астронавты «Аполлона-12» и привезли на Землю его телекамеру.'},
+{id:'surveyor5', code:'SV5', name:'Surveyor 5', year:'1967', date:'11.09.1967', lat:1.41, lon:23.18, prog:'other', status:'OK', traj:'direct',
+ tip:'Первый химический анализ грунта · 1967',
+ facts:[['Дата','11.09.1967'],['Страна','США'],['Тип','мягкая посадка'],['Район','Море Спокойствия']],
+ route:'Прямой перелёт → торможение → посадка.',
+ desc:'Первым провёл химический анализ лунного грунта: альфа-анализатор показал, что лунные моря сложены базальтом.'},
+{id:'surveyor6', code:'SV6', name:'Surveyor 6', year:'1967', date:'10.11.1967', lat:0.47, lon:-1.43, prog:'other', status:'OK', traj:'direct',
+ tip:'Первый «прыжок» с Луны · 1967',
+ facts:[['Дата','10.11.1967'],['Страна','США'],['Тип','мягкая посадка'],['Район','Центральный залив']],
+ route:'Прямой перелёт → посадка → включение двигателей и перелёт на 2,5 м.',
+ desc:'Первым «взлетел» с Луны: включил двигатели и перепрыгнул на 2,5 метра — проверка взлёта перед «Аполлонами».'},
+{id:'surveyor7', code:'SV7', name:'Surveyor 7', year:'1968', date:'10.01.1968', lat:-40.98, lon:-11.51, prog:'other', status:'OK', traj:'direct',
+ tip:'Посадка у кратера Тихо · 1968',
+ facts:[['Дата','10.01.1968'],['Страна','США'],['Тип','мягкая посадка'],['Район','у кратера Тихо']],
+ route:'Прямой перелёт → посадка в гористой местности.',
+ desc:'Единственный Surveyor в гористой местности — у кратера Тихо. Его камера разглядела лазерные лучи, направленные на Луну с Земли.'},
+{id:'luna15', code:'L15', name:'Луна-15', year:'1969', date:'21.07.1969', lat:17.0, lon:60.0, prog:'crash', status:'FAIL', traj:'orbit',
+ tip:'Разбилась, пока «Аполлон-11» был на Луне · 1969',
+ facts:[['Дата','21.07.1969'],['Страна','СССР'],['Задача','доставка грунта'],['Район','Море Кризисов']],
+ route:'Перелёт → орбита Луны одновременно с «Аполлоном-11» → снижение → удар о склон в Море Кризисов.',
+ desc:'Советский аппарат для доставки грунта летел одновременно с «Аполлоном-11» и разбился в Море Кризисов, когда Армстронг и Олдрин ещё были на Луне.'},
+{id:'luna20', code:'L20', name:'Луна-20', year:'1972', date:'21.02.1972', lat:3.53, lon:56.55, prog:'luna', status:'OK', traj:'orbit',
+ tip:'Грунт из лунных нагорий · 1972',
+ facts:[['Дата','21.02.1972'],['Страна','СССР'],['Грунта доставлено','55 г'],['Район','материк у кратера Аполлоний']],
+ route:'Перелёт → орбита Луны → посадка → бурение → взлёт возвращаемой ракеты к Земле.',
+ desc:'Вторая автоматическая доставка грунта: 55 г пород из материковой области — древних лунных нагорий.'},
+{id:'luna23', code:'L23', name:'Луна-23', year:'1974', date:'06.11.1974', lat:12.68, lon:62.15, prog:'crash', status:'FAIL', traj:'orbit',
+ tip:'Опрокинулась при посадке · 1974',
+ facts:[['Дата','06.11.1974'],['Страна','СССР'],['Задача','доставка грунта с глубины'],['Район','Море Кризисов']],
+ route:'Перелёт → орбита Луны → жёсткая посадка → повреждена буровая установка.',
+ desc:'При посадке в Море Кризисов аппарат опрокинулся и повредил бур — грунт взять не удалось. Его остатки позже нашли на снимках LRO.'},
+{id:'lcross', code:'LCR', name:'LCROSS', year:'2009', date:'09.10.2009', lat:-84.68, lon:-48.73, prog:'other', status:'OK', traj:'direct',
+ tip:'Удар в кратер Кабеус и вода в выбросе · 2009',
+ facts:[['Дата','09.10.2009'],['Страна','США'],['Тип','намеренный удар'],['Район','кратер Кабеус, южный полюс']],
+ route:'Запуск вместе с LRO → почти 4 месяца на вытянутой орбите → ступень Centaur врезается в кратер, аппарат летит следом и изучает выброс.',
+ desc:'Ступень Centaur врезалась в вечно затенённый кратер Кабеус, а летевший следом аппарат проанализировал облако выброса и нашёл в нём водяной лёд.'},
+{id:'vikram', code:'VKM', name:'«Викрам»', year:'2019', date:'06.09.2019', lat:-70.88, lon:22.78, prog:'crash', status:'FAIL', traj:'phasing',
+ tip:'Посадочный модуль «Чандраяна-2» · 2019',
+ facts:[['Дата','06.09.2019'],['Страна','Индия'],['Район','южная полярная область'],['Найден','на снимках LRO, 2019']],
+ route:'Витки у Земли → перелёт → орбита Луны в составе «Чандраяна-2» → отделение → на снижении потеря связи в 2 км над поверхностью.',
+ desc:'Посадочный модуль индийского «Чандраяна-2» потерял связь в 2 км над поверхностью и разбился у южного полюса. Обломки на снимках LRO первым нашёл индийский инженер-любитель.'},
+{id:'hakuto1', code:'HK1', name:'Hakuto-R M1', year:'2023', date:'25.04.2023', lat:47.58, lon:44.09, prog:'crash', status:'FAIL', traj:'wsb',
+ tip:'Первая частная попытка Японии · 2023',
+ facts:[['Дата','25.04.2023'],['Оператор','ispace (Япония)'],['Район','кратер Атлас'],['Причина','ошибка оценки высоты']],
+ route:'Запуск на Falcon 9 → 3 месяца по энергосберегающей траектории → орбита Луны → снижение → топливо кончилось над поверхностью.',
+ desc:'Аппарат компании ispace неправильно оценил высоту над краем кратера Атлас, израсходовал топливо, зависнув высоко над поверхностью, и упал.'},
+{id:'resilience', code:'HK2', name:'Resilience (Hakuto-R M2)', year:'2025', date:'05.06.2025', lat:60.5, lon:-4.6, prog:'crash', status:'FAIL', traj:'wsb',
+ tip:'Вторая попытка ispace · 2025',
+ facts:[['Дата','05.06.2025'],['Оператор','ispace (Япония)'],['Район','Море Холода'],['Причина','поздно сработал лазерный высотомер']],
+ route:'Запуск вместе с Blue Ghost → 4 месяца по энергосберегающей траектории → орбита Луны → снижение → удар.',
+ desc:'Вторая попытка ispace закончилась так же: лазерный высотомер слишком поздно «увидел» поверхность, и аппарат разбился в Море Холода.'},
 {id:'change7', code:'CE7', name:'Чанъэ-7 (план)', year:'2026', date:'2026 (план)', lat:-88.8, lon:123.0, prog:'plan', status:'PLAN', traj:'orbit',
  tip:'Планируемая посадка у южного полюса · 2026',
  facts:[['Запуск','2026 (план)'],['Страна','КНР'],['Район','хребет у кратера Шеклтон'],['Состав','орбитер + посадочный + луноход + «прыгун»']],
@@ -2167,7 +2299,7 @@ const VERSIONS = [
   'Геометрия собрана из Natural Earth (1:110M и административное деление 1:10M), общая граница России и Украины согласована',
   'Площадь в досье России и Украины пересчитывается по выбранному режиму; в досье указано, как показаны границы',
   'В ⚙ Настройках можно переключиться на международно признанные границы — без перезагрузки страницы']},
-{v:'0.8', date:'28.10.2026', title:'Все спутники Земли, история запусков, музыка',
+{v:'0.8', img:['docs/changelog/v0.8.jpg'], date:'28.10.2026', title:'Все спутники Земли, история запусков, музыка',
  items:['Каталог всех спутников Земли по TLE CelesTrak: активные аппараты, облака обломков (Фэнъюнь-1C, Космос-2251, Iridium 33) и ступени ракет; положение каждого — по SGP4 в реальном времени, каждая точка кликабельна',
   'Досье спутника: живая телеметрия (координаты, высота, скорость, над какой страной, солнце или тень), параметры орбиты, данные SATCAT (владелец, космодром, дата запуска); орбита, наземная трасса и зона радиовидимости на глобусе',
   'Flight Atlas: рисунок ракеты-носителя, описание запуска и плашка «Посмотреть на Flight Atlas»; ссылка на Space Atlas; список всех объектов того же пуска',
@@ -2189,7 +2321,7 @@ const VERSIONS = [
   'Вкладка «СПУТНИКИ»: категории сверху — Starlink, OneWeb, Kuiper, Qianfan, связь, навигация (GPS, ГЛОНАСС, Galileo, BeiDou), геостационар, ДЗЗ; выбор категории фильтрует список и подсвечивает её на карте',
   'Внизу вкладки — отдельная «КОСМИЧЕСКИЙ МУСОР»: облака обломков по событиям (Фэнъюнь-1C, Космос-2251, Iridium 33, Космос-1408) и ступени ракет, с пояснениями',
   'Звёзды фона мягче и тусклее, у Земли — ещё сильнее, чтобы не мешать смотреть на спутники']},
-{v:'0.10', date:'28.10.2026', title:'Небо ESO, динамический блик и весь космический мусор',
+{v:'0.10', img:['docs/changelog/v0.10.jpg'], date:'28.10.2026', title:'Небо ESO, динамический блик и весь космический мусор',
  items:['Фон неба — фотопанорама Млечного Пути ESO / S. Brunier (CC BY 4.0), точно совмещённая с созвездиями и галактиками карты; у Земли фон приглушается, чтобы не мешать спутникам; отключается в ⚙ Настройках',
   'Динамический блик Солнца вместо плоской полосы: лучи у Солнца, радужное гало и «призраки» объектива вдоль оси к центру кадра; яркость зависит от положения Солнца и плавно гаснет, когда его закрывает планета или Луна',
   'Перетаскивание мышью по горизонтали инвертировано — картинка движется за курсором (так же в виде с МКС и на телефоне)',
@@ -2199,7 +2331,7 @@ const VERSIONS = [
   'В режиме «Мусор» серая дымка — модель распределения мелких фрагментов (≈1 млн крупнее 1 см), а не реальные объекты',
   'Масштаб как на satellitemap.space: точки мелкие и чёткие, их размер зависит от числа показанных объектов и приближения; аппараты в тени Земли тусклые, на солнце — яркие; у Земли узкий угол обзора — перспектива почти пропадает',
   'Исправлено: в списке не было Starlink и ГЛОНАСС — CelesTrak отдаёт каждую группу одному адресу не чаще раза в 2 часа. Данные теперь берутся из снимка в репозитории (GitHub Action каждые 3 часа), неполный каталог помечается и догружается сам; Starlink — ещё и из резервного набора SupGP']},
-{v:'0.11', date:'29.10.2026', title:'Ближайшие запуски, история орбиты и чистое небо',
+{v:'0.11', img:['docs/changelog/v0.11.jpg','docs/changelog/v0.11-sky.jpg'], date:'29.10.2026', title:'Ближайшие запуски, история орбиты и чистое небо',
  items:['Ближайшие запуски со всего мира (Launch Library 2, The Space Devs): окно «▲ МИССИИ И ЗАПУСКИ» с обратным отсчётом, фильтрами (пилотируемые, наука, связь, военные, Россия, Китай, США), подробностями и ссылкой на трансляцию; клавиша R',
   'Площадки ближайших стартов светятся на глобусе, у самого близкого — подпись с отсчётом; щелчок — досье запуска (ракета, оператор, орбита, окно, другие старты с той же площадки), кнопка «на глобусе» подводит камеру к площадке сверху. Ближайший запуск — в бегущей строке и на панели космической погоды; расписание обновляется в снимке данных каждые 3 часа',
   'История орбиты 1957 → сейчас (клавиша J или «⏳ ИСТОРИЯ» у Земли): точки вспыхивают в год запуска, внизу — счётчик объектов и вехи от «Спутника-1» до Starlink; обломки появляются в год разрушения (по номеру NORAD), а не в год запуска «родителя»',
@@ -2214,7 +2346,7 @@ const VERSIONS = [
   'Размер интерфейса (⚙ → «Интерфейс»: авто, 100–150 %), настройки разбиты на группы; описание в досье — сразу под заголовком, длинное сворачивается',
   'Телефон: досье и каталог открываются шторкой снизу, карта остаётся видна; инструменты свёрнуты в кнопку «⋯»',
   'Окно миссий: прошедшие плановые даты опущены вниз с пометкой; название проекта везде — BURAN GALAXY; в меню слоёв клавиши по порядку и новый слой «Ближайшие запуски»']},
-{v:'0.12', date:'29.10.2026', title:'Фон без путаницы со спутниками и понятное досье',
+{v:'0.12', img:['docs/changelog/v0.12.jpg'], date:'29.10.2026', title:'Фон без путаницы со спутниками и понятное досье',
  items:['Четыре стиля фона (⚙ → «Стиль фона»): «Фото» — вдали полная фотопанорама ESO со звёздами, у Земли звёзды растворяются; «Туманности» — Млечный Путь без звёзд, с пылевыми прожилками; «Фокус» — мягкое свечение, как фон не в фокусе; «Сетка» — тёмное небо с сеткой небесных координат, экватором и эклиптикой',
   'У Земли и в виде с МКС звёзд на фоне нет ни в одном стиле — все точки там спутники. Звёзды с панорамы убирает фильтр на видеокарте один раз при загрузке (минимум, затем максимум по окрестности ±5 пикселей): точки исчезают, туманности остаются',
   'Фон на четверть темнее, яркость — ползунок ⚙ → «Яркость фона». У Земли фон приглушается сам, при выбранном спутнике или группировке — ещё сильнее и мягче, с плавным переходом',
@@ -2231,7 +2363,7 @@ const VERSIONS = [
  items:['История орбиты (J): станции, телескопы и зонды появляются в год запуска — «Хаббл» в 1990-м, МКС в 1998-м, «Тяньгун» в 2021-м — а не висят над Землёй с 1957 года',
   'История в режиме «Мусор»: дымка мелкого мусора (модель ≈1 млн неотслеживаемых обломков) больше не видна с самого начала — она густеет вместе с отслеживаемым мусором; подпись «ИСЗ LIVE» с сегодняшними числами на время истории скрыта',
   'Границы стран в режимах «Спутники» и «Мусор» плавно гаснут до ≈15 % и не спорят с точками; в режиме «Земля» — прежняя яркость']},
-{v:'0.15', date:'30.10.2026', title:'Луна со спутниками и миссиями, полёты по таймлайну, аномалии и катастрофы',
+{v:'0.15', img:['docs/changelog/v0.15.jpg'], date:'30.10.2026', title:'Луна со спутниками и миссиями, полёты по таймлайну, аномалии и катастрофы',
  items:['Спутники Луны: 7 работающих сейчас (LRO, ARTEMIS P1 и P2, «Чандраян-2», Danuri, CAPSTONE, «Цюэцяо-2») и 13 исторических — от «Луны-10» до LADEE. Каждый кликабелен: в досье высота, скорость, над какой стороной Луны он сейчас и вкладка «▲ ЗАПУСК»',
   'У Луны внизу переключатель «◌ Спутники Луны / ⚑ Миссии / ◎ Всё вместе» и кнопка «⏳ История»; фон у Луны — без звёзд, как у Земли',
   'История освоения Луны (J у Луны): 1959 → сейчас; места посадок вспыхивают в свой день, спутники видны только в годы работы, вехи от «Луны-2» до Blue Ghost',
@@ -2241,7 +2373,25 @@ const VERSIONS = [
   'На карте новые тела: Эрида, Седна, Хаумеа, Макемаке, Аррокот, Фаэтон, Камоалева, 2015 BZ509, Дидим, «Улисс» и Tesla Roadster',
   '«Сейчас падает» — самые низкие объекты каталога, которые скоро сгорят в атмосфере (вверху вкладки «Катастрофы»)',
   'В «Истории орбиты» Земли, когда шкала проходит 4 октября 1957 года, звучит «бип-бип» первого спутника (если звук включён)',
-  'Площадки ближайших запусков больше не светятся на глобусе, когда время карты далеко от сегодняшнего']}
+  'Площадки ближайших запусков больше не светятся на глобусе, когда время карты далеко от сегодняшнего']},
+{v:'0.16', img:['docs/changelog/v0.16.jpg'], date:'30.10.2026', title:'Обучение, Марс как Луна и все миссии на карте',
+ items:['Обучение по интерфейсу: при первом запуске — короткий тур по всем основным кнопкам. Кнопка подсвечивается, рядом карточка «7 / 18 · СЛОИ» с описанием в одну-две строки, «← Назад», «Далее →», ✕ и «Пропустить обучение»; стрелки и Esc тоже работают. Кнопки, которых нет на экране (телефон), пропускаются. Повторить — «? Обучение по кнопкам» в окне приветствия или кнопка вверху справки',
+  'Марс как Луна: 16 мест посадок — от «Марса-2» и «Марса-3» до Perseverance и «Чжужуна» — с метками, 3D-моделями посадочных станций и марсоходов и маршрутами Spirit, Opportunity, Curiosity, Perseverance и «Чжужуна». Внизу переключатель «◎ Всё вместе / ◌ Спутники Марса / ⚑ Миссии», ⏳ история освоения 1960 → сейчас (J у Марса) и ◐ раскраска по стране и эпохе с легендой',
+  'Полёт к Марсу по реальным датам: щелчок по месту посадки — старт с космодрома, опорная орбита, уход от Земли, дуга вокруг Солнца к той точке, где Марс окажется в день прибытия (пунктирный круг), подлёт, витки на орбите у «Викингов» и «Чжужуна» и «семь минут ужаса» точно в место посадки. Шкала с фазами, пауза, перемотка, ×½–×2, камера «◎ Авто», «◉ С борта», «✥ Свободно»',
+  'Спутники Марса во времени: к работающим — 9 исторических (Mariner 9, орбитеры «Марса-2», «-3», «Марс-5», орбитеры «Викингов», «Фобос-2», Mars Global Surveyor, «Мангальян»); каждый виден в годы своей работы',
+  '«◎ ВСЁ ВМЕСТЕ» — первая кнопка у Земли, Луны и Марса: у Земли работающие спутники и мусор одновременно, у Луны и Марса — спутники и места посадок. У Луны и Марса появился «◐ Цвет»: обычный, по стране или по эпохе',
+  'Этапы на шкалах истории — как фазы полёта миссии: «История орбиты» Земли разделена на первые спутники, космическую гонку, орбитальные станции, навигацию и МКС, малые спутники и мегагруппировки; свои этапы у истории Луны и Марса. Текущий этап подсвечен и подписан под счётчиком',
+  'Проверка «все ли миссии на карте»: добавлены 14 спусков на Венеру («Венера-4…14», «Вега-1, -2», Pioneer Venus), «Гюйгенс» на Титане, падение MESSENGER на Меркурий; ACE, Wind, DSCOVR и «Адитья-L1» в точке L1, «Спектр-РГ» и Gaia в L2 — на гало-орбитах, а не в одну линию; «Цюэцяо-1» за Луной; «Хаябуса-2», Kepler и Spitzer вокруг Солнца; 15 новых мест на Луне (Ranger, Surveyor, «Луна-13…23», LCROSS, «Викрам», Hakuto-R, Resilience) — всего 41',
+  'Завершённые миссии видны в годы работы: Pioneer Venus Orbiter, «Венера-15, -16», Magellan, Venus Express, «Акацуки», MESSENGER, Galileo, Cassini, Dawn у Весты и Цереры, Rosetta у кометы Чурюмова — Герасименко. Станции прошлого — «Салют-1, -6, -7», Skylab, «Мир», «Тяньгун-1, -2» — появляются в «Истории орбиты» в свои годы',
+  'Список «Объекты»: новые разделы «Луна · спутники», «Марс · места посадок», «Венера, Титан, Меркурий · посадки» и «Аппараты прошлого»; щелчок по завершённой миссии переводит время карты в годы её работы (⟲ СЕЙЧАС вернёт назад). ACE, Wind, DSCOVR, «Адитья-L1», «Спектр-РГ», Gaia и «Цюэцяо-1» — в разделе Земли',
+  'MAVEN: 6 декабря 2025 года аппарат замолчал, пройдя за Марсом, в июне 2026 года NASA завершило миссию — теперь он на карте в годах работы, а не среди действующих',
+  'Точки спутников видны и над ночной стороной Земли: тень Земли больше не гасит их почти до черноты',
+  'Один стиль для списков слева: в «Аномалиях», «Катастрофах» и «Запусках» — раскрывающиеся категории с цветной меткой и счётчиком, как группы во «Спутниках», строки — как в «Объектах»; «Сейчас падает» — такая же категория. Поиск во всех вкладках одинаковый']},
+{v:'0.17', img:['docs/changelog/v0.17.jpg'], date:'30.10.2026', title:'Картинки в истории версий',
+ items:['К версиям добавлены снимки из самой карты, которые показывались в отчётах: v0.8, v0.10, v0.11, v0.12, v0.15, v0.16 и эта версия',
+  'В приложении картинка стоит под заголовком версии (бейдж версии вверху справа); щелчок открывает её целиком в новой вкладке',
+  'В CHANGELOG.md картинки стоят под заголовком каждой версии; файлы лежат в папке docs/changelog',
+  'Если открыть один index.html без папки docs, история версий показывается как раньше — без картинок и без пустых рамок']}
 ];
 </script>
 <script>
@@ -2747,7 +2897,9 @@ const PROG_CSS={apollo:'#4dff88', luna:'#ff7a5a', change:'#ffd24d', other:'#39c8
 const SITE3D={apollo11:'lm',apollo12:'lm',apollo14:'lm',apollo15:'lmr',apollo16:'lmr',apollo17:'lmr',
   luna2:'impact',luna9:'lander',surveyor1:'lander',luna16:'ret',luna17:'rover',luna21:'rover',luna24:'ret',
   change3:'rover',change4:'rover',change5:'ret',change6:'ret',chandrayaan3:'rover',slim:'tipped',
-  im1:'tipped',im2:'tipped',blueghost1:'lander',luna25:'impact',beresheet:'impact',artemis3:'plan',change7:'plan'};
+  im1:'tipped',im2:'tipped',blueghost1:'lander',luna25:'impact',beresheet:'impact',artemis3:'plan',change7:'plan',
+  ranger7:'impact',ranger8:'impact',ranger9:'impact',luna13:'lander',surveyor3:'lander',surveyor5:'lander',surveyor6:'lander',surveyor7:'lander',
+  luna15:'impact',luna20:'ret',luna23:'tipped',lcross:'impact',vikram:'impact',hakuto1:'impact',resilience:'impact'};
 /* пробеги по поверхности, км (для отрисовки траверса) */
 const TRAVERSE={apollo12:1.4,apollo14:3.5,apollo15:27.8,apollo16:26.7,apollo17:35.9,
   luna17:10.5,luna21:39,change3:0.11,change4:1.6,chandrayaan3:0.1};
@@ -3708,6 +3860,12 @@ mOv.addEventListener('click',function(e){ if(e.target===this) this.style.display
     const dt=document.createElement('span'); dt.className='verDate'; dt.textContent=V.date;
     const t=document.createElement('span'); t.className='verTitle'; t.textContent=V.title;
     h.appendChild(n); h.appendChild(dt); h.appendChild(t); d.appendChild(h);
+    if(V.img&&V.img.length){ const box=document.createElement('div'); box.className='verImgs';
+      V.img.forEach(src=>{ const a=document.createElement('a'); a.href=src; a.target='_blank'; a.rel='noopener'; a.title='Открыть картинку целиком';
+        const im=document.createElement('img'); im.loading='lazy'; im.alt='v'+V.v+' — '+V.title; im.src=src;
+        im.addEventListener('error',()=>{ a.remove(); if(!box.children.length) box.remove(); });
+        a.appendChild(im); box.appendChild(a); });
+      d.appendChild(box); }
     const ul=document.createElement('ul');
     V.items.forEach(i=>{ const li=document.createElement('li'); li.textContent=i; ul.appendChild(li); });
     d.appendChild(ul); list.appendChild(d);
@@ -6135,7 +6293,7 @@ function posAt(s,t){
    и от того, насколько близко Земля; аппараты в тени Земли — тусклые, на солнце — яркие. */
 let cloud=null, posA=null, colA=null, sizeA=null, alphaA=null, cursor=0, N=0, visCount=0, hlCount=0;
 const satMat=new THREE.ShaderMaterial({
-  uniforms:{pxr:{value:1}, gain:{value:1}, szk:{value:1.8}, sunL:{value:new THREE.Vector3(1,0,0)}, eRL:{value:eR}, shadowK:{value:0.72},
+  uniforms:{pxr:{value:1}, gain:{value:1}, szk:{value:1.8}, sunL:{value:new THREE.Vector3(1,0,0)}, eRL:{value:eR}, shadowK:{value:0.12},
     uYear:{value:3000}, uYearOn:{value:0}, nearA:{value:0}, nearB:{value:0}},
   vertexShader:LD.vp+'attribute vec3 acol; attribute float asize; attribute float aalpha; attribute float ayear;\n'+
     'uniform float pxr; uniform float gain; uniform float szk; uniform vec3 sunL; uniform float eRL; uniform float shadowK;\n'+
@@ -6148,7 +6306,7 @@ const satMat=new THREE.ShaderMaterial({
     ' vSh=1.0-sh*shadowK;'+
     ' vec4 mv=modelViewMatrix*vec4(position,1.0); gl_Position=projectionMatrix*mv;'+
     ' if(nearB>0.0) vA*=smoothstep(nearA,nearB,length(mv.xyz));'+
-    ' gl_PointSize=(vA<0.005)?0.0:asize*szk*pxr*(1.0-0.2*sh)*(1.0+1.6*fl);'+LD.v+'}',
+    ' gl_PointSize=(vA<0.005)?0.0:asize*szk*pxr*(1.0-0.05*sh)*(1.0+1.6*fl);'+LD.v+'}',
   fragmentShader:LD.fp+'varying vec3 vC; varying float vA; varying float vSh;\n'+
     'void main(){ vec2 d=gl_PointCoord-vec2(0.5); float r=dot(d,d)*4.0; if(r>1.0) discard;'+
     ' float a=vA*(1.0-smoothstep(0.6,1.0,r))*mix(0.55,1.0,vSh); gl_FragColor=vec4(vC*vSh*(1.0+0.35*(1.0-r)),a);'+LD.f+'}',
@@ -6218,7 +6376,7 @@ let satsOn=true;                  // слой «0 · Все спутники З�
 function satColor(s){ return s.cls==='nav'?NAV_CSS[s.nav]||NAV_CSS.other:CLS_BY[s.cls].css; }
 function shown(s){ return !s.bad&&!hiddenCls.has(s.cls)&&(!SH.vis||SH.vis(s)); }
 // что сейчас на карте: в режиме «Мусор» — только обломки, ступени и мёртвые спутники, в остальных — только работающие аппараты
-function onMap(s){ return shown(s)&&(mode==='deb')===isJunk(s); }
+function onMap(s){ return shown(s)&&(mode==='all'||(mode==='deb')===isJunk(s)); }
 const BASE_SZ={station:1.9, geo:1.3, nav:1.3, deb:0.85, rb:1.0, dead:0.95};
 function restyle(){
   if(!cloud) return;
@@ -6229,7 +6387,7 @@ function restyle(){
     _col.set(SH.col?SH.col(s):satColor(s)); colA[i*3]=_col.r; colA[i*3+1]=_col.g; colA[i*3+2]=_col.b;
     const base=BASE_SZ[s.cls]||1;
     sizeA[i]=hlTest?(hl?base*1.35:base*0.8):base;
-    alphaA[i]=!vis?0:(hlTest?(hl?1:0.13):(mode==='deb'?0.8:0.95));
+    alphaA[i]=!vis?0:(hlTest?(hl?1:0.13):(mode==='deb'?0.8:(mode==='all'&&isJunk(s)?0.5:0.95)));
   }
   visCount=vn; hlCount=hn;
   const at=cloud.geometry.attributes; at.acol.needsUpdate=at.asize.needsUpdate=at.aalpha.needsUpdate=true;
@@ -6583,7 +6741,7 @@ function pickSat(ndc){
   const cand=[];
   const junkOnly=mode==='deb';
   for(let i=0;i<N;i++){
-    if(alphaA[i]<0.05||isJunk(cat.list[i])!==junkOnly) continue;
+    if(alphaA[i]<0.05||(mode!=='all'&&isJunk(cat.list[i])!==junkOnly)) continue;
     const x=posA[i*3], y=posA[i*3+1], z=posA[i*3+2];
     const w=e[3]*x+e[7]*y+e[11]*z+e[15]; if(w<=0) continue;
     const sx=((e[0]*x+e[4]*y+e[8]*z+e[12])/w+1)/2*W; if(sx<mx-R||sx>mx+R) continue;
@@ -6632,13 +6790,14 @@ hooks.vis.push(function(){
 
 /* ── Плавающий переключатель режимов ───────────────────────────────── */
 const modeSw=mk('div'); modeSw.id='modeSw';
-modeSw.innerHTML='<button data-m="earth" title="Наводить и выбирать страны на глобусе [G]"><b>◍ ЗЕМЛЯ</b><small>страны и границы</small></button>'+
+modeSw.innerHTML='<button data-m="all" title="Спутники и космический мусор вместе [G]"><b>◎ ВСЁ ВМЕСТЕ</b><small>спутники и мусор</small></button>'+
+  '<button data-m="earth" title="Наводить и выбирать страны на глобусе [G]"><b>◍ ЗЕМЛЯ</b><small>страны и границы</small></button>'+
   '<button data-m="sats" title="Наводить и выбирать спутники [G]"><b>✦ СПУТНИКИ</b><small id="msCnt">загрузка…</small></button>'+
   '<button data-m="deb" title="Космический мусор: обломки, ступени, неработающие спутники [G]"><b>☄ МУСОР</b><small id="msDeb">обломки и ступени</small></button>';
 vp.appendChild(modeSw);
 modeSw.querySelectorAll('button').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); setMode(b.dataset.m,true); }));
 ['mousedown','mouseup','wheel','dblclick'].forEach(ev=>modeSw.addEventListener(ev,e=>e.stopPropagation()));
-const MODE_MSG={earth:'◍ РЕЖИМ «ЗЕМЛЯ»: ЩЕЛЧОК ПО СТРАНЕ — ДОСЬЕ', sats:'✦ РЕЖИМ «СПУТНИКИ»: ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ АППАРАТА',
+const MODE_MSG={all:'◎ СПУТНИКИ И МУСОР ВМЕСТЕ: ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ', earth:'◍ РЕЖИМ «ЗЕМЛЯ»: ЩЕЛЧОК ПО СТРАНЕ — ДОСЬЕ', sats:'✦ РЕЖИМ «СПУТНИКИ»: ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ АППАРАТА',
   deb:'☄ РЕЖИМ «МУСОР»: ОБЛОМКИ, СТУПЕНИ И МЁРТВЫЕ СПУТНИКИ — ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ'};
 function setMode(m,user){
   const changed=m!==mode; mode=m;
@@ -6646,12 +6805,13 @@ function setMode(m,user){
   satMat.uniforms.gain.value=m==='earth'?0.38:1;
   if(user&&changed) toast(MODE_MSG[m],'',2400);
   if(!cat.ready) return;
-  if(m==='deb'){ loadApprox().catch(()=>{}); if(!haze) buildHaze(); }
+  if(m==='deb'||m==='all') loadApprox().catch(()=>{});
+  if(m==='deb'&&!haze) buildHaze();
   // вкладка списка следует за режимом: «Мусор» ↔ «КОСМИЧЕСКИЙ МУСОР», «Спутники» ↔ «АППАРАТЫ»
-  if(m!=='earth'&&(m==='deb')!==(satKind==='deb')) setKind(m==='deb'?'deb':'act',true);
+  if((m==='sats'||m==='deb')&&(m==='deb')!==(satKind==='deb')) setKind(m==='deb'?'deb':'act',true);
   // переключили вкладку вручную, а выбран объект «чужой» вкладки — досье закрываем (его точки на карте больше нет)
   const sel=B.getSelected();
-  if(user&&changed&&m!=='earth'&&sel&&((sel.kindType==='sat'&&isJunk(sel.sat)!==(m==='deb'))||(m==='deb'&&EARTH_CRAFT.indexOf(sel)>=0))) B.select(null);
+  if(user&&changed&&m!=='earth'&&m!=='all'&&sel&&((sel.kindType==='sat'&&isJunk(sel.sat)!==(m==='deb'))||(m==='deb'&&EARTH_CRAFT.indexOf(sel)>=0))) B.select(null);
   restyle(); refreshHL(); B.applyVisibility();
 }
 setMode('sats');
@@ -6680,12 +6840,12 @@ hooks.pos.push(function(t){ if(haze&&haze.visible) haze.rotation.y=((t-J2000)/10
 hooks.select.push(function(r){
   if(!r) return;
   if(r.kindType==='observatory') setMode('earth'); // у Земли по умолчанию — спутники (главное в проекте)
-  else if(r.kindType==='sat') setMode(isJunk(r.sat)?'deb':'sats');
-  else if(r.kindType==='satgroup'||REC_NORAD[r.id]) setMode(r.id==='g_debris'?'deb':'sats');
+  else if(r.kindType==='sat'&&mode!=='all') setMode(isJunk(r.sat)?'deb':'sats');
+  else if((r.kindType==='satgroup'||REC_NORAD[r.id])&&mode!=='all') setMode(r.id==='g_debris'?'deb':'sats');
 });
 hooks.key.push(function(e){
   if(e.ctrlKey||e.altKey||e.metaKey) return false;
-  if(e.code==='KeyG'&&nearE){ setMode(mode==='earth'?'sats':(mode==='sats'?'deb':'earth'),true); return true; }
+  if(e.code==='KeyG'&&nearE){ const O=['all','earth','sats','deb']; setMode(O[(O.indexOf(mode)+1)%O.length],true); return true; }
   if(e.code==='KeyI'){ togglePov(); return true; }
   if(e.key==='Escape'&&pov){ togglePov(false); return true; }
   return false;
@@ -6798,7 +6958,7 @@ function openSat(s,fly){
   const r=satRec(s);
   if(!satsOn){ toggleSats(true); }
   if(hiddenCls.has(s.cls)){ hiddenCls.delete(s.cls); restyle(); renderChips(); }
-  B.select(r); setMode(isJunk(s)?'deb':'sats');
+  B.select(r); if(mode!=='all'||isJunk(s)&&!onMap(s)) setMode(isJunk(s)?'deb':'sats');
   if(fly) focusAbove(r);
 }
 
@@ -7241,7 +7401,7 @@ paneLnc.innerHTML='<div class="lpSearch"><input id="lncQ" placeholder="&gt; АП
 const lncList=VList(paneLnc.querySelector('#lncBox'),18,{
   row(d,x){ const sel=B.getSelected(); d.className='vrow lnc'+(sel&&sel.kindType==='launch'&&sel.fa===x?' sel':'');
     d.innerHTML='<span class="code"></span><span class="nm"></span><span class="val"></span><span class="st"></span>';
-    d.children[0].textContent=String(x.net).slice(0,10); d.children[1].textContent=x.payload; d.children[2].textContent=x.model;
+    const dt=String(x.net); d.children[0].textContent=dt.slice(8,10)+'.'+dt.slice(5,7)+'.'+dt.slice(2,4); d.children[1].textContent=x.payload; d.children[2].textContent=x.model;
     const st=OK_RU[x.ok]||['UNK','?']; d.children[3].textContent=st[0]==='OK'?'✓':(st[0]==='FAIL'?'✕':'◐'); d.children[3].className='st st'+st[0];
     d.title=x.payload+' · '+x.model+' · '+((padOf(x.loc)||{}).ru||x.loc); },
   click(x){ openLaunch(x.id); }
@@ -7257,9 +7417,16 @@ function runLncFilter(){
   const L=FA.rows.filter(x=>F(x)&&(!q||x.hay.indexOf(q)>=0));
   lncList.set(L); $('lncN').textContent=fmtNum(L.length)+' запусков из '+fmtNum(FA.rows.length);
 }
+const LNC_NM={all:'Все запуски',RUS:'СССР и Россия',USA:'США',CHN:'Китай',EU:'Европа',JPN:'Япония',IND:'Индия',FAIL:'Аварии',MOON:'К Луне и планетам'};
+const LNC_COL={all:'#d8d8d8',RUS:'#ff5a5a',USA:'#4d9fff',CHN:'#ffd24d',EU:'#b28aff',JPN:'#ff8ad0',IND:'#ffa64d',FAIL:'#ff3b3b',MOON:'#7fd8ff'};
+let lncCnt=null;
 function lncChips(){
-  const b=$('lncChips'); b.innerHTML='';
-  Object.keys(LNC_F).forEach(k=>{ const c=mk('button','scChip'+(k===lncF?' on':''),LNC_F[k][0]); c.addEventListener('click',()=>{ lncF=k; lncChips(); runLncFilter(); }); b.appendChild(c); });
+  const b=$('lncChips'); b.innerHTML=''; b.className='satCats';
+  if(!lncCnt&&FA){ lncCnt={}; Object.keys(LNC_F).forEach(k=>{ lncCnt[k]=FA.rows.filter(LNC_F[k][1]).length; }); }
+  Object.keys(LNC_F).forEach(k=>{ const c=mk('div','scat'+(k===lncF?' on':''));
+    c.innerHTML='<span class="scDot" style="background:'+LNC_COL[k]+'"></span><span class="n"></span><span class="c">'+(lncCnt?fmtNum(lncCnt[k]):'')+'</span><span class="ch">'+(k===lncF?'':'›')+'</span>';
+    c.querySelector('.n').textContent=LNC_NM[k]; c.title='Показать: '+LNC_NM[k];
+    c.addEventListener('click',()=>{ if(lncF===k) return; lncF=k; lncChips(); runLncFilter(); }); b.appendChild(c); });
 }
 let lncQT=0; $('lncQ').addEventListener('input',()=>{ clearTimeout(lncQT); lncQT=setTimeout(runLncFilter,160); });
 $('lncQ').addEventListener('keydown',e=>{ e.stopPropagation(); if(e.key==='Escape') e.target.blur(); });
@@ -7560,7 +7727,8 @@ const MPAD={baikonur:[45.92,63.34,'Байконур'], ccafs:[28.49,-80.58,'мы
 const SITE_PAD={luna2:'baikonur',luna9:'baikonur',surveyor1:'ccafs',apollo11:'ksc',apollo12:'ksc',apollo14:'ksc',apollo15:'ksc',apollo16:'ksc',
   apollo17:'ksc',luna16:'baikonur',luna17:'baikonur',luna21:'baikonur',luna24:'baikonur',change3:'xichang',change4:'xichang',change5:'wenchang',
   change6:'wenchang',chandrayaan3:'shar',slim:'tnsc',im1:'ksc',blueghost1:'ksc',im2:'ksc',luna25:'vostochny',beresheet:'ccafs',
-  change7:'wenchang',artemis3:'ksc39b'};
+  change7:'wenchang',artemis3:'ksc39b',ranger7:'ccafs',ranger8:'ccafs',ranger9:'ccafs',luna13:'baikonur',surveyor3:'ccafs',surveyor5:'ccafs',
+  surveyor6:'ccafs',surveyor7:'ccafs',luna15:'baikonur',luna20:'baikonur',luna23:'baikonur',lcross:'ccafs',vikram:'shar',hakuto1:'ccafs',resilience:'ksc'};
 const TRAJ_LBL={direct:'прямой перелёт без выхода на орбиту Луны', orbit:'перелёт с выходом на окололунную орбиту',
   phasing:'энергосберегающая схема: витки у Земли с подъёмом апогея, затем витки у Луны', wsb:'перелёт через «слабую границу устойчивости» за орбитой Луны (~4 мес.)'};
 const trajL=B.trajLine;
@@ -7637,7 +7805,7 @@ function setLine(line,pts){ line.geometry.dispose(); line.geometry=new THREE.Buf
 let tjRebuild=0;
 B.setTrajFn(function(){
   const S=B.getSelected();
-  if(!S||S.kindType!=='site'||(window.__flightOn&&window.__flightOn(S))){ trajL.visible=trajLaunch.visible=craft.visible=padMark.visible=false; tj.id=null; return; }
+  if(!S||S.kindType!=='site'||S.parentRec!==MOON||(window.__flightOn&&window.__flightOn(S))){ trajL.visible=trajLaunch.visible=craft.visible=padMark.visible=false; tj.id=null; return; }
   if(tj.id!==S.id||++tjRebuild%45===0){ const g=buildLunarTraj(S); if(tj.id!==S.id) tj.t=0; tj.id=S.id; Object.assign(tj,g);
     setLine(trajL,g.pts); setLine(trajLaunch,g.launch); }
   trajL.visible=trajLaunch.visible=true;
@@ -7652,7 +7820,7 @@ B.setTrajFn(function(){
 });
 // в досье места посадки — откуда стартовали и по какой схеме летели
 hooks.live.push(function(r,rows){
-  if(r.kindType!=='site') return;
+  if(r.kindType!=='site'||r.parentRec!==MOON) return;
   const pad=MPAD[SITE_PAD[r.id]];
   if(pad) rows.push(['Космодром старта',()=>pad[2]]);
   rows.push(['Схема перелёта',()=>TRAJ_LBL[r.traj]||'—']);
@@ -7728,7 +7896,7 @@ hooks.post.push(function(dt){
     satMat.uniforms.pxr.value=renderer.getPixelRatio();
     satMat.uniforms.szk.value=pointScale(); updSunUniform();
     // v0.12: у выбранного спутника соседи в тени Земли не тонут во тьме — затенение слабее
-    const shK=skyFocus()===2?0.3:0.72; satMat.uniforms.shadowK.value+=(shK-satMat.uniforms.shadowK.value)*Math.min(1,dt*3);
+    const shK=skyFocus()===2?0.06:0.12; satMat.uniforms.shadowK.value+=(shK-satMat.uniforms.shadowK.value)*Math.min(1,dt*3);
     // v0.11: камера смотрит на Землю издалека — объекты высоких орбит рядом с камерой гаснут, кольцо ГСО остаётся
     const fw=B.getFollow(), nk=(!pov&&(!fw||fw===EARTH))?clamp((dE-3.5)/2.5,0,1):0;
     satMat.uniforms.nearA.value=0.22*dE*eR*nk; satMat.uniforms.nearB.value=0.55*dE*eR*nk;
@@ -8358,7 +8526,7 @@ vp.appendChild(histBar);
 const yNow=()=>{ const d=new Date(); return d.getUTCFullYear()+(d.getUTCMonth()+d.getUTCDate()/31)/12; };
 let hist=null, fyS=null, hbK=1, fyMode='';
 function buildFy(){ fyMode=V8.mode(); const L=V8.cat.list.filter(s=>s.fy&&V8.onMap(s)).map(s=>s.fy); fyS=new Float32Array(L).sort();
-  $('hbNl').textContent=fyMode==='deb'?'объектов мусора':'работающих спутников'; }
+  $('hbNl').textContent=fyMode==='deb'?'объектов мусора':(fyMode==='all'?'объектов на орбите':'работающих спутников'); }
 function cntTo(y){ if(!fyS) return 0; let lo=0, hi=fyS.length; while(lo<hi){ const m=(lo+hi)>>1; if(fyS[m]<=y) lo=m+1; else hi=m; } return lo; }
 function histOpen(){
   const c=V8.cat; if(!c.ready){ toast('КАТАЛОГ СПУТНИКОВ ЕЩЁ ЗАГРУЖАЕТСЯ…','',2500); return; }
@@ -8644,122 +8812,189 @@ hooks.select.push(function(r){
   V8.loadFA().then(fa=>{ if(B.getSelected()!==r) return; V8.fillExtra([V8.faBlock(fa.byCospar.get(r.lc)||null,{cospar:r.lc})]); }).catch(()=>{});
 });
 
-/* ════ 2. У ЛУНЫ: ПЕРЕКЛЮЧАТЕЛЬ «СПУТНИКИ / МИССИИ / ВСЁ ВМЕСТЕ» ════════ */
-const SITES=B.recs.filter(r=>r.kindType==='site');
+/* ════ 2. У ТЕЛА (ЛУНА, МАРС): ПЕРЕКЛЮЧАТЕЛЬ, РАСКРАСКА, ИСТОРИЯ С ЭПОХАМИ ═════
+   Общий модуль: «◎ Всё вместе» (первая кнопка) · «◌ Спутники» · «⚑ Миссии» · «⏳ История» · «◐ Цвет».
+   Луна подключается здесь, Марс — в части 8. Даты: у мест посадок r.launchMs — день посадки,
+   у спутников — выход на орбиту (r.endMs — конец работы); ядро прячет их по году шкалы через B.timeOverride. */
+const SITES=B.recs.filter(r=>r.kindType==='site'&&r.parentRec===MOON);
 const LANDED=SITES.filter(r=>r.status!=='PLAN');
-let moonMode=getLS('buran_moonmode'); if(['sats','missions','both'].indexOf(moonMode)<0) moonMode='both';
-let lh=null, fl=null;                                   // история освоения Луны, полёт миссии
-const lsOn=()=>!!lh||moonMode!=='missions', msOn=()=>!!lh||moonMode!=='sats';
-LSR.forEach(r=>{ const lc=r.labelCheck, pc=r.pickCheck;
-  r.labelCheck=()=>(!lc||lc())&&(lsOn()||B.getSelected()===r); r.pickCheck=()=>(!pc||pc())&&(lsOn()||B.getSelected()===r); });
-SITES.forEach(r=>{ const lc=r.labelCheck, pc=r.pickCheck, plan=r.status==='PLAN';   // планы в истории не показываем
-  r.labelCheck=()=>(!lc||lc())&&(msOn()||B.getSelected()===r)&&!(lh&&plan); r.pickCheck=()=>(!pc||pc())&&(msOn()||B.getSelected()===r)&&!(lh&&plan); });
-hooks.vis.push(function(){
-  const sel=B.getSelected();
-  if(fl&&fl.cam==='board') B.recs.forEach(r=>{ if(r.orbit) r.orbit.visible=false; });
-  LSR.forEach(r=>{ const on=!r.hiddenByTime&&(lsOn()||sel===r); r.node.visible=on; if(r.orbit&&!on) r.orbit.visible=false; });
-  if(!msOn()) SITES.forEach(r=>{ if(r!==sel) r.node.visible=false; });
-  if(lh) SITES.forEach(r=>{ if(r.status==='PLAN') r.node.visible=false; });
-});
-const moonSw=mk('div'); moonSw.id='moonSw';
-moonSw.innerHTML='<button data-m="sats" title="Искусственные спутники Луны — работающие сейчас и в выбранный момент времени"><b>◌ СПУТНИКИ ЛУНЫ</b><small id="msLs">—</small></button>'+
-  '<button data-m="missions" title="Места посадок; щелчок по миссии — полёт по таймлайну"><b>⚑ МИССИИ</b><small id="msLm">—</small></button>'+
-  '<button data-m="both" title="Спутники и места посадок вместе"><b>◎ ВСЁ ВМЕСТЕ</b><small>спутники и посадки</small></button>'+
-  '<button class="mx" id="msLh" title="История освоения Луны: 1959 → сейчас [J]"><b>⏳ ИСТОРИЯ</b><small>1959 → сейчас</small></button>';
-vp.appendChild(moonSw); shield(moonSw);
-function setMoonMode(m,user){
-  moonMode=m; setLS('buran_moonmode',m);
-  moonSw.querySelectorAll('button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
-  const sel=B.getSelected();
-  if(user&&sel&&((m==='sats'&&sel.kindType==='site')||(m==='missions'&&sel.kindType==='lsat'))) B.select(null);
-  B.applyVisibility();
-  if(user) toast(m==='sats'?'◌ СПУТНИКИ ЛУНЫ: ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ':(m==='missions'?'⚑ МИССИИ: ЩЕЛЧОК ПО МЕСТУ ПОСАДКИ — ПОЛЁТ ПО ТАЙМЛАЙНУ':'◎ СПУТНИКИ И МИССИИ ВМЕСТЕ'),'',2400);
+let fl=null;                                                           // полёт миссии (раздел 4)
+const CTRY={RU:['СССР и Россия','#ff5a5a'], US:['США','#4d9fff'], CN:['Китай','#ffd24d'], IN:['Индия','#ffa64d'], JP:['Япония','#ff8ad0'],
+  EU:['Европа','#b28aff'], IL:['Израиль','#5fe0c8'], KR:['Южная Корея','#9dff5a'], AE:['ОАЭ','#7fd8ff'], PV:['Частные компании','#d8d8d8']};
+const HUBS=[];
+const eraOf=(eras,y)=>eras.find(e=>y>=e[0]&&y<e[1])||eras[eras.length-1];
+// полоса эпох под шкалой истории: ширина — по длительности, текущая — ярче
+function eraTrack(eras,y0){
+  const box=mk('div','eraTrack'), y1=msY(Date.now()), span=y1-y0;
+  eras.forEach(e=>{ const d=mk('div',null,e[2]); d.style.flex=String(Math.max(0.01,(Math.min(e[1],y1)-Math.max(e[0],y0))/span)); d.style.background=e[3];
+    d.title=e[2]+' · '+e[0]+'–'+(e[1]>y1?'сейчас':e[1]); box.appendChild(d); });
+  box.set=y=>{ const i=eras.indexOf(eraOf(eras,y)); [...box.children].forEach((d,k)=>d.classList.toggle('cur',k===i)); };
+  return box;
 }
-moonSw.querySelectorAll('button[data-m]').forEach(b=>b.addEventListener('click',()=>setMoonMode(b.dataset.m,true)));
-$('msLh').addEventListener('click',()=>lhToggle());
-setMoonMode(moonMode,false);
-function nearMoon(){
+function makeHub(C){
+  const H={C:C, mode:getLS('buran_hub_'+C.id)||'all', col:getLS('buran_hubcol_'+C.id)||'type', hist:null, k:1, ui:0, vis:false, swT:0};
+  if(['all','sats','sites'].indexOf(H.mode)<0) H.mode='all';
+  if(['type','country','era'].indexOf(H.col)<0) H.col='type';
+  H.satsOn=()=>!!H.hist||H.mode!=='sites'; H.sitesOn=()=>!!H.hist||H.mode!=='sats';
+  H.wrap=function(){                                                    // подписи и выбор по режиму (вызывать после появления новых записей)
+    C.sats().forEach(r=>{ if(r._hubW) return; r._hubW=1; const lc=r.labelCheck, pc=r.pickCheck;
+      r.labelCheck=()=>(!lc||lc())&&(H.satsOn()||B.getSelected()===r); r.pickCheck=()=>(!pc||pc())&&(H.satsOn()||B.getSelected()===r); });
+    C.sites().forEach(r=>{ if(r._hubW) return; r._hubW=1; const lc=r.labelCheck, pc=r.pickCheck, plan=r.status==='PLAN';
+      r.labelCheck=()=>(!lc||lc())&&(H.sitesOn()||B.getSelected()===r)&&!(H.hist&&plan); r.pickCheck=()=>(!pc||pc())&&(H.sitesOn()||B.getSelected()===r)&&!(H.hist&&plan); });
+  };
+  H.wrap();
+  hooks.vis.push(function(){
+    const sel=B.getSelected();
+    C.sats().forEach(r=>{ if(r.hiddenByTime||(!H.satsOn()&&sel!==r)){ r.node.visible=false; if(r.orbit) r.orbit.visible=false; } else if(r.kindType==='lsat') r.node.visible=true; });
+    C.sites().forEach(r=>{ if((!H.sitesOn()&&r!==sel)||(H.hist&&r.status==='PLAN')) r.node.visible=false; });
+  });
+  // переключатель
+  const sw=mk('div','hubSw'); sw.id='hubSw_'+C.id;
+  sw.innerHTML='<button data-m="all" title="Спутники и места посадок вместе"><b>◎ ВСЁ ВМЕСТЕ</b><small>спутники и миссии</small></button>'+
+    '<button data-m="sats" title="Искусственные спутники — работающие сейчас и в выбранный момент"><b>◌ '+C.satsName+'</b><small class="hN">—</small></button>'+
+    '<button data-m="sites" title="Места посадок; щелчок по миссии — подробности"><b>⚑ МИССИИ</b><small class="hM">—</small></button>'+
+    '<button class="mx hH" title="История освоения: '+C.y0+' → сейчас [J]"><b>⏳ ИСТОРИЯ</b><small>'+C.y0+' → сейчас</small></button>'+
+    '<button class="mx hC" title="Раскраска: обычная → по стране → по эпохе"><b class="hCt">◐ ЦВЕТ</b><small class="hCs">обычный</small></button>';
+  vp.appendChild(sw); shield(sw); H.sw=sw;
+  H.setMode=function(m,user){
+    H.mode=m; setLS('buran_hub_'+C.id,m);
+    sw.querySelectorAll('button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+    const sel=B.getSelected();
+    if(user&&sel&&((m==='sats'&&C.sites().indexOf(sel)>=0)||(m==='sites'&&C.sats().indexOf(sel)>=0))) B.select(null);
+    B.applyVisibility();
+    if(user) toast(m==='sats'?'◌ '+C.satsName+': ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ':(m==='sites'?'⚑ МИССИИ: ЩЕЛЧОК ПО МЕСТУ ПОСАДКИ — ПОДРОБНОСТИ':'◎ СПУТНИКИ И МИССИИ ВМЕСТЕ'),'',2200);
+  };
+  sw.querySelectorAll('button[data-m]').forEach(b=>b.addEventListener('click',()=>H.setMode(b.dataset.m,true)));
+  sw.querySelector('.hH').addEventListener('click',()=>H.histToggle());
+  // раскраска и легенда
+  const COLN={type:'обычный', country:'по стране', era:'по эпохе'};
+  const leg=mk('div','hubLeg'); vp.appendChild(leg); shield(leg); H.leg=leg;
+  H.colOf=function(r){
+    if(H.col==='country'){ const c=CTRY[r.ctry]; return c?c[1]:'#9a9a9a'; }
+    if(H.col==='era') return eraOf(C.eras,msY(r.launchMs||Date.now()))[3];
+    return r._css0;
+  };
+  H.applyCol=function(){
+    C.sats().concat(C.sites()).forEach(r=>{ if(r._css0==null) r._css0=r.labelColor; const css=H.colOf(r);
+      if(r.labelEl) r.labelEl.style.color=css;
+      const c=new THREE.Color(css); if(r.spr) r.spr.material.color.copy(c); if(r.hubTint) r.hubTint.forEach(m=>m.color.copy(c)); });
+    sw.querySelector('.hCs').textContent=COLN[H.col]; sw.querySelector('.hC').classList.toggle('on',H.col!=='type');
+    H.drawLeg();
+  };
+  H.drawLeg=function(){
+    leg.innerHTML=''; if(H.col==='type'){ leg.classList.remove('on'); return; }
+    const L=C.sats().concat(C.sites()).filter(r=>r.status!=='PLAN'), groups=new Map();
+    if(H.col==='country') L.forEach(r=>{ const k=CTRY[r.ctry]?r.ctry:'?'; groups.set(k,(groups.get(k)||0)+1); });
+    else L.forEach(r=>{ const e=eraOf(C.eras,msY(r.launchMs||Date.now())); groups.set(e,(groups.get(e)||0)+1); });
+    const t=mk('div','clT'); t.appendChild(mk('span',null,'◐ ЦВЕТ: '+(H.col==='country'?'СТРАНА':'ЭПОХА')+' · '+C.title)); const x=mk('button',null,'✕'); x.title='Обычная раскраска';
+    x.addEventListener('click',()=>{ H.col='type'; setLS('buran_hubcol_'+C.id,'type'); H.applyCol(); }); t.appendChild(x); leg.appendChild(t);
+    const keys=H.col==='country'?Object.keys(CTRY).concat(['?']).filter(k=>groups.has(k)):C.eras.filter(e=>groups.has(e));
+    keys.forEach(k=>{ const row=mk('div','clR'), d=mk('i'), c=H.col==='country'?(CTRY[k]||['Нет данных','#9a9a9a']):[k[2]+' · '+k[0]+'–'+(k[1]>2100?'…':k[1]),k[3]];
+      d.style.background=c[1]; d.style.color=c[1]; row.appendChild(d); row.appendChild(mk('span',null,c[0])); row.appendChild(mk('em',null,String(groups.get(k)))); leg.appendChild(row); });
+    leg.appendChild(mk('div','clN','Спутники и места посадок, включая аварии и завершённые миссии.'));
+    leg.classList.toggle('on',H.vis);
+  };
+  sw.querySelector('.hC').addEventListener('click',()=>{ const o=['type','country','era']; H.col=o[(o.indexOf(H.col)+1)%3]; setLS('buran_hubcol_'+C.id,H.col); H.applyCol();
+    toast('◐ ЦВЕТ: '+COLN[H.col].toUpperCase(),'ok',1600); });
+  // история освоения
+  const bar=mk('div','tlBar hubBar'); bar.id='hubBar_'+C.id;
+  bar.innerHTML='<div class="tlTop"><span>⏳ '+C.histTitle+'</span><span class="tlNote">'+C.histNote+'</span>'+
+    '<div class="tlSeg hSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div><button class="tlX" title="Выйти [J / Esc]">✕</button></div>'+
+    '<div class="tlMain"><button class="tlPlay">❚❚</button><div class="tlYear">'+C.y0+'</div>'+
+    '<div class="tlStat"><b class="hN1">0</b> <span class="hN1l"></span> · <b class="hS1">0</b> <span class="hS1l"></span><small class="hEra"></small></div></div>'+
+    '<input type="range" class="tlR" min="'+(C.y0+0.5)+'" max="2027" step="0.01" value="'+(C.y0+0.5)+'">';
+  const track=eraTrack(C.eras,C.y0+0.5); bar.insertBefore(track,bar.querySelector('.tlR'));
+  bar.appendChild(mk('div','tlEv')); vp.appendChild(bar); shield(bar); H.bar=bar;
+  const q=s=>bar.querySelector(s);
+  H.histOpen=function(){
+    if(fl) stopFlight(true);
+    HUBS.forEach(h=>{ if(h!==H) h.histClose(); });
+    if(V11.hist&&V11.hist()) V11.histClose();
+    const sel=B.getSelected(); if(sel&&(C.sats().indexOf(sel)>=0||C.sites().indexOf(sel)>=0)) B.select(null);
+    H.hist={y:C.y0+0.5, play:true, ev:-1, seen:new Set()};
+    B.setFollow(C.body); B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:C.body, toR:C.body.visR*C.histR, dur:1.4});
+    B.timeOverride=yMs(H.hist.y); B.timeVisCheck(); B.applyVisibility();
+    bar.classList.add('on'); body.classList.add('lhOn'); H.ui=0;
+  };
+  H.histClose=function(){ if(!H.hist) return; H.hist=null; bar.classList.remove('on');
+    if(!HUBS.some(h=>h.hist)) body.classList.remove('lhOn');
+    B.timeOverride=null; B.timeVisCheck(); B.applyVisibility(); };
+  H.histToggle=()=>{ if(H.hist) H.histClose(); else H.histOpen(); };
+  q('.tlX').addEventListener('click',()=>H.histClose());
+  q('.tlPlay').addEventListener('click',()=>{ const h=H.hist; if(!h) return; if(!h.play&&h.y>=msY(Date.now())-0.01){ h.y=C.y0+0.5; h.seen.clear(); } h.play=!h.play; });
+  q('.tlR').addEventListener('input',function(){ if(!H.hist) return; H.hist.y=+this.value; H.hist.play=false; });
+  q('.hSpd').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; H.k=+b.dataset.k; [...q('.hSpd').children].forEach(x=>x.classList.toggle('on',x===b)); });
+  hooks.post.push(function(dt){
+    const show=C.near()&&!fl&&!(window.__mflOn&&window.__mflOn());
+    if(show!==H.vis){ H.vis=show; sw.classList.toggle('show',show); body.classList.toggle('moonSwOn',HUBS.some(h=>h.vis)); leg.classList.toggle('on',show&&H.col!=='type'); }
+    H.swT-=dt;
+    if(show&&H.swT<=0){ H.swT=1; const t=B.getSim(), nS=C.sats().filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs)).length, nM=C.sites().filter(r=>r.status!=='PLAN'&&t>=r.launchMs).length;
+      sw.querySelector('.hN').textContent=nS+' на орбите'; sw.querySelector('.hM').textContent=nM+' '+plur(nM,'миссия','миссии','миссий'); sw.querySelector('.hH').classList.toggle('on',!!H.hist); }
+    const h=H.hist; if(!h) return;
+    if(V11.hist&&V11.hist()){ H.histClose(); return; }
+    const end=msY(Date.now());
+    if(h.play){ const y=h.y, rate=C.rate(y)*H.k; h.y=Math.min(end,y+dt*rate); if(h.y>=end) h.play=false; }
+    B.timeOverride=yMs(h.y);
+    H.ui-=dt; if(H.ui>0) return; H.ui=0.06;
+    B.timeVisCheck();
+    q('.tlPlay').textContent=h.play?'❚❚':'▶';
+    q('.tlYear').textContent=h.y>=end-0.01?'СЕЙЧАС':String(Math.floor(h.y));
+    q('.tlR').value=String(h.y);
+    const t=yMs(h.y), land=C.sites().filter(r=>r.status!=='PLAN'&&t>=r.launchMs), on=C.sats().filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs));
+    q('.hN1').textContent=land.length; q('.hN1l').textContent=plur(land.length,'посадка или падение','посадки и падения','посадок и падений');
+    q('.hS1').textContent=on.length; q('.hS1l').textContent=plur(on.length,'спутник на орбите','спутника на орбите','спутников на орбите');
+    const er=eraOf(C.eras,h.y); q('.hEra').textContent='эпоха: '+er[2].toLowerCase()+' · '+er[0]+'–'+(er[1]>end?'сейчас':er[1])+(on.length?' · на орбите: '+on.map(r=>r.name).join(', '):'');
+    track.set(h.y);
+    land.forEach(r=>{ if(h.seen.has(r)) return; h.seen.add(r); const el=r.labelEl; if(el){ el.classList.remove('born'); void el.offsetWidth; el.classList.add('born'); } });
+    let ei=-1; C.events.forEach((e,i)=>{ if(e[0]<=h.y) ei=i; });
+    if(ei!==h.ev){ h.ev=ei; const ev=q('.tlEv'); ev.style.opacity=0; setTimeout(()=>{ ev.innerHTML=ei>=0?C.events[ei][1]:''; ev.style.opacity=1; },220); }
+  });
+  H.setMode(H.mode,false); H.applyCol();
+  HUBS.push(H); return H;
+}
+function nearBody(rec,sats,sites,k){
   if(isCine()) return false;
-  const f=B.getFollow(), cp=camera.position, dM=cp.distanceTo(B.worldPos(MOON));
-  if(f===MOON||(f&&(f.kindType==='site'||f.kindType==='lsat'))) return dM<mR*40;
+  const f=B.getFollow(), cp=camera.position, d=cp.distanceTo(B.worldPos(rec));
+  if(f===rec||(f&&(sats().indexOf(f)>=0||sites().indexOf(f)>=0))) return d<rec.visR*40;
   if(f) return false;
-  return dM<mR*14&&dM<cp.distanceTo(B.worldPos(EARTH));
+  return d<rec.visR*k&&d<cp.distanceTo(B.worldPos(EARTH));
 }
-let mswVis=false, mswT=0;
-hooks.post.push(function(dt){
-  const show=nearMoon()&&!fl;
-  if(show!==mswVis){ mswVis=show; moonSw.classList.toggle('show',show); body.classList.toggle('moonSwOn',show); }
-  mswT-=dt; if(mswT>0||!show) return; mswT=1;
-  const t=B.getSim(), nLs=LSR.filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs)).length, nLm=LANDED.filter(r=>t>=r.launchMs).length;
-  $('msLs').textContent=nLs+' на орбите'; $('msLm').textContent=nLm+' '+plur(nLm,'миссия','миссии','миссий');
-  $('msLh').classList.toggle('on',!!lh);
-});
-
-/* ════ 3. ИСТОРИЯ ОСВОЕНИЯ ЛУНЫ: 1959 → СЕЙЧАС ═══════════════════════
-   Как «История орбиты» у Земли: места посадок появляются в день посадки, спутники Луны —
-   на время своей работы (ядро скрывает их по году шкалы через B.timeOverride). */
-const LH_EV=[[1959.70,'13 сентября 1959 — <b>«Луна-2»</b>: первый рукотворный объект на Луне'],
+// страны лунных миссий и спутников — для раскраски «по стране»
+const SITE_CTRY={luna2:'RU',luna9:'RU',luna13:'RU',luna15:'RU',luna16:'RU',luna17:'RU',luna20:'RU',luna21:'RU',luna23:'RU',luna24:'RU',luna25:'RU',
+  surveyor1:'US',surveyor3:'US',surveyor5:'US',surveyor6:'US',surveyor7:'US',ranger7:'US',ranger8:'US',ranger9:'US',lcross:'US',
+  apollo11:'US',apollo12:'US',apollo14:'US',apollo15:'US',apollo16:'US',apollo17:'US',artemis3:'US',
+  change3:'CN',change4:'CN',change5:'CN',change6:'CN',change7:'CN',chandrayaan3:'IN',vikram:'IN',slim:'JP',hakuto1:'PV',resilience:'PV',
+  im1:'PV',im2:'PV',blueghost1:'PV',beresheet:'IL'};
+const LS_CTRY={lro:'US',artemis1:'US',artemis2:'US',ch2:'IN',danuri:'KR',capstone:'US',queqiao2:'CN',luna10:'RU',lo1:'US',apollo8:'US',hiten:'JP',
+  clementine:'US',prospector:'US',smart1:'EU',kaguya:'JP',ce1:'CN',chandrayaan1:'IN',ce2:'CN',grail:'US',ladee:'US'};
+SITES.forEach(r=>{ r.ctry=SITE_CTRY[r.id]; });
+LSR.forEach(r=>{ r.ctry=LS_CTRY[r.D.id]; });
+const nearMoon=()=>nearBody(MOON,()=>LSR,()=>SITES,14);
+const moonHub=makeHub({id:'moon', body:MOON, title:'ЛУНА', satsName:'СПУТНИКИ ЛУНЫ', sats:()=>LSR, sites:()=>SITES, near:nearMoon, y0:1959, histR:5.4,
+  histTitle:'ИСТОРИЯ ОСВОЕНИЯ ЛУНЫ', histNote:'посадки и спутники Луны появляются в свой год · вспышка — новая посадка',
+  rate:y=>y<1977?1.4:(y<2007?3.2:1.1),
+  eras:[[1959,1966,'ПЕРВЫЕ ЗОНДЫ','#7a5cff'],[1966,1977,'ЛУННАЯ ГОНКА','#3d8bff'],[1977,2007,'ЗАТИШЬЕ','#5a6f80'],[2007,2019,'ВОЗВРАЩЕНИЕ','#3dd6c8'],[2019,2200,'НОВАЯ ЛУННАЯ ГОНКА','#ff8a3d']],
+  events:[[1959.70,'13 сентября 1959 — <b>«Луна-2»</b>: первый рукотворный объект на Луне'],
+  [1964.58,'31 июля 1964 — <b>Ranger 7</b> передаёт первые снимки Луны вблизи, перед ударом'],
   [1966.09,'3 февраля 1966 — <b>«Луна-9»</b>: первая мягкая посадка и первые панорамы с поверхности'],
   [1966.25,'3 апреля 1966 — <b>«Луна-10»</b>: первый искусственный спутник Луны'],
   [1968.98,'24 декабря 1968 — <b>«Аполлон-8»</b>: люди впервые на орбите Луны, снимок «Восход Земли»'],
-  [1969.55,'20 июля 1969 — <b>«Аполлон-11»</b>: первая высадка людей'],
+  [1969.55,'20 июля 1969 — <b>«Аполлон-11»</b>: первая высадка людей; рядом разбивается «Луна-15»'],
   [1970.71,'1970 — <b>«Луна-16»</b> привозит грунт автоматически, <b>«Луноход-1»</b> ездит по Луне'],
   [1972.94,'Декабрь 1972 — <b>«Аполлон-17»</b>: последние люди на Луне'],
   [1976.63,'Август 1976 — <b>«Луна-24»</b>; после неё 37 лет ни одной мягкой посадки'],
   [1992.12,'1992 — японский <b>«Хитэн»</b>: третья страна у Луны'],
   [1998.03,'1998 — <b>Lunar Prospector</b> находит признаки льда у полюсов'],
-  [2009.47,'2009 — <b>LRO</b>: самый долгоживущий спутник Луны работает до сих пор'],
+  [2009.47,'2009 — <b>LRO</b> и удар <b>LCROSS</b> в кратер Кабеус: в выбросе нашли воду'],
   [2013.95,'Декабрь 2013 — <b>«Чанъэ-3»</b> и луноход «Юйту»: Китай на Луне'],
   [2019.00,'3 января 2019 — <b>«Чанъэ-4»</b>: первая посадка на обратной стороне'],
-  [2019.28,'Апрель 2019 — израильский <b>Beresheet</b> разбивается при посадке'],
+  [2019.28,'2019 — <b>Beresheet</b> и <b>«Викрам»</b> разбиваются при посадке'],
   [2020.92,'Декабрь 2020 — <b>«Чанъэ-5»</b> возвращает грунт спустя 44 года'],
-  [2023.63,'Август 2023 — <b>«Луна-25»</b> разбивается, <b>«Чандраян-3»</b> садится у южного полюса'],
+  [2023.30,'2023 — <b>Hakuto-R</b>, затем <b>«Луна-25»</b> разбиваются; <b>«Чандраян-3»</b> садится у южного полюса'],
   [2024.05,'2024 — <b>SLIM</b> садится «на нос», <b>Odysseus</b> — первая частная посадка, <b>«Чанъэ-6»</b> везёт грунт с обратной стороны'],
   [2025.17,'Март 2025 — <b>Blue Ghost</b>: первая полностью успешная частная посадка'],
-  [2025.6,'Сегодня у Луны работают несколько спутников; следующие — «Чанъэ-7» и «Артемида»']];
-const lhBar=mk('div','tlBar'); lhBar.id='lhBar';
-lhBar.innerHTML='<div class="tlTop"><span>⏳ ИСТОРИЯ ОСВОЕНИЯ ЛУНЫ</span><span class="tlNote">посадки и спутники Луны появляются в свой год · вспышка — новая посадка</span>'+
-  '<div class="tlSeg" id="lhSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div><button class="tlX" id="lhX" title="Выйти [J / Esc]">✕</button></div>'+
-  '<div class="tlMain"><button class="tlPlay" id="lhPlay">❚❚</button><div class="tlYear" id="lhYear">1959</div>'+
-  '<div class="tlStat"><b id="lhN">0</b> <span id="lhNl">посадок и падений</span> · <b id="lhS">0</b> <span id="lhSl">спутников на орбите</span><small id="lhAdd"></small></div></div>'+
-  '<input type="range" class="tlR" id="lhR" min="1959.5" max="2027" step="0.01" value="1959.5"><div class="tlScale"><span>1959</span><span>1970</span><span>1990</span><span>2010</span><span>сейчас</span></div>'+
-  '<div class="tlEv" id="lhEv"></div>';
-vp.appendChild(lhBar); shield(lhBar);
-let lhK=1, lhUi=0;
-function lhOpen(){
-  if(fl) stopFlight(true);
-  if(V11.hist&&V11.hist()) V11.histClose();
-  if(B.getSelected()&&(B.getSelected().kindType==='site'||B.getSelected().kindType==='lsat')) B.select(null);
-  lh={y:1959.5, play:true, ev:-1, seen:new Set()};
-  B.setFollow(MOON); B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:MOON, toR:mR*5.4, dur:1.4});
-  B.timeOverride=yMs(lh.y); B.timeVisCheck(); B.applyVisibility();
-  lhBar.classList.add('on'); body.classList.add('lhOn');
-}
-function lhClose(){ if(!lh) return; lh=null; lhBar.classList.remove('on'); body.classList.remove('lhOn');
-  B.timeOverride=null; B.timeVisCheck(); B.applyVisibility(); }
-function lhToggle(){ if(lh) lhClose(); else lhOpen(); }
-$('lhX').addEventListener('click',lhClose);
-$('lhPlay').addEventListener('click',()=>{ if(!lh) return; if(!lh.play&&lh.y>=msY(Date.now())-0.01){ lh.y=1959.5; lh.seen.clear(); } lh.play=!lh.play; });
-$('lhR').addEventListener('input',function(){ if(!lh) return; lh.y=+this.value; lh.play=false; });
-$('lhSpd').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; lhK=+b.dataset.k; [...$('lhSpd').children].forEach(x=>x.classList.toggle('on',x===b)); });
-hooks.post.push(function(dt){
-  if(!lh) return;
-  if(V11.hist&&V11.hist()){ lhClose(); return; }                     // открыли «Историю орбиты» Земли
-  const end=msY(Date.now());
-  if(lh.play){ const y=lh.y, rate=(y<1977?1.4:(y<2007?3.2:1.1))*lhK; lh.y=Math.min(end,y+dt*rate); if(lh.y>=end) lh.play=false; }
-  B.timeOverride=yMs(lh.y);
-  lhUi-=dt; if(lhUi>0) return; lhUi=0.06;
-  B.timeVisCheck();
-  $('lhPlay').textContent=lh.play?'❚❚':'▶';
-  $('lhYear').textContent=lh.y>=end-0.01?'СЕЙЧАС':String(Math.floor(lh.y));
-  $('lhR').value=String(lh.y);
-  const t=yMs(lh.y), land=LANDED.filter(r=>t>=r.launchMs), on=LSR.filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs));
-  $('lhN').textContent=land.length; $('lhS').textContent=on.length; $('lhNl').textContent=plur(land.length,'посадка или падение','посадки и падения','посадок и падений'); $('lhSl').textContent=plur(on.length,'спутник на орбите','спутника на орбите','спутников на орбите');
-  $('lhAdd').textContent=on.length?'на орбите: '+on.map(r=>r.name).join(', '):'';
-  land.forEach(r=>{ if(lh.seen.has(r)) return; lh.seen.add(r); const el=r.labelEl; if(el){ el.classList.remove('born'); void el.offsetWidth; el.classList.add('born'); } });
-  let ei=-1; LH_EV.forEach((e,i)=>{ if(e[0]<=lh.y) ei=i; });
-  if(ei!==lh.ev){ lh.ev=ei; const ev=$('lhEv'); ev.style.opacity=0; setTimeout(()=>{ ev.innerHTML=ei>=0?LH_EV[ei][1]:''; ev.style.opacity=1; },220); }
-});
+  [2025.6,'Сегодня у Луны работают несколько спутников; следующие — «Чанъэ-7» и «Артемида»']]});
+const lhClose=()=>moonHub.histClose();
 
 /* ════ 4. ПОЛЁТ МИССИИ ПО ТАЙМЛАЙНУ ═════════════════════════════════
    Выбор места посадки запускает реальное время миссии: модельные часы ставятся на момент старта
@@ -8791,7 +9026,16 @@ const MT={
  blueghost1:{L:'2025-01-15T06:11Z', T:'2025-02-09T00:00Z', O:'2025-02-13T21:45Z', E:'2025-03-02T08:34Z'},
  im2:{L:'2025-02-27T00:16Z', O:'2025-03-03T00:00Z', E:'2025-03-06T17:28Z', tli:0.8},
  luna25:{L:'2023-08-10T23:10Z', O:'2023-08-16T09:57Z', E:'2023-08-19T11:57Z', tli:1.1},
- beresheet:{L:'2019-02-22T01:45Z', T:'2019-03-28T00:00Z', O:'2019-04-04T14:18Z', E:'2019-04-11T19:23Z'}
+ beresheet:{L:'2019-02-22T01:45Z', T:'2019-03-28T00:00Z', O:'2019-04-04T14:18Z', E:'2019-04-11T19:23Z'},
+ ranger7:{L:'1964-07-28T16:50Z', E:'1964-07-31T13:25Z', tli:0.4}, ranger8:{L:'1965-02-17T17:05Z', E:'1965-02-20T09:57Z', tli:0.4},
+ ranger9:{L:'1965-03-21T21:37Z', E:'1965-03-24T14:08Z', tli:0.4}, luna13:{L:'1966-12-21T10:17Z', E:'1966-12-24T18:01Z', tli:1.1},
+ surveyor3:{L:'1967-04-17T07:05Z', E:'1967-04-20T00:04Z', tli:0.4}, surveyor5:{L:'1967-09-08T07:57Z', E:'1967-09-11T00:46Z', tli:0.4},
+ surveyor6:{L:'1967-11-07T07:39Z', E:'1967-11-10T01:01Z', tli:0.4}, surveyor7:{L:'1968-01-07T06:30Z', E:'1968-01-10T01:05Z', tli:0.4},
+ luna15:{L:'1969-07-13T02:54Z', O:'1969-07-17T10:00Z', E:'1969-07-21T15:50Z', tli:1.2}, luna20:{L:'1972-02-14T03:27Z', O:'1972-02-18T19:00Z', E:'1972-02-21T19:19Z', tli:1.2},
+ luna23:{L:'1974-10-28T14:30Z', O:'1974-11-02T00:00Z', E:'1974-11-06T00:00Z', tli:1.2}, lcross:{L:'2009-06-18T21:32Z', E:'2009-10-09T11:31Z', tli:0.5},
+ vikram:{L:'2019-07-22T09:13Z', T:'2019-08-13T20:00Z', O:'2019-08-20T03:32Z', E:'2019-09-06T20:23Z'},
+ hakuto1:{L:'2022-12-11T07:38Z', T:'2022-12-12T00:00Z', O:'2023-03-21T00:00Z', E:'2023-04-25T16:40Z'},
+ resilience:{L:'2025-01-15T06:11Z', T:'2025-01-16T00:00Z', O:'2025-05-06T00:00Z', E:'2025-06-05T19:17Z'}
 };
 const PH_TXT={
   asc:S=>'Старт: '+(S._pad||'космодром')+' — ракета выводит аппарат на опорную орбиту около 190 км. Земля вращается — космодром уплывает из-под траектории.',
@@ -8821,9 +9065,10 @@ function mtOf(S){
   const E=Date.UTC(+m[3],+m[2]-1,+m[1],12); const iso=t=>new Date(t).toISOString().slice(0,16)+'Z';
   return {L:iso(E-4.5*DAY_MS), O:iso(E-DAY_MS), E:iso(E), tli:1};
 }
-const flightOk=S=>!!S&&S.kindType==='site'&&S.status!=='PLAN'&&!!mtOf(S);
+const flightOk=S=>!!S&&S.kindType==='site'&&S.parentRec===MOON&&S.status!=='PLAN'&&!!mtOf(S);
 window.__flightOn=S=>!!fl&&fl.S===S;
-B.skyNear=()=>!!fl||nearMoon();
+B.skyNear=()=>!!fl||HUBS.some(h=>h.C.near())||!!(window.__mflOn&&window.__mflOn());
+hooks.vis.push(function(){ if(fl&&fl.cam==='board') B.recs.forEach(r=>{ if(r.orbit) r.orbit.visible=false; }); });
 function buildFlight(S){
   const m=mtOf(S), type=S.traj||'orbit', direct=type==='direct', phasing=type==='phasing';
   const T0=Date.parse(m.L), TE=Date.parse(m.E), Tin=T0+12*60000, PLEO=88.5*60000;
@@ -8922,7 +9167,7 @@ vp.appendChild(flBar); shield(flBar);
 let flPrev=null, flUi=0;
 function startFlight(S){
   if(fl&&fl.S===S) return;
-  if(lh) lhClose();
+  HUBS.forEach(h=>h.histClose());
   if(V11.hist&&V11.hist()) V11.histClose();
   if(!flPrev) flPrev={sim:B.getSim(), live:B.isLive(), speed:B.getSpeed()};
   fl=buildFlight(S);
@@ -9276,48 +9521,69 @@ const STORIES=[
   f:[['Скорость удара','≈ 6,1 км/с'],['Период сократился','на 32 мин'],['Следом летит','Hera (ESA)']]}
 ];
 
-// вкладки над «Объекты / Спутники / Запуски»
+// вкладки над «Объекты / Спутники / Запуски»: поиск, раскрывающиеся категории (как группы во «Спутниках»), строки — как в «Объектах»
 const LP=$('leftPanel'), tabs1=$('lpTabs');
 const row2=mk('div'); row2.id='lpTabs2';
 const TAB2=[['anom','◬ АНОМАЛИИ','Странные орбиты, тела и рукотворные загадки'],['cata','✸ КАТАСТРОФЫ','Аварии, падения, столкновения и удары из космоса']];
-const panes2={};
+const ST_COL={'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ':'#a07cff','СТРАННЫЕ ТЕЛА':'#7fd8ff','РУКОТВОРНЫЕ СТРАННОСТИ':'#ffd24d','СЕЙЧАС ПАДАЕТ':'#ff3b3b',
+  'ПИЛОТИРУЕМЫЕ':'#ff5a5a','НА СТАРТЕ':'#ff8a3d','ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ':'#ffd24d','НА ОРБИТЕ':'#7fd8ff','ПРИРОДНЫЕ':'#9dff5a'};
+const capS=s=>s.charAt(0)+s.slice(1).toLowerCase();
+const panes2={}, stOpen={};
 TAB2.forEach(T=>{
   const b=mk('button','lpTab'); b.dataset.t=T[0]; b.title=T[2]; b.innerHTML=T[1]+'<b>'+STORIES.filter(s=>s.tab===T[0]).length+' историй</b>';
   b.addEventListener('click',()=>{ V8.showTab(T[0]); if(T[0]==='cata') drawFalling(); });
   row2.appendChild(b);
-  const pane=mk('div','lpPane'), list=mk('div','stList'); pane.appendChild(list); panes2[T[0]]={pane:pane, list:list};
+  const pane=mk('div','lpPane'), sr=mk('div','lpSearch'), qi=mk('input'), list=mk('div','stList');
+  qi.placeholder=T[0]==='anom'?'> ПОИСК ИСТОРИИ: ПЛУТОН, ЗОМБИ, ВОЯДЖЕР…':'> ПОИСК: ЧЕЛЛЕНДЖЕР, 2007, МЕТЕОРИТ…'; qi.spellcheck=false; qi.autocomplete='off';
+  qi.addEventListener('input',()=>drawList(T[0])); qi.addEventListener('keydown',e=>{ e.stopPropagation(); if(e.key==='Escape') qi.blur(); });
+  sr.appendChild(qi); pane.appendChild(sr); pane.appendChild(list);
+  panes2[T[0]]={pane:pane, list:list, q:qi};
   if(V8.regTab) V8.regTab(T[0],b,pane);
 });
 if(tabs1&&tabs1.parentNode) tabs1.parentNode.insertBefore(row2,tabs1);
 let stActive=null, stTarget=null, stHL=false;
-function drawList(tab){
-  const L=panes2[tab].list; L.innerHTML='';
-  L.appendChild(mk('div','stIntro',tab==='anom'?'Наклоны «не как у всех», загадочные тела и странные истории спутников. Щелчок — камера к объекту, история — в досье справа.':
-    'Аварии ракет и кораблей, падения станций, столкновения на орбите и удары из космоса. Щелчок — место события, история — в досье справа.'));
-  if(tab==='cata'){ const box=mk('div'); box.id='stFall'; L.appendChild(box); }
-  let g='';
-  STORIES.filter(s=>s.tab===tab).forEach(s=>{
-    if(s.g!==g){ g=s.g; L.appendChild(mk('div','stGrp',g)); }
-    const d=mk('div','stRow'+(stActive===s?' on':'')); d.dataset.id=s.id;
-    const t=mk('div','t'); t.appendChild(mk('b',null,s.t)); t.appendChild(mk('i',null,s.y)); d.appendChild(t);
-    const h=mk('small',null,s.h); if(s.go.body) h.appendChild(mk('span','new','● новое на карте')); d.appendChild(h);
-    d.addEventListener('click',()=>openStory(s)); L.appendChild(d);
-  });
+function catRow(key,name,n,open){
+  const h=mk('div','scat stCat'+(open?' open':'')); h.innerHTML='<span class="scDot" style="background:'+(ST_COL[name]||'#d8d8d8')+'"></span><span class="n"></span><span class="c">'+n+'</span><span class="ch">'+(open?'▾':'›')+'</span>';
+  h.querySelector('.n').textContent=capS(name); h.title=open?'Свернуть':'Раскрыть';
+  return h;
 }
-TAB2.forEach(T=>drawList(T[0]));
+function drawList(tab){
+  const P=panes2[tab], L=P.list, q=(P.q.value||'').trim().toLowerCase(), st=L.scrollTop; L.innerHTML='';
+  L.appendChild(mk('div','stIntro',tab==='anom'?'Наклоны «не как у всех», загадочные тела и странные истории спутников. Щелчок — камера к объекту, история — в досье.':
+    'Аварии, падения станций, столкновения на орбите и удары из космоса. Щелчок — место события, история — в досье.'));
+  if(tab==='cata'){ const fb=mk('div'); fb.id='stFall'; L.appendChild(fb); drawFalling(); }
+  const groups=[];
+  STORIES.filter(s=>s.tab===tab&&(!q||(s.t+' '+s.h+' '+s.y+' '+s.g+' '+s.x).toLowerCase().indexOf(q)>=0)).forEach(s=>{
+    let g=groups.find(x=>x.n===s.g); if(!g){ g={n:s.g, L:[]}; groups.push(g); } g.L.push(s); });
+  groups.forEach(g=>{
+    const key=tab+'|'+g.n, open=!!q||!!stOpen[key], h=catRow(key,g.n,g.L.length,open);
+    h.addEventListener('click',()=>{ stOpen[key]=!stOpen[key]; drawList(tab); }); L.appendChild(h);
+    if(!open) return;
+    g.L.forEach(s=>{ const d=mk('div','row stRow'+(stActive===s?' sel':'')); d.dataset.id=s.id; d.title=s.h;
+      const y=String(s.y).match(/\d{4}/); d.appendChild(mk('span','code',y?y[0]:'—')); d.appendChild(mk('span','nm',s.t));
+      if(s.go.body){ const v=mk('span','val stNew','●'); v.title='новое на карте'; d.appendChild(v); }
+      d.addEventListener('click',()=>openStory(s)); L.appendChild(d); });
+  });
+  if(!groups.length) L.appendChild(mk('div','stIntro','Ничего не найдено.'));
+  L.scrollTop=st;
+}
 // «СЕЙЧАС ПАДАЕТ»: самые низкие объекты каталога — первые кандидаты сгореть в атмосфере
 function drawFalling(){
   const box=$('stFall'); if(!box) return;
-  const c=V8.cat; box.innerHTML='';
-  if(!c||!c.ready){ box.appendChild(mk('div','stGrp','СЕЙЧАС ПАДАЕТ')); box.appendChild(mk('div','stIntro','каталог спутников загружается…')); return; }
-  const L=c.list.filter(s=>!s.bad&&!s.approx&&s.peri<215&&s.apo<700&&s.peri>60).sort((a,b)=>a.peri-b.peri);
-  box.appendChild(mk('div','stGrp','СЕЙЧАС ПАДАЕТ · '+L.length+' объектов ниже 215 км'));
-  box.appendChild(mk('div','stIntro','Чем ниже перигей, тем сильнее тормозит атмосфера. Оценка срока грубая: точный прогноз зависит от Солнца и формы объекта.'));
-  L.slice(0,12).forEach(s=>{ const d=mk('div','stRow'), t=mk('div','t');
-    t.appendChild(mk('b',null,s.nm||s.N)); t.appendChild(mk('i',null,fmtNum(s.peri)+' км')); d.appendChild(t);
-    d.appendChild(mk('small',null,(s.peri<150?'сгорит в ближайшие часы–сутки':(s.peri<180?'сгорит в ближайшие дни':'сгорит в ближайшие недели'))+' · NORAD '+s.norad));
+  const c=V8.cat, key='cata|СЕЙЧАС ПАДАЕТ', open=!!stOpen[key]; box.innerHTML='';
+  const L=c&&c.ready?c.list.filter(s=>!s.bad&&!s.approx&&s.peri<215&&s.apo<700&&s.peri>60).sort((a,b)=>a.peri-b.peri):[];
+  const h=catRow(key,'СЕЙЧАС ПАДАЕТ',c&&c.ready?L.length:'…',open); h.title='Объекты ниже 215 км — скоро сгорят в атмосфере';
+  h.addEventListener('click',()=>{ stOpen[key]=!stOpen[key]; drawFalling(); }); box.appendChild(h);
+  if(!open) return;
+  if(!c||!c.ready){ box.appendChild(mk('div','stIntro','каталог спутников загружается…')); return; }
+  box.appendChild(mk('div','stIntro','Чем ниже перигей, тем сильнее тормозит атмосфера. Срок — грубая оценка: он зависит от Солнца и формы объекта.'));
+  L.slice(0,15).forEach(s=>{ const d=mk('div','row stRow');
+    d.title=(s.peri<150?'сгорит в ближайшие часы–сутки':(s.peri<180?'сгорит в ближайшие дни':'сгорит в ближайшие недели'))+' · NORAD '+s.norad;
+    d.appendChild(mk('span','code',fmtNum(s.peri))); d.appendChild(mk('span','nm',s.nm||s.N));
+    d.appendChild(mk('span','val',s.peri<150?'часы':(s.peri<180?'дни':'недели')));
     d.addEventListener('click',()=>{ closeStory(); V8.openSat(s,true); }); box.appendChild(d); });
 }
+TAB2.forEach(T=>drawList(T[0]));
 setInterval(()=>{ if(panes2.cata.pane.classList.contains('on')) drawFalling(); },60000);
 // история — сверху досье выбранного объекта
 const stBox=mk('div'); stBox.id='rpStory';
@@ -9332,7 +9598,7 @@ function renderStory(s){
 function closeStory(){
   stActive=null; stTarget=null; stBox.className=''; stBox.innerHTML='';
   if(stHL){ stHL=false; V8.setHighlight(null); V8.refreshHL&&V8.refreshHL(); }
-  document.querySelectorAll('.stRow.on').forEach(e=>e.classList.remove('on'));
+  document.querySelectorAll('.stRow.sel').forEach(e=>e.classList.remove('sel'));
 }
 function placeRec(s){
   let r=byId['pl_'+s.id]; if(r) return r;
@@ -9349,9 +9615,9 @@ hooks.post.push(function(){ STORIES.forEach(s=>{ const r=byId['pl_'+s.id]; if(r)
   if(on) r.spr.scale.setScalar(clamp(camera.position.distanceTo(B.worldPos(r))*0.04,0.05,3)); } }); });
 function needCat(fn){ const c=V8.cat; if(c&&c.ready) fn(); else { toast('КАТАЛОГ СПУТНИКОВ ЗАГРУЖАЕТСЯ…','',2200); setTimeout(()=>needCat(fn),1500); } }
 function openStory(s){
-  if(fl) stopFlight(true); if(lh) lhClose();
+  if(fl) stopFlight(true); HUBS.forEach(h=>h.histClose());
   closeStory(); stActive=s;
-  document.querySelectorAll('.stRow').forEach(e=>e.classList.toggle('on',e.dataset.id===s.id));
+  document.querySelectorAll('.stRow').forEach(e=>e.classList.toggle('sel',e.dataset.id===s.id));
   const g=s.go; let r=null;
   if(g.rec) r=byId[g.rec];
   else if(g.name) r=B.recs.find(x=>x.name===g.name);
@@ -9395,11 +9661,12 @@ hooks.post.push(function(){
 /* ════ 8. КЛАВИШИ, СПРАВКА, ОТЛАДКА ═══════════════════════════════════ */
 hooks.key.unshift(function(e){
   if(e.ctrlKey||e.altKey||e.metaKey) return false;
-  if(e.code==='KeyJ'&&(lh||nearMoon())){ lhToggle(); return true; }
+  const hh=HUBS.find(h=>h.hist), hn=HUBS.find(h=>h.C.near());
+  if(e.code==='KeyJ'&&(hh||hn)){ (hh||hn).histToggle(); return true; }
   if(e.key==='Escape'&&fl){ stopFlight(true); return true; }
-  if(e.key==='Escape'&&lh){ lhClose(); return true; }
+  if(e.key==='Escape'&&hh){ hh.histClose(); return true; }
   if(e.key===' '&&fl){ $('flPlay').click(); return true; }
-  if(e.key===' '&&lh){ $('lhPlay').click(); return true; }
+  if(e.key===' '&&hh){ hh.bar.querySelector('.tlPlay').click(); return true; }
   return false;
 });
 (function(){ const hb=$('helpBox'); if(!hb) return; const sec=mk('div','hsec');
@@ -9411,9 +9678,785 @@ hooks.key.unshift(function(e){
    '<tr><td>Сейчас падает</td><td>вверху вкладки «Катастрофы» — самые низкие объекты каталога, которые скоро сгорят</td></tr>'+
    '<tr><td>1957 в истории</td><td>когда шкала «Истории орбиты» проходит 4 октября 1957, звучит «бип-бип» первого спутника</td></tr></table>';
   hb.insertBefore(sec,hb.children[1]||null); })();
-window.__v15={LSR:LSR, lfr:lfr, moonRel:moonRel, siteOff:siteOff, padRel:padRel, fl:()=>fl, lh:()=>lh, startFlight:startFlight, stopFlight:stopFlight,
-  lhOpen:lhOpen, lhClose:lhClose, setMoonMode:setMoonMode, moonMode:()=>moonMode, nearMoon:nearMoon, STORIES:STORIES, openStory:openStory, closeStory:closeStory,
-  NEWB:NEWB, buildFlight:buildFlight, MT:MT, drawFalling:drawFalling};
+window.__v15={LSR:LSR, lfr:lfr, moonRel:moonRel, siteOff:siteOff, padRel:padRel, fl:()=>fl, lh:()=>moonHub.hist, startFlight:startFlight, stopFlight:stopFlight,
+  lhOpen:()=>moonHub.histOpen(), lhClose:lhClose, setMoonMode:m=>moonHub.setMode({missions:'sites',both:'all'}[m]||m,true), moonMode:()=>moonHub.mode, nearMoon:nearMoon,
+  STORIES:STORIES, openStory:openStory, closeStory:closeStory, NEWB:NEWB, buildFlight:buildFlight, MT:MT, drawFalling:drawFalling, drawList:drawList,
+  HUBS:HUBS, makeHub:makeHub, nearBody:nearBody, eraTrack:eraTrack, eraOf:eraOf, CTRY:CTRY, moonHub:moonHub, SITES:SITES, panes2:panes2,
+  fmtUTC:fmtUTC, fmtMET:fmtMET, fmtDays:fmtDays, yMs:yMs, msY:msY, plur:plur, bz:bz, kepE:kepE, rotY:rotY};
+})();
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   ЧАСТЬ 8. v0.16: МАРС — МЕСТА ПОСАДОК, СПУТНИКИ, ИСТОРИЯ ОСВОЕНИЯ, ПЕРЕЛЁТ ПО РЕАЛЬНЫМ ДАТАМ;
+   ПОСАДКИ НА ВЕНЕРЕ, ТИТАНЕ И МЕРКУРИИ; НЕДОСТАЮЩИЕ АППАРАТЫ (ТОЧКИ ЛАГРАНЖА, У ДРУГИХ ПЛАНЕТ,
+   СТАНЦИИ ПРОШЛОГО); ЭПОХИ В «ИСТОРИИ ОРБИТЫ»; ОБУЧЕНИЕ ПО ИНТЕРФЕЙСУ.
+   Переключатель, раскраска и история «у тела» — общий модуль части 7 (makeHub).
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+const B=window.BURAN, V8=window.__v8, V11=window.__v11||{}, V15=window.__v15||{}, V4=window.__v4||{}; if(!B||!V8||!V15.makeHub) return;
+const THREE=B.THREE, camera=B.camera, byId=B.byId, hooks=B.hooks;
+const D2R=B.D2R, DAY_MS=B.DAY_MS, J2000=B.J2000, clamp=B.clamp, two=B.two, V3=THREE.Vector3;
+const EARTH=byId.earth, MOON=byId.moon, MARS=byId.mars, eR=EARTH.visR, vp=B.viewport, $=id=>document.getElementById(id);
+const toast=V4.toast||function(){};
+const {fmtUTC, fmtMET, fmtDays, yMs, msY, plur, bz, CTRY}=V15;
+function mk(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+function setLS(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function getLS(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+const shield=el=>['mousedown','mouseup','wheel','dblclick','click','pointerdown'].forEach(ev=>el.addEventListener(ev,e=>e.stopPropagation()));
+const body=document.body, isCine=()=>body.classList.contains('cine')||body.classList.contains('touring');
+const fmtD=s=>s?String(s).slice(0,10).split('-').reverse().join('.'):'—';
+const isoMs=s=>Date.parse(String(s).length<=10?s+'T00:00:00Z':s);
+const Y_AX=new V3(0,1,0);
+Object.assign(B.STATUS_LBL,{END:'МИССИЯ ЗАВЕРШЕНА'});
+if(V8.MPAD&&!V8.MPAD.vandenberg) V8.MPAD.vandenberg=[34.63,-120.61,'Ванденберг'];
+
+/* ════ 1. МЕСТА ПОСАДОК: МАРС, ВЕНЕРА, ТИТАН, МЕРКУРИЙ ═══════════════
+   Координаты — широта и восточная долгота (планетоцентрические), даты — UTC: L — старт,
+   O — выход на орбиту Марса (если садились с орбиты), E — посадка или падение. */
+const MARS_SITES=[
+ {id:'mars2', name:'«Марс-2»', code:'MR2', ctry:'RU', st:'FAIL', m:'impact', L:'1971-05-19T16:22Z', E:'1971-11-27T12:00Z', lat:-45, lon:47, pad:'baikonur',
+  facts:[['Дата','27.11.1971'],['Страна','СССР'],['Итог','спускаемый аппарат разбился'],['Район','равнина Эллада (примерно)']],
+  desc:'Первый рукотворный объект на поверхности Марса. Спускаемый аппарат вошёл в атмосферу слишком круто: парашют не успел раскрыться, и аппарат разбился. Орбитальный модуль работал до 1972 года.'},
+ {id:'mars3', name:'«Марс-3»', code:'MR3', ctry:'RU', st:'OK', m:'lander', L:'1971-05-28T15:26Z', E:'1971-12-02T13:52Z', lat:-45.05, lon:-158.06, pad:'baikonur',
+  facts:[['Дата','02.12.1971'],['Страна','СССР'],['Итог','первая мягкая посадка; связь 14,5 с'],['Район','у кратера Птолемей']],
+  desc:'Первая мягкая посадка на Марс. Через полторы минуты после касания аппарат начал передавать первый снимок — и замолчал через 14,5 секунды, скорее всего из-за пылевой бури.'},
+ {id:'mars6', name:'«Марс-6»', code:'MR6', ctry:'RU', st:'FAIL', m:'impact', L:'1973-08-05T17:45Z', E:'1974-03-12T09:11Z', lat:-23.9, lon:-19.42, pad:'baikonur',
+  facts:[['Дата','12.03.1974'],['Страна','СССР'],['Итог','связь оборвалась перед касанием'],['Район','Земля Жемчужная']],
+  desc:'Спускаемый аппарат передал первые прямые измерения атмосферы Марса во время спуска на парашюте, но связь оборвалась перед самым касанием грунта.'},
+ {id:'viking1', name:'«Викинг-1»', code:'VK1', ctry:'US', st:'OK', m:'lander', L:'1975-08-20T21:22Z', O:'1976-06-19T00:00Z', E:'1976-07-20T11:53Z', lat:22.27, lon:-47.95, pad:'ccafs',
+  facts:[['Дата','20.07.1976'],['Страна','США'],['Работал','до ноября 1982'],['Район','Равнина Хриса']],
+  desc:'Первая полностью успешная посадка на Марс и первые цветные панорамы его поверхности. Посадочный модуль проработал больше шести лет и проводил опыты по поиску жизни в грунте.'},
+ {id:'viking2', name:'«Викинг-2»', code:'VK2', ctry:'US', st:'OK', m:'lander', L:'1975-09-09T18:39Z', O:'1976-08-07T00:00Z', E:'1976-09-03T22:58Z', lat:47.64, lon:134.29, pad:'ccafs',
+  facts:[['Дата','03.09.1976'],['Страна','США'],['Работал','до апреля 1980'],['Район','Равнина Утопия']],
+  desc:'Сел на Равнине Утопия и сфотографировал иней на марсианском грунте. Вместе с «Викингом-1» передал больше 50 000 снимков.'},
+ {id:'pathfinder', name:'Mars Pathfinder', code:'MPF', ctry:'US', st:'OK', m:'bags', L:'1996-12-04T06:58Z', E:'1997-07-04T16:57Z', lat:19.13, lon:-33.22, pad:'ccafs', km:0.1,
+  facts:[['Дата','04.07.1997'],['Страна','США'],['Марсоход','Sojourner, 10,6 кг'],['Район','долина Арес']],
+  desc:'Сел на надувных подушках, отскакивая от грунта, и выпустил первый марсоход — 10-килограммовый Sojourner. Трансляция его работы стала одним из первых больших событий в интернете.'},
+ {id:'mpl', name:'Mars Polar Lander', code:'MPL', ctry:'US', st:'FAIL', m:'impact', L:'1999-01-03T20:21Z', E:'1999-12-03T20:01Z', lat:-76.57, lon:165.2, pad:'ccafs',
+  facts:[['Дата','03.12.1999'],['Страна','США'],['Итог','связь не восстановилась'],['Район','у южной полярной шапки']],
+  desc:'После входа в атмосферу связь так и не появилась. Вероятная причина: датчики на опорах приняли рывок при их выпуске за касание грунта, и двигатель выключился на высоте около 40 метров.'},
+ {id:'beagle2', name:'Beagle 2', code:'BG2', ctry:'EU', st:'FAIL', m:'lander', L:'2003-06-02T17:45Z', E:'2003-12-25T02:54Z', lat:11.53, lon:90.43, pad:'baikonur',
+  facts:[['Дата','25.12.2003'],['Страна','Великобритания (ESA)'],['Итог','не раскрыл все панели'],['Найден','на снимках MRO, 2015']],
+  desc:'Британский посадочный модуль из миссии Mars Express сел на Марс, но не раскрыл все солнечные панели и не вышел на связь. Его нашли на снимках MRO только через 11 лет.'},
+ {id:'spirit', name:'Spirit', code:'SPI', ctry:'US', st:'OK', m:'rover', L:'2003-06-10T17:58Z', E:'2004-01-04T04:35Z', lat:-14.57, lon:175.47, pad:'ccafs', km:7.7,
+  facts:[['Дата','04.01.2004'],['Страна','США'],['Пробег','7,7 км'],['Работал','до 2010 года'],['Район','кратер Гусев']],
+  desc:'Марсоход, рассчитанный на 90 дней, проработал больше шести лет и проехал 7,7 км по кратеру Гусев, пока не застрял в рыхлом грунте.'},
+ {id:'opportunity', name:'Opportunity', code:'OPP', ctry:'US', st:'OK', m:'rover', L:'2003-07-08T03:18Z', E:'2004-01-25T05:05Z', lat:-1.95, lon:-5.53, pad:'ccafs', km:45.2,
+  facts:[['Дата','25.01.2004'],['Страна','США'],['Пробег','45,2 км — рекорд'],['Работал','до 2018 года'],['Район','плато Меридиани']],
+  desc:'Вместо 90 дней работал почти 15 лет и проехал 45 км — больше марафонской дистанции. Нашёл следы древней воды; затих в 2018 году во время глобальной пылевой бури.'},
+ {id:'phoenix', name:'Phoenix', code:'PHX', ctry:'US', st:'OK', m:'lander', L:'2007-08-04T09:26Z', E:'2008-05-25T23:38Z', lat:68.22, lon:-125.75, pad:'ccafs',
+  facts:[['Дата','25.05.2008'],['Страна','США'],['Открытие','водяной лёд под грунтом'],['Район','Северная равнина']],
+  desc:'Сел в приполярной области и докопался до водяного льда прямо под поверхностью; работал до наступления полярной зимы.'},
+ {id:'curiosity', name:'Curiosity', code:'CUR', ctry:'US', st:'OK', m:'big', L:'2011-11-26T15:02Z', E:'2012-08-06T05:17Z', lat:-4.59, lon:137.44, pad:'ccafs', km:35,
+  facts:[['Дата','06.08.2012'],['Страна','США'],['Масса','899 кг'],['Посадка','«небесный кран»'],['Район','кратер Гейл, гора Шарп']],
+  desc:'Почти тонна на шести колёсах: первым опущен на тросах «небесного крана». С 2012 года поднимается на гору Шарп в кратере Гейл и показал, что когда-то здесь было пригодное для жизни озеро.'},
+ {id:'schiaparelli', name:'Schiaparelli', code:'SCH', ctry:'EU', st:'FAIL', m:'impact', L:'2016-03-14T09:31Z', E:'2016-10-19T14:58Z', lat:-2.05, lon:-6.21, pad:'baikonur',
+  facts:[['Дата','19.10.2016'],['Страна','ESA'],['Итог','разбился'],['Район','плато Меридиани']],
+  desc:'Демонстратор посадки ESA: датчик вращения на секунду «зашкалило», компьютер решил, что аппарат уже у грунта, — и сбросил парашют на высоте 3,7 км.'},
+ {id:'insight', name:'InSight', code:'INS', ctry:'US', st:'OK', m:'lander', L:'2018-05-05T11:05Z', E:'2018-11-26T19:52Z', lat:4.5, lon:135.62, pad:'vandenberg',
+  facts:[['Дата','26.11.2018'],['Страна','США'],['Марсотрясений','более 1 300'],['Работал','до декабря 2022'],['Район','Равнина Элизий']],
+  desc:'Сейсмограф на Марсе: записал больше 1 300 марсотрясений и впервые показал строение недр планеты. Работал до конца 2022 года, пока пыль не закрыла солнечные панели.'},
+ {id:'perseverance', name:'Perseverance', code:'PER', ctry:'US', st:'OK', m:'big', L:'2020-07-30T11:50Z', E:'2021-02-18T20:55Z', lat:18.44, lon:77.45, pad:'ccafs', km:30,
+  facts:[['Дата','18.02.2021'],['Страна','США'],['Вертолёт Ingenuity','72 полёта вместо 5'],['Район','кратер Езеро']],
+  desc:'Марсоход собирает образцы в древней дельте реки в кратере Езеро для будущей доставки на Землю. Вертолёт Ingenuity, рассчитанный на 5 полётов, совершил 72.'},
+ {id:'zhurong', name:'«Чжужун»', code:'ZHR', ctry:'CN', st:'OK', m:'rover', L:'2020-07-23T04:41Z', O:'2021-02-10T11:52Z', E:'2021-05-14T23:18Z', lat:25.07, lon:109.93, pad:'wenchang', km:1.9,
+  facts:[['Дата','15.05.2021 (Пекин)'],['Страна','Китай'],['Пробег','≈ 1,9 км'],['Район','Равнина Утопия']],
+  desc:'Первый китайский марсоход: сел на Равнине Утопия с первой попытки и проехал почти 2 км; в 2022 году уснул на зиму, и пыль помешала ему проснуться.'}
+];
+const VENUS_SITES=[
+ {id:'venera4', name:'«Венера-4»', ctry:'RU', st:'OK', E:'1967-10-18T04:34Z', lat:19, lon:38, probe:1, desc:'Первые прямые измерения атмосферы другой планеты: зонд опускался на парашюте 93 минуты и был раздавлен давлением, не долетев до поверхности.'},
+ {id:'venera5', name:'«Венера-5»', ctry:'RU', st:'OK', E:'1969-05-16T06:02Z', lat:-3, lon:18, probe:1, desc:'Атмосферный зонд: 53 минуты передавал данные о составе и давлении атмосферы, пока его не раздавило.'},
+ {id:'venera6', name:'«Венера-6»', ctry:'RU', st:'OK', E:'1969-05-17T06:05Z', lat:-5, lon:23, probe:1, desc:'Близнец «Венеры-5»: спускался по соседству и передавал данные 51 минуту.'},
+ {id:'venera7', name:'«Венера-7»', ctry:'RU', st:'OK', E:'1970-12-15T05:34Z', lat:-5, lon:-9, desc:'Первая посадка на другую планету с передачей данных: 23 минуты сигнала с поверхности при 475 °C и давлении около 90 атмосфер.'},
+ {id:'venera8', name:'«Венера-8»', ctry:'RU', st:'OK', E:'1972-07-22T09:32Z', lat:-10.7, lon:-24.75, desc:'Работал на дневной стороне 50 минут и измерил освещённость: на Венере светло, как в пасмурный день на Земле.'},
+ {id:'venera9', name:'«Венера-9»', ctry:'RU', st:'OK', E:'1975-10-22T05:13Z', lat:31.01, lon:-68.36, desc:'Передал первую в истории фотографию с поверхности другой планеты — каменистая равнина под оранжевым небом.'},
+ {id:'venera10', name:'«Венера-10»', ctry:'RU', st:'OK', E:'1975-10-25T05:17Z', lat:15.42, lon:-68.49, desc:'Второй снимок поверхности Венеры: плоские плиты, похожие на застывшую лаву.'},
+ {id:'pvlarge', name:'Pioneer Venus', ctry:'US', st:'OK', E:'1978-12-09T19:39Z', lat:4.4, lon:-56, probe:1, desc:'Четыре зонда NASA вошли в атмосферу Венеры в разных местах; один из них, не рассчитанный на посадку, пережил удар и передавал данные с поверхности 67 минут. Отмечено место большого зонда.'},
+ {id:'venera12', name:'«Венера-12»', ctry:'RU', st:'OK', E:'1978-12-21T03:30Z', lat:-7, lon:-66, desc:'Передавал данные 110 минут; изучил состав облаков и нижней атмосферы.'},
+ {id:'venera11', name:'«Венера-11»', ctry:'RU', st:'OK', E:'1978-12-25T03:24Z', lat:-14, lon:-61, desc:'Проработал 95 минут; крышки камер не отстрелились, снимков нет, но приборы зарегистрировали молнии в атмосфере.'},
+ {id:'venera13', name:'«Венера-13»', ctry:'RU', st:'OK', E:'1982-03-01T03:57Z', lat:-7.5, lon:-57, desc:'Первые цветные снимки поверхности Венеры и рекорд выживания: 127 минут при 457 °C. Буровая установка взяла пробу грунта.'},
+ {id:'venera14', name:'«Венера-14»', ctry:'RU', st:'OK', E:'1982-03-05T07:00Z', lat:-13.25, lon:-50, desc:'Сделал цветные панорамы и анализ грунта; по иронии судьбы, отстреленная крышка камеры упала точно под щуп, и он измерил её, а не грунт.'},
+ {id:'vega1', name:'«Вега-1»', ctry:'RU', st:'OK', E:'1985-06-11T03:02Z', lat:7.2, lon:177.8, desc:'Посадочный модуль и первый аэростат в атмосфере другой планеты; затем станция полетела к комете Галлея.'},
+ {id:'vega2', name:'«Вега-2»', ctry:'RU', st:'OK', E:'1985-06-15T03:00Z', lat:-7.14, lon:177.67, desc:'Последняя на сегодня посадка на Венеру: анализ грунта и аэростат, дрейфовавший 46 часов.'}
+];
+const FAR_SITES=[
+ {par:'titan', id:'huygens', name:'«Гюйгенс»', ctry:'EU', st:'OK', E:'2005-01-14T12:43Z', lat:-10.57, lon:167.67,
+  desc:'Зонд ESA, доставленный «Кассини», — самая далёкая посадка в истории: опустился на Титан, спутник Сатурна, и передал снимки берегов метановых рек и «гальки» из водяного льда.'},
+ {par:'mercury', id:'messengerx', name:'MESSENGER', ctry:'US', st:'END', E:'2015-04-30T19:26Z', lat:54.4, lon:-149.9,
+  desc:'Первый спутник Меркурия (2011–2015) нанёс карту всей планеты и нашёл водяной лёд в вечно затенённых кратерах у полюсов. Когда кончилось топливо, аппарат упал на Меркурий со скоростью 3,9 км/с и оставил кратер около 16 метров.'}
+];
+const SITE_CSS={RU:'#ff7a5a', US:'#39c8ff', CN:'#ffd24d', EU:'#b28aff'};
+// карты планет начинаются не с −180°: у Марса левый край — 0° (сдвиг 180°), у Венеры — около 239° в. д.
+// (сверено по Олимпу, Элладе и Большому Сырту; по горам Максвелла, областям Бета и Альфа)
+const TEX_DLON={mars:180, venus:-59}, wrapLon=l=>((l+180)%360+360)%360-180;
+function siteModel(kind){
+  const g=new THREE.Group(), M=(geo,c)=>new THREE.Mesh(geo,new THREE.MeshPhongMaterial({color:c,shininess:14}));
+  const gold=0xc8a032, silver=0xc4c8d0, gray=0x7a7a7a, white=0xe6e2da, panel=0x2255aa;
+  if(kind==='rover'||kind==='big'){ const k=kind==='big'?1.5:1;
+    const b=M(new THREE.BoxGeometry(0.05*k,0.016*k,0.034*k),white); b.position.y=0.026*k; g.add(b);
+    [-1,0,1].forEach(i=>[-1,1].forEach(s=>{ const w=M(new THREE.CylinderGeometry(0.008*k,0.008*k,0.006*k,10),gray); w.rotation.x=Math.PI/2; w.position.set(i*0.02*k,0.008*k,s*0.021*k); g.add(w); }));
+    const mast=M(new THREE.CylinderGeometry(0.0025*k,0.0025*k,0.04*k,6),silver); mast.position.set(0.018*k,0.05*k,0); g.add(mast);
+    const head=M(new THREE.BoxGeometry(0.012*k,0.007*k,0.01*k),silver); head.position.set(0.018*k,0.072*k,0); g.add(head);
+    if(kind==='rover'){ const p=M(new THREE.BoxGeometry(0.07,0.002,0.05),panel); p.position.y=0.036; g.add(p); }
+  } else if(kind==='lander'){
+    const b=M(new THREE.CylinderGeometry(0.03,0.034,0.02,6),gold); b.position.y=0.03; g.add(b);
+    for(let i=0;i<3;i++){ const a=i/3*Math.PI*2, l=M(new THREE.CylinderGeometry(0.003,0.003,0.03,4),silver);
+      l.position.set(Math.cos(a)*0.032,0.014,Math.sin(a)*0.032); l.rotation.z=Math.cos(a)*0.45; l.rotation.x=-Math.sin(a)*0.45; g.add(l); }
+    [-1,1].forEach(s=>{ const p=M(new THREE.CylinderGeometry(0.028,0.028,0.002,10),panel); p.position.set(s*0.06,0.036,0); g.add(p); });
+  } else if(kind==='bags'){
+    for(let i=0;i<3;i++){ const a=i/3*Math.PI*2, p=M(new THREE.CylinderGeometry(0.03,0.03,0.003,3),panel); p.position.set(Math.cos(a)*0.03,0.003,Math.sin(a)*0.03); p.rotation.y=-a; g.add(p); }
+    const c=M(new THREE.CylinderGeometry(0.014,0.014,0.03,3),gold); c.position.y=0.016; g.add(c);
+    const r=M(new THREE.BoxGeometry(0.016,0.006,0.011),white); r.position.set(0.075,0.006,-0.02); g.add(r);
+  } else {
+    const d=M(new THREE.CylinderGeometry(0.05,0.056,0.004,14),0x4a3428); d.position.y=0.002; g.add(d);
+    for(let i=0;i<7;i++){ const a=i/7*Math.PI*2+0.3, s=M(new THREE.BoxGeometry(0.034,0.002,0.005),0x5c4436); s.position.set(Math.cos(a)*0.064,0.001,Math.sin(a)*0.064); s.rotation.y=-a; g.add(s); }
+  }
+  return g;
+}
+function addSites(par,L){
+  if(!par||!par.mesh) return [];
+  return L.map(S=>{
+    const node=new THREE.Group(); node.position.copy(B.surfPoint(S.lat,wrapLon(S.lon+(TEX_DLON[par.id]||0)),par.visR*1.004));
+    node.quaternion.setFromUnitVectors(new V3(0,0,1),node.position.clone().normalize()); par.mesh.add(node);
+    const col=S.st==='FAIL'?'#ff5544':(SITE_CSS[S.ctry]||'#39c8ff'), dt=fmtD(S.E), c=CTRY[S.ctry];
+    const facts=S.facts||[['Дата',dt],['Страна',c?c[0]:'—'],['Тип',S.probe?'атмосферный зонд':(S.st==='END'?'падение в конце миссии':'посадочный аппарат')],
+      ['Координаты',Math.abs(S.lat)+'° '+(S.lat>=0?'с. ш.':'ю. ш.')+', '+Math.abs(S.lon)+'° '+(S.lon>=0?'в. д.':'з. д.')]];
+    const r=B.addRec({id:S.id, code:S.code||S.id.slice(0,3).toUpperCase(), name:S.name, kindType:'site', type:'site', node:node, visR:0.34, hitR:0.30,
+      parentRec:par, labelColor:col, status:S.st, date:dt, year:String(S.E).slice(0,4), ctry:S.ctry, D:S,
+      tip:(S.st==='FAIL'?'Авария · ':(S.probe?'Атмосферный зонд · ':(S.st==='END'?'Конец миссии · ':'Посадка · ')))+dt, facts:facts, desc:S.desc,
+      launchMs:Date.parse(S.E)});
+    if(S.m){ const mdl=new THREE.Group(); mdl.rotation.x=Math.PI/2; mdl.add(siteModel(S.m)); node.add(mdl); r.mdl=mdl; mdl.visible=false; }
+    if(r.labelEl){ r.labelEl.classList.add('pin'); r.labelEl.innerHTML='<span class="pt"></span>'; r.labelEl.firstChild.textContent=r.name; }
+    return r;
+  });
+}
+const MARS_R=addSites(MARS,MARS_SITES), VENUS_R=addSites(byId.venus,VENUS_SITES);
+const FAR_R=[]; FAR_SITES.forEach(S=>{ FAR_R.push(...addSites(byId[S.par],[S])); });
+const PINS=MARS_R.concat(VENUS_R,FAR_R);
+// пройденный путь марсоходов — плавная кривая у места посадки (форма схематична, длина — в масштабе ×4)
+const KM_MARS=MARS.visR/3389.5;
+MARS_R.forEach(r=>{ const km=r.D.km; if(!km) return;
+  const L=Math.max(0.006,km*KM_MARS*4), seed=B.hash01(r.id)*Math.PI*2, ctrl=[new V3(0,0,0.002)];
+  let a=seed, x=0, y=0; for(let i=1;i<=6;i++){ a+=Math.sin(seed*5+i*1.3)*0.9; x+=Math.cos(a)*L/6; y+=Math.sin(a)*L/6; ctrl.push(new V3(x,y,0.002)); }
+  r.trav=new THREE.Line(new THREE.BufferGeometry().setFromPoints(new THREE.CatmullRomCurve3(ctrl).getPoints(60)),
+    new THREE.LineBasicMaterial({color:0xffb84d,transparent:true,opacity:0.95}));
+  r.node.add(r.trav); });
+// модели и маршруты — только вблизи; подписи соседних мест не наезжают друг на друга
+hooks.post.push(function(){
+  const cp=camera.position, sel=B.getSelected(), boxes=[];
+  PINS.forEach(r=>{ const pr=r.parentRec; if(!r.mdl&&!r.trav) return; const d=cp.distanceTo(B.worldPos(r));
+    if(r.mdl){ const near=r.node.visible&&(d<pr.visR*0.7||(sel===r&&d<pr.visR*1.6)); r.mdl.visible=near; if(near) r.mdl.scale.setScalar(clamp(d*0.9,0.04,1.6)); }
+    if(r.trav) r.trav.visible=d<pr.visR*1.2||sel===r; });
+  const L=PINS.filter(r=>r.labelEl&&r.labelEl.style.display!=='none'); L.sort((a,b)=>(b===sel)-(a===sel));
+  L.forEach(r=>{ const e=r.labelEl, x=parseFloat(e.style.left)||0, y=parseFloat(e.style.top)||0, w=r.name.length*6+10, bx=[x-w/2,y-26,x+w/2,y-2];
+    const hit=boxes.some(b=>bx[0]<b[2]&&bx[2]>b[0]&&bx[1]<b[3]&&bx[3]>b[1]); e.classList.toggle('dot',hit&&r!==sel); if(!hit||r===sel) boxes.push(bx); });
+});
+
+/* ════ 2. АППАРАТЫ У ПЛАНЕТ: ИСТОРИЧЕСКИЕ СПУТНИКИ И СТАНЦИИ ПРОШЛОГО ══
+   Завершённые миссии видны только в годы работы (машина времени, история освоения): on — выход на орбиту,
+   off — конец работы. Орбиты схематичные, фаза условная. */
+function probeMk(col,tex,station){
+  const g=new THREE.Group(), m=new THREE.Mesh(new THREE.OctahedronGeometry(station?0.55:0.45,0),new THREE.MeshBasicMaterial({color:col}));
+  g.add(m); const gl=B.glowSprite(tex,2.6,0.85); g.add(gl); return {grp:g, mesh:m, glow:gl};
+}
+// станция прошлого — маленькая модель: корпус и две пары панелей (как модели МКС и «Тяньгуна» в ядре)
+function miniStation(){
+  const g=new THREE.Group(), mat=(c,e)=>new THREE.MeshPhongMaterial({color:c, emissive:e||0x0a0a0a, shininess:30});
+  const body=new THREE.Mesh(new THREE.CylinderGeometry(0.08,0.1,0.62,10),mat(0xc8ccd4)); body.rotation.z=Math.PI/2; g.add(body);
+  [[0.14,0.3],[-0.12,-0.3],[0.14,-0.3],[-0.12,0.3]].forEach(p=>{ const pn=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.012,0.3),mat(0x2255aa,0x0a1a3a)); pn.position.set(p[0],0,p[1]); g.add(pn); });
+  g.scale.setScalar(0.62); g.rotation.set(0.4,0.6,0.15); return g;
+}
+function addOrbiter(par,P){
+  if(!par) return null;
+  const st=P.kind==='station', live=P.status==='ACT';
+  const inclGrp=new THREE.Group(); if(P.incl) inclGrp.rotation.x=P.incl*D2R; (par.tiltGrp||par.node).add(inclGrp);
+  const col=st?0x4dff88:(live?0x39c8ff:0x9aa3ad), m=probeMk(col,st?B.GLOW.green:(live?B.GLOW.cyan:B.GLOW.white),st); inclGrp.add(m.grp);
+  if(st){ m.mesh.visible=false; m.grp.add(miniStation()); }
+  const rOrb=par.visR*P.orbF, pts=[]; for(let k=0;k<=80;k++){ const a=k/80*Math.PI*2; pts.push(new V3(Math.cos(a)*rOrb,0,Math.sin(a)*rOrb)); }
+  const lc=st?0x2a8a5a:(live?0x1e6a8a:0x4f5a63), line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:lc,transparent:true,opacity:0.4}));
+  line.userData={baseColor:lc, baseOp:0.4}; inclGrp.add(line);
+  const r=B.addRec({...P, d:P, node:m.grp, mesh:m.mesh, glow:m.glow, visR:0.7, hitR:2.0, orbit:line, rOrb:rOrb, type:'probe', kindType:st?'station':'orbiter', cat:'orbiter',
+    parentRec:par, phase:B.hash01(P.id)*Math.PI*2, approx:true, labelColor:st?'#4dff88':(live?'#39c8ff':'#a9b4be')});
+  if(P.on) r.launchMs=isoMs(P.on); if(P.off) r.endMs=isoMs(P.off)+DAY_MS-60000;
+  r.hubTint=[m.mesh.material]; return r;
+}
+const ORB_PAST=[
+ // Марс
+ {par:'mars', id:'mariner9', code:'MR9', name:'Mariner 9', agency:'NASA', ctry:'US', on:'1971-11-14', off:'1972-10-27', orbF:1.5, period:0.5,
+  desc:'Первый аппарат на орбите другой планеты: переждал глобальную пылевую бурю и снял весь Марс — вулкан Олимп, долины Маринер и русла древних рек.'},
+ {par:'mars', id:'mars2o', code:'M2O', name:'«Марс-2» (орбитер)', agency:'СССР', ctry:'RU', on:'1971-11-27', off:'1972-08-22', orbF:2.2, period:0.75,
+  desc:'Орбитальный модуль «Марса-2» почти год изучал атмосферу и рельеф планеты.'},
+ {par:'mars', id:'mars3o', code:'M3O', name:'«Марс-3» (орбитер)', agency:'СССР', ctry:'RU', on:'1971-12-02', off:'1972-08-22', orbF:3.0, period:12.8,
+  desc:'Орбитальный модуль «Марса-3» на сильно вытянутой 12-суточной орбите измерял температуру поверхности и состав атмосферы.'},
+ {par:'mars', id:'mars5', code:'MR5', name:'«Марс-5»', agency:'СССР', ctry:'RU', on:'1974-02-12', off:'1974-02-28', orbF:2.4, period:1,
+  desc:'Проработал на орбите Марса всего 22 витка, но успел передать около 60 снимков и данные о поверхности.'},
+ {par:'mars', id:'viking1o', code:'V1O', name:'«Викинг-1» (орбитер)', agency:'NASA', ctry:'US', on:'1976-06-19', off:'1980-08-17', orbF:1.8, period:1,
+  desc:'Снял «лицо на Марсе» — холм, который при боковом свете напоминал человеческое лицо; поздние снимки показали обычную гору.'},
+ {par:'mars', id:'viking2o', code:'V2O', name:'«Викинг-2» (орбитер)', agency:'NASA', ctry:'US', on:'1976-08-07', off:'1978-07-25', orbF:2.0, period:1,
+  desc:'Орбитальный модуль «Викинга-2» вместе с первым составил подробную карту Марса.'},
+ {par:'mars', id:'phobos2', code:'PH2', name:'«Фобос-2»', agency:'СССР', ctry:'RU', on:'1989-01-29', off:'1989-03-27', orbF:2.6, period:0.33,
+  desc:'Последняя советская марсианская станция: успела снять Фобос вблизи, но связь потеряли перед сбросом зондов на спутник Марса.'},
+ {par:'mars', id:'mgs', code:'MGS', name:'Mars Global Surveyor', agency:'NASA', ctry:'US', on:'1997-09-12', off:'2006-11-02', orbF:1.35, period:0.0817,
+  desc:'Почти десять лет картографировал Марс: нашёл овраги, похожие на следы недавних потоков воды, и остаточное магнитное поле коры.'},
+ {par:'mars', id:'mom', code:'MOM', name:'«Мангальян» (MOM)', agency:'ISRO', ctry:'IN', on:'2014-09-24', off:'2022-10-03', orbF:2.8, period:3.2,
+  desc:'Первая индийская межпланетная миссия вышла на орбиту Марса с первой попытки и обошлась дешевле многих фильмов о космосе.'},
+ // Венера
+ {par:'venus', id:'pvo', code:'PVO', name:'Pioneer Venus Orbiter', agency:'NASA', ctry:'US', on:'1978-12-04', off:'1992-10-08', orbF:2.4, period:1, incl:5,
+  desc:'14 лет на орбите Венеры: первая радарная карта планеты и измерения её верхней атмосферы.'},
+ {par:'venus', id:'venera15', code:'V15', name:'«Венера-15» и «-16»', agency:'СССР', ctry:'RU', on:'1983-10-10', off:'1984-07-10', orbF:2.0, period:1, incl:8,
+  desc:'Два радарных спутника сквозь облака сняли северное полушарие Венеры с разрешением 1–2 км.'},
+ {par:'venus', id:'magellan', code:'MGN', name:'Magellan', agency:'NASA', ctry:'US', on:'1990-08-10', off:'1994-10-12', orbF:1.5, period:0.13, incl:12,
+  desc:'Радаром нанёс на карту 98 % поверхности Венеры; в конце миссии нарочно опустился в атмосферу.'},
+ {par:'venus', id:'vex', code:'VEX', name:'Venus Express', agency:'ESA', ctry:'EU', on:'2006-04-11', off:'2014-12-16', orbF:2.8, period:1, incl:16,
+  desc:'Европейский спутник Венеры изучал её атмосферу 8 лет и нашёл признаки недавнего вулканизма.'},
+ {par:'venus', id:'akatsuki', code:'AKA', name:'«Акацуки»', agency:'JAXA', ctry:'JP', status:'INA', on:'2015-12-07', off:'2024-04-29', orbF:3.4, period:10.5, incl:3,
+  desc:'Японский метеоспутник Венеры: в 2010 году промахнулся мимо планеты из-за отказа двигателя и через пять лет вышел на орбиту со второй попытки. Изучал сверхвращение атмосферы; связь потеряна в 2024 году.'},
+ // Меркурий, Юпитер, Сатурн, пояс астероидов
+ {par:'mercury', id:'messenger', code:'MSG', name:'MESSENGER', agency:'NASA', ctry:'US', on:'2011-03-18', off:'2015-04-30', orbF:2.2, period:0.5, incl:82,
+  desc:'Первый спутник Меркурия: за четыре года нанёс на карту всю планету и нашёл лёд в полярных кратерах, затем упал на поверхность.'},
+ {par:'jupiter', id:'galileo', code:'GLL', name:'Galileo', agency:'NASA', ctry:'US', on:'1995-12-08', off:'2003-09-21', orbF:2.6, period:60, incl:5,
+  desc:'Первый спутник Юпитера: сбросил зонд в атмосферу, нашёл признаки океана подо льдом Европы. В конце миссии его направили в Юпитер, чтобы не занести земные микробы на Европу.'},
+ {par:'saturn', id:'cassini', code:'CAS', name:'Cassini', agency:'NASA/ESA/ASI', ctry:'US', on:'2004-07-01', off:'2017-09-15', orbF:3.1, period:30, incl:12,
+  desc:'13 лет у Сатурна: доставил «Гюйгенс» на Титан, нашёл гейзеры Энцелада и моря Титана, пролетел между планетой и кольцами и сгорел в атмосфере Сатурна.'},
+ {par:'vesta', id:'dawnv', code:'DWV', name:'Dawn у Весты', agency:'NASA', ctry:'US', on:'2011-07-16', off:'2012-09-05', orbF:2.4, period:1, incl:80,
+  desc:'Dawn провёл у Весты 14 месяцев и снял её огромный ударный бассейн у южного полюса, а потом на ионном двигателе улетел к Церере.'},
+ {par:'cg67p', id:'rosetta', code:'ROS', name:'Rosetta и Philae', agency:'ESA', ctry:'EU', on:'2014-08-06', off:'2016-09-30', orbF:3.2, period:10, incl:50,
+  desc:'Первый аппарат на орбите кометы: два года летал вокруг ядра Чурюмова — Герасименко и сбросил модуль Philae — первую посадку на комету (12.11.2014). В 2016 году Rosetta сама мягко опустилась на ядро.'},
+ {par:'ceres', id:'dawn', code:'DWN', name:'Dawn у Цереры', agency:'NASA', ctry:'US', on:'2015-03-06', off:'2018-10-31', orbF:2.4, period:1, incl:80,
+  desc:'Единственный аппарат, побывавший на орбитах двух тел пояса астероидов. Нашёл на Церере яркие пятна солей; после 2018 года остаётся её неработающим спутником.'},
+ // станции прошлого у Земли
+ {par:'earth', kind:'station', id:'salyut1', code:'SL1', name:'«Салют-1»', agency:'СССР', ctry:'RU', on:'1971-04-19', off:'1971-10-11', orbF:1.035, period:0.0613, incl:51.6,
+  desc:'Первая орбитальная станция. Экипаж «Союза-11» провёл на ней 23 дня и погиб при возвращении из-за разгерметизации спускаемого аппарата.'},
+ {par:'earth', kind:'station', id:'skylab', code:'SKL', name:'Skylab', agency:'NASA', ctry:'US', on:'1973-05-14', off:'1979-07-11', orbF:1.068, period:0.0645, incl:50,
+  desc:'Первая американская станция: три экипажа в 1973–1974 годах. Сошла с орбиты в 1979 году, и обломки упали в Австралии.'},
+ {par:'earth', kind:'station', id:'salyut6', code:'SL6', name:'«Салют-6»', agency:'СССР', ctry:'RU', on:'1977-09-29', off:'1982-07-29', orbF:1.05, period:0.0625, incl:51.6,
+  desc:'Первая станция с двумя стыковочными узлами: экипажи принимали грузовые «Прогрессы» и гостей из других стран.'},
+ {par:'earth', kind:'station', id:'salyut7', code:'SL7', name:'«Салют-7»', agency:'СССР', ctry:'RU', on:'1982-04-19', off:'1991-02-07', orbF:1.05, period:0.0625, incl:51.6,
+  desc:'В 1985 году станция замёрзла и замолчала; экипаж Джанибекова и Савиных состыковался с неуправляемой станцией и вернул её к жизни.'},
+ {par:'earth', kind:'station', id:'mir', code:'MIR', name:'«Мир»', agency:'СССР / Россия', ctry:'RU', on:'1986-02-20', off:'2001-03-23', orbF:1.06, period:0.0637, incl:51.6,
+  desc:'Первая модульная станция: 15 лет на орбите, рекорд Полякова — 437 суток в космосе. Затоплена в Тихом океане в 2001 году.'},
+ {par:'earth', kind:'station', id:'tiangong1', code:'TG1', name:'«Тяньгун-1»', agency:'CNSA', ctry:'CN', on:'2011-09-29', off:'2018-04-02', orbF:1.055, period:0.063, incl:42.8,
+  desc:'Первая китайская станция-лаборатория: две пилотируемые экспедиции; в 2018 году неуправляемо сошла с орбиты.'},
+ {par:'earth', kind:'station', id:'tiangong2', code:'TG2', name:'«Тяньгун-2»', agency:'CNSA', ctry:'CN', on:'2016-09-15', off:'2019-07-19', orbF:1.06, period:0.0635, incl:42.8,
+  desc:'Вторая китайская лаборатория: 30-дневная экспедиция и первая дозаправка на орбите грузовиком «Тяньчжоу-1».'}
+];
+const AT={mars:'Марса',venus:'Венеры',mercury:'Меркурия',jupiter:'Юпитера',saturn:'Сатурна',vesta:'Весты',ceres:'Цереры',earth:'Земли',cg67p:'кометы 67P'};
+const PAST_R=ORB_PAST.map(P=>{ const r=addOrbiter(byId[P.par],{...P, status:P.status||'END',
+  facts:[[P.kind==='station'?'На орбите':'Работал у '+(AT[P.par]||'цели'),fmtD(P.on)+' — '+fmtD(P.off)],['Агентство',P.agency]]});
+  if(r) r.ctry=P.ctry; return r; }).filter(Boolean);
+const MARS_HIST=PAST_R.filter(r=>r.parentRec===MARS);
+// работающие аппараты у Марса (ядро) + исторические — для переключателя и истории освоения
+const MARS_CTRY={mro:'US',odyssey:'US',maven:'US',mex:'EU',tgo:'EU',tianwen1:'CN',hope:'AE'};
+if(byId.maven) byId.maven.endMs=isoMs('2025-12-06')+DAY_MS-60000;               // замолчал за Марсом; NASA завершило миссию 03.06.2026
+const MARS_SATS=B.recs.filter(r=>r.parentRec===MARS&&r.kindType==='orbiter'&&MARS_HIST.indexOf(r)<0);
+MARS_SATS.forEach(r=>{ r.ctry=MARS_CTRY[r.id]; if(r.mesh&&r.mesh.material&&r.mesh.material.color) r.hubTint=[r.mesh.material]; });
+const MARS_ALL=MARS_SATS.concat(MARS_HIST);
+// у Земли: станции прошлого и новые аппараты в L1/L2 ведут себя как МКС — в режиме «Мусор» скрыты, в режиме «Земля» не мешают выбирать страны
+function earthCraft(r){
+  const off=()=>V8.mode()==='deb'&&V8.cat.ready&&B.getSelected()!==r, lc=r.labelCheck, pc=r.pickCheck;
+  r.labelCheck=()=>(!lc||lc())&&!off(); r.pickCheck=()=>(!pc||pc())&&!off()&&!(V8.nearE()&&V8.mode()==='earth'&&V8.cat.ready);
+  return off;
+}
+
+/* ════ 3. НЕДОСТАЮЩИЕ АППАРАТЫ: ТОЧКИ ЛАГРАНЖА, ЗА ЛУНОЙ, ВОКРУГ СОЛНЦА ═══ */
+const L_EXTRA=[
+ {id:'ace', code:'ACE', name:'ACE', side:-1, offF:10.2, on:'1997-12-12', agency:'NASA', facts:[['Запуск','25.08.1997'],['Положение','точка L1'],['Задача','состав солнечного ветра']],
+  desc:'Advanced Composition Explorer почти 30 лет стоит «дозорным» в точке L1 и примерно за час предупреждает о приходе солнечных бурь. Положение схематично.'},
+ {id:'wind', code:'WND', name:'Wind', side:-1, offF:11.7, on:'2004-05-01', agency:'NASA', facts:[['Запуск','01.11.1994'],['Положение','точка L1 (с 2004)'],['Задача','солнечный ветер и магнитное поле']],
+  desc:'Один из старейших работающих аппаратов NASA: с 1994 года измеряет солнечный ветер перед Землёй. Положение схематично.'},
+ {id:'dscovr', code:'DSC', name:'DSCOVR', side:-1, offF:12.4, on:'2015-06-08', agency:'NOAA/NASA', facts:[['Запуск','11.02.2015'],['Положение','точка L1'],['Камера EPIC','снимки всей освещённой Земли']],
+  desc:'Космическая метеостанция NOAA в точке L1; её камера EPIC каждый день снимает Землю целиком — «Голубой шарик» в реальном времени. Положение схематично.'},
+ {id:'aditya', code:'ADL', name:'«Адитья-L1»', side:-1, offF:13.1, on:'2024-01-06', agency:'ISRO', facts:[['Запуск','02.09.2023'],['Положение','точка L1 (с 06.01.2024)'],['Задача','корона и солнечный ветер']],
+  desc:'Первая индийская солнечная обсерватория: изучает корону Солнца и выбросы плазмы из точки L1. Положение схематично.'},
+ {id:'srg', code:'SRG', name:'«Спектр-РГ»', side:1, offF:11.0, on:'2019-10-21', agency:'Роскосмос / DLR', facts:[['Запуск','13.07.2019'],['Положение','точка L2'],['Телескопы','ART-XC и eROSITA']],
+  desc:'Российско-германская рентгеновская обсерватория в L2 составила самую подробную карту всего неба в рентгеновских лучах. Немецкий телескоп eROSITA выключен в 2022 году, российский ART-XC продолжает работу. Положение схематично.'},
+ {id:'gaia', code:'GAI', name:'Gaia', side:1, offF:13.0, on:'2014-01-08', status:'END', agency:'ESA', facts:[['Запуск','19.12.2013'],['Положение','точка L2 (до 2025)'],['Каталог','≈ 1,8 млрд звёзд'],['Выключена','27.03.2025']],
+  desc:'Измерила положения и движения почти двух миллиардов звёзд и составила самую точную трёхмерную карту Галактики. В марте 2025 года аппарат увели с L2 на орбиту вокруг Солнца и выключили. Положение схематично.'}
+];
+const LAG_R=L_EXTRA.map(P=>{ const act=P.status!=='END', m=probeMk(act?0x39c8ff:0x9aa3ad,act?B.GLOW.cyan:B.GLOW.white); B.scene.add(m.grp);
+  const r=B.addRec({...P, status:P.status||'ACT', d:P, node:m.grp, mesh:m.mesh, glow:m.glow, visR:0.6, hitR:2.4, type:'probe', kindType:'lagrange', cat:'orbiter',
+    parentRec:EARTH, approx:true, labelColor:act?'#39c8ff':'#a9b4be', phase:B.hash01(P.id)*Math.PI*2});
+  r.launchMs=isoMs(P.on); return r; });
+// новые аппараты в L1/L2 стоят не на одной линии: гало-орбиты вокруг точки (период ≈ полгода, размах схематичный)
+const _n=new V3(), _p=new V3();
+hooks.pos.push(function(t,days){
+  _n.copy(B.worldPos(EARTH)).normalize(); _p.crossVectors(_n,Y_AX).normalize();
+  LAG_R.forEach(r=>{ const a=r.phase+2*Math.PI*days/178; r.node.position.addScaledVector(Y_AX,Math.sin(a)*eR*1.3).addScaledVector(_p,Math.cos(a)*eR*2.2); });
+});
+// «Цюэцяо-1» — у точки L2 системы Земля — Луна, за обратной стороной Луны
+const qq1=(function(){ const m=probeMk(0x39c8ff,B.GLOW.cyan); EARTH.node.add(m.grp);
+  return B.addRec({id:'queqiao1', code:'QQ1', name:'«Цюэцяо-1»', node:m.grp, mesh:m.mesh, glow:m.glow, visR:0.4, hitR:1.2, type:'probe', kindType:'probe', cat:'probe', parentRec:MOON,
+    status:'ACT', agency:'CNSA', approx:true, labelColor:'#39c8ff', launchMs:isoMs('2018-06-14'),
+    facts:[['Запуск','20.05.2018'],['Положение','гало-орбита у точки L2 системы Земля — Луна'],['Задача','связь с «Чанъэ-4» на обратной стороне']],
+    desc:'Первый ретранслятор за Луной: с 2018 года держит связь с «Чанъэ-4» и луноходом «Юйту-2» на обратной стороне Луны, откуда Земли не видно. Гало-орбита показана схематично.'}); })();
+hooks.pos.push(function(t,days){ const a=2*Math.PI*days/14, mp=MOON.node.position; _p.set(-mp.z,0,mp.x).normalize();
+  qq1.node.position.copy(mp).multiplyScalar(1.17).addScaledVector(Y_AX,Math.sin(a)*MOON.visR*0.9).addScaledVector(_p,Math.cos(a)*MOON.visR*0.5); });
+// аппараты на орбитах вокруг Солнца: элементы примерные, долгота подогнана к положению относительно Земли на 30.10.2026
+function helio(P){
+  const act=P.status==='ACT', m=probeMk(act?0x39c8ff:0x9aa3ad,act?B.GLOW.cyan:B.GLOW.white); B.scene.add(m.grp);
+  const e=P.el, n=0.9856076686/Math.pow(e.a,1.5), days=(Date.parse('2026-10-30T00:00:00Z')-J2000)/DAY_MS, lamE=100.464+0.98564736*days;
+  e.M0=(((lamE+P.dLam-e.O-e.w-n*days)%360)+360)%360;
+  const pts=[]; for(let k=0;k<=200;k++) pts.push(B.sv(B.elToPos(e.a,e.e,e.i,e.O,e.w,k/200*360)));
+  const lc=act?0x1e6a8a:0x4f5a63, line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:lc,transparent:true,opacity:0.35}));
+  line.userData={baseColor:lc, baseOp:0.35}; B.scene.add(line);
+  const r=B.addRec({...P, d:P, node:m.grp, mesh:m.mesh, glow:m.glow, visR:0.6, hitR:3.0, orbit:line, el:e, type:'probe', kindType:'probe', cat:'probe', helio:true, approx:true,
+    labelColor:act?'#39c8ff':'#a9b4be'});
+  r.launchMs=isoMs(P.launch); return r;
+}
+const HELIO_R=[
+ helio({id:'hayabusa2', code:'HY2', name:'«Хаябуса-2»', status:'ACT', agency:'JAXA', launch:'2014-12-03', el:{a:0.99,e:0.11,i:1.2,O:20,w:110}, dLam:70,
+  facts:[['Запуск','03.12.2014'],['Сделано','грунт с астероида Рюгу (капсула — 2020)'],['Дальше','пролёт 2001 CC21 (2026), астероид 1998 KY26 (2031)']],
+  desc:'Привезла на Землю грунт с астероида Рюгу, сбросила капсулу и полетела дальше: в расширенной миссии — пролёт астероида 2001 CC21 и сближение с быстро вращающимся 1998 KY26. Положение примерное.'}),
+ helio({id:'kepler', code:'KEP', name:'Kepler', status:'END', agency:'NASA', launch:'2009-03-07', el:{a:1.0132,e:0.036,i:0.45,O:0,w:0}, dLam:-123,
+  facts:[['Запуск','07.03.2009'],['Открыто','более 2 600 экзопланет'],['Выключен','15.11.2018']],
+  desc:'Космический телескоп, который доказал: планет в Галактике больше, чем звёзд. Отстаёт от Земли на её же орбите и с 2018 года выключен. Положение примерное.'}),
+ helio({id:'spitzer', code:'SPZ', name:'Spitzer', status:'END', agency:'NASA', launch:'2003-08-25', el:{a:1.004,e:0.012,i:1.0,O:0,w:0}, dLam:-170,
+  facts:[['Запуск','25.08.2003'],['Диапазон','инфракрасный'],['Выключен','30.01.2020']],
+  desc:'Инфракрасный телескоп NASA: увидел семь землеподобных планет у звезды TRAPPIST-1. Медленно отстаёт от Земли; выключен в 2020 году. Положение примерное.'})
+];
+const E_CRAFT=PAST_R.filter(r=>r.parentRec===EARTH).concat(LAG_R).map(r=>({r:r, off:earthCraft(r)}));
+hooks.vis.push(function(){ E_CRAFT.forEach(o=>{ if(o.off()){ o.r.node.visible=false; if(o.r.orbit) o.r.orbit.visible=false; } }); });
+B.timeVisCheck&&B.timeVisCheck(); B.applyVisibility();
+
+/* ════ 4. У МАРСА: ПЕРЕКЛЮЧАТЕЛЬ, РАСКРАСКА, ИСТОРИЯ ОСВОЕНИЯ (как у Луны) ═══ */
+let mfl=null;                                                           // перелёт к Марсу (раздел 5)
+const HUBS=V15.HUBS;
+const nearMars=()=>V15.nearBody(MARS,()=>MARS_ALL,()=>MARS_R,14);
+const marsHub=V15.makeHub({id:'mars', body:MARS, title:'МАРС', satsName:'СПУТНИКИ МАРСА', sats:()=>MARS_ALL, sites:()=>MARS_R, near:nearMars, y0:1960, histR:5.6,
+  histTitle:'ИСТОРИЯ ОСВОЕНИЯ МАРСА', histNote:'посадки и спутники Марса появляются в свой год · вспышка — новая посадка',
+  rate:y=>y<1977?1.6:(y<1996?3.6:1.3),
+  eras:[[1960,1976,'ПЕРВЫЕ ПОПЫТКИ','#7a5cff'],[1976,1996,'ВИКИНГИ И ЗАТИШЬЕ','#3d8bff'],[1996,2012,'ПЕРВЫЕ МАРСОХОДЫ','#3dd6c8'],[2012,2200,'БОЛЬШИЕ МАРСОХОДЫ','#ff8a3d']],
+  events:[[1960.78,'Октябрь 1960 — первые попытки СССР: две станции к Марсу не вышли даже на орбиту Земли'],
+  [1965.54,'14 июля 1965 — <b>Mariner 4</b>: первый пролёт и первые снимки — Марс в кратерах, как Луна'],
+  [1971.87,'14 ноября 1971 — <b>Mariner 9</b>: первый искусственный спутник другой планеты'],
+  [1971.91,'Ноябрь — декабрь 1971 — <b>«Марс-2»</b> разбивается, <b>«Марс-3»</b> совершает первую мягкую посадку'],
+  [1974.12,'1974 — <b>«Марс-5»</b> на орбите, <b>«Марс-6»</b> передаёт данные во время спуска'],
+  [1976.55,'20 июля 1976 — <b>«Викинг-1»</b>: первая полностью успешная посадка и цветные панорамы'],
+  [1989.08,'1989 — <b>«Фобос-2»</b> снимает спутник Марса Фобос вблизи и замолкает'],
+  [1993.64,'1993 — <b>Mars Observer</b> пропадает за три дня до выхода на орбиту'],
+  [1997.51,'4 июля 1997 — <b>Mars Pathfinder</b> и первый марсоход <b>Sojourner</b>'],
+  [1999.73,'1999 — <b>Mars Climate Orbiter</b> сгорает из-за путаницы фунтов и ньютонов, <b>Mars Polar Lander</b> пропадает'],
+  [2003.98,'Январь 2004 — марсоходы <b>Spirit</b> и <b>Opportunity</b>; <b>Beagle 2</b> пропадает в Рождество'],
+  [2008.4,'2008 — <b>Phoenix</b> находит водяной лёд у северного полюса'],
+  [2012.6,'6 августа 2012 — <b>Curiosity</b> опускается на тросах «небесного крана»'],
+  [2014.73,'Сентябрь 2014 — <b>MAVEN</b> и индийский <b>«Мангальян»</b>: Индия у Марса с первой попытки'],
+  [2016.8,'2016 — <b>TGO</b> выходит на орбиту, <b>Schiaparelli</b> разбивается'],
+  [2018.45,'2018 — <b>InSight</b> слушает марсотрясения; <b>Opportunity</b> замолкает в пылевой буре'],
+  [2021.12,'Февраль 2021 — <b>Hope</b> (ОАЭ), <b>«Тяньвэнь-1»</b> и <b>Perseverance</b>; в апреле взлетает вертолёт <b>Ingenuity</b>'],
+  [2021.37,'Май 2021 — <b>«Чжужун»</b>: Китай — третья страна, мягко посадившая аппарат на Марс'],
+  [2025.93,'6 декабря 2025 — <b>MAVEN</b> замолкает, пройдя за Марсом; в июне 2026 года NASA объявляет миссию завершённой'],
+  [2026.3,'Сегодня у Марса работают аппараты США, Европы, Китая и ОАЭ, по грунту ездят Curiosity и Perseverance']]});
+// история «у тела» и полёт к Марсу не идут одновременно
+HUBS.forEach(h=>{ const o=h.histOpen; h.histOpen=function(){ if(mfl) stopM(true); o(); }; });
+
+/* ════ 5. ПЕРЕЛЁТ К МАРСУ ПО РЕАЛЬНЫМ ДАТАМ ══════════════════════════
+   Выбор места посадки включает реальное время миссии, как у Луны: старт с космодрома, опорная орбита,
+   уход от Земли, дуга вокруг Солнца к той точке, где Марс окажется в день прибытия (пунктирный круг),
+   подлёт, витки на орбите Марса (у «Викингов» и «Чжужуна») и спуск в атмосфере точно в место посадки.
+   Земля и Марс идут по своим орбитам вместе со временем. Расстояния у планет на карте сжаты. */
+const helioAt=(rec,t,o)=>{ const e=B.planetEl(rec.kep,t), p=B.elToPos(e.a,e.e,e.i,e.O,e.w,e.M); return (o||new V3()).set(p.x,p.z,-p.y).multiplyScalar(B.DIST); };
+const marsSpin=t=>2*Math.PI*((t-J2000)/DAY_MS)/MARS.rotD;
+const siteRel=(r,t,o)=>(o||new V3()).copy(r.node.position).applyAxisAngle(Y_AX,marsSpin(t)).applyQuaternion(MARS.tiltGrp.quaternion);
+const mR=MARS.visR, D_ESC=MOON.rOrb*1.25, D_APP=mR*9;
+const PH_TXT={
+  asc:S=>'Старт: '+S._pad+' — ракета выводит аппарат на опорную орбиту. Земля вращается — космодром уплывает из-под траектории.',
+  leo:()=>'Опорная орбита: разгонный блок ждёт точки, откуда разгон уведёт аппарат к Марсу.',
+  esc:()=>'Уход от Земли: разгонный блок добавляет около 3–4 км/с, и аппарат навсегда покидает Землю. Расстояния у Земли на карте сжаты.',
+  cruise:(S,f)=>'Перелёт '+Math.round((f.Tarr-f.T0)/DAY_MS)+' сут по дуге вокруг Солнца: аппарат летит не к Марсу, а туда, где Марс окажется в день прибытия (пунктирный круг). Марс сам догоняет точку встречи.',
+  app:(S,f)=>f.orbit?'Подлёт: гравитация Марса разгоняет аппарат; торможение двигателем — выход на орбиту.':'Подлёт: аппарат идёт прямо в атмосферу, без выхода на орбиту Марса.',
+  orb:(S,f)=>'Орбита Марса: '+Math.round((f.Tent-f.TO)/DAY_MS)+' сут'+(f.revV<f.revR?' (витков показано меньше)':'')+' — выбор безопасного места и ожидание, пока оно окажется под трассой.',
+  edl:S=>S.status==='FAIL'?'Спуск закончился аварией: '+(S.desc||'').split('.')[0]+'.':
+    '«Семь минут ужаса»: теплозащита, парашют и '+(S.D.m==='bags'?'надувные подушки — аппарат отскакивает от грунта':(S.D.m==='big'?'«небесный кран» на тросах':'тормозные двигатели'))+'. От 20 000 км/ч почти до нуля.',
+  hold:S=>S.status==='FAIL'?'Связь потеряна — на карте отмечено место.':'На Марсе. '+(S.desc||'').split('.')[0]+'.'
+};
+const PH_COL={asc:'#ff6a3d', leo:'#ffb84d', esc:'#ffb84d', cruise:'#ffd27a', app:'#ff9a5a', orb:'#7fd8ff', edl:'#ffd27a', hold:'#9bff9b'};
+const mfE=new THREE.Group(); EARTH.node.add(mfE);                     // старт и опорная орбита — в системе Земли
+const mfS=new THREE.Group(); B.scene.add(mfS);                        // уход, перелёт и подлёт — вокруг Солнца
+const mfM=new THREE.Group(); MARS.node.add(mfM);                      // орбита и спуск — в системе Марса (без вращения)
+[mfE,mfS,mfM].forEach(g=>g.visible=false);
+const mCraft=B.glowSprite(B.GLOW.amber,1,1); mCraft.visible=false; B.scene.add(mCraft);
+const mMid={node:new THREE.Group(), visR:1, minR:2, kindType:'flmid', name:'перелёт'}; B.scene.add(mMid.node);
+const mGhostTxt=mk('div','flGhost','Марс в день прибытия'); mGhostTxt.style.display='none'; B.labelsRoot.appendChild(mGhostTxt);
+const _c=new V3(), _q=new V3(), _w=new V3(), _h=new V3();
+function lineOf(pts,col,op,loop,dash,ds){
+  const g=new THREE.BufferGeometry().setFromPoints(pts);
+  const m=dash?new THREE.LineDashedMaterial({color:col,transparent:true,opacity:op,dashSize:ds,gapSize:ds*0.7}):new THREE.LineBasicMaterial({color:col,transparent:true,opacity:op});
+  const l=new (loop?THREE.LineLoop:THREE.Line)(g,m); l.frustumCulled=false; if(dash) l.computeLineDistances(); return l;
+}
+function clearGrp(g){ g.children.slice().forEach(c=>{ g.remove(c); if(c.geometry) c.geometry.dispose(); if(c.material) c.material.dispose(); }); }
+const mflOk=S=>!!S&&S.kindType==='site'&&S.parentRec===MARS&&!!(S.D&&S.D.L&&S.D.E);
+window.__mflOn=()=>!!mfl;
+hooks.vis.push(function(){ if(mfl&&mfl.cam==='board') B.recs.forEach(r=>{ if(r.orbit) r.orbit.visible=false; }); });
+function buildM(S){
+  const D=S.D, T0=Date.parse(D.L), TE=Date.parse(D.E), orbit=!!D.O&&Date.parse(D.O)<TE-2*DAY_MS, TO=orbit?Date.parse(D.O):0;
+  const PLEO=88.5*60000, Tin=T0+12*60000, Tent=orbit?TE-3*3600000:TE-7*60000, Tarr=orbit?TO:Tent, Tapp=Tarr-1.5*DAY_MS;
+  const pad=(V8.MPAD&&V8.MPAD[D.pad])||[45.92,63.34,'Байконур']; S._pad=pad[2];
+  // дуга вокруг Солнца: от Земли в момент ухода к Марсу в момент прибытия, только по ходу планет
+  const pE0=helioAt(EARTH,T0+2*DAY_MS), pM=helioAt(MARS,Tapp), ang=p=>Math.atan2(-p.z,p.x);
+  const rE=Math.hypot(pE0.x,pE0.z), rM=Math.hypot(pM.x,pM.z), aE=ang(pE0); let dA=ang(pM)-aE; while(dA<0.3) dA+=2*Math.PI;
+  const base=(s,o)=>{ const a=aE+dA*s, r=rE+(rM-rE)*(1-Math.cos(Math.PI*s))/2; return (o||new V3()).set(Math.cos(a)*r,pE0.y+(pM.y-pE0.y)*s,-Math.sin(a)*r); };
+  const dir0=base(0.003).sub(base(0)).normalize(), dir1=base(1).sub(base(0.997)).normalize();
+  // старт, опорная орбита (в плоскости, где скорость в точке ухода смотрит вдоль дуги), уход от Земли
+  const rad=V15.padRel(pad[0],pad[1],T0).normalize();
+  const t0v=dir0.clone().addScaledVector(rad,-dir0.dot(rad)); if(t0v.lengthSq()<1e-6) t0v.set(0,1,0); t0v.normalize();
+  const nE=new V3().crossVectors(rad,t0v).normalize();
+  const R0=eR*1.03, A0=0.35, cdir=(a,o)=>(o||new V3()).copy(rad).multiplyScalar(Math.cos(a)).addScaledVector(t0v,Math.sin(a));
+  let aD=Math.atan2(-dir0.dot(rad),dir0.dot(t0v)); while(aD<A0+0.4) aD+=2*Math.PI;
+  const Tdep=Tin+PLEO*(aD-A0)/(2*Math.PI), Tesc=Tdep+2*DAY_MS;
+  const P1=cdir(aD).multiplyScalar(R0), vD=rad.clone().multiplyScalar(-Math.sin(aD)).addScaledVector(t0v,Math.cos(aD)).normalize(), E1=dir0.clone().multiplyScalar(D_ESC);
+  const e1=P1.clone().addScaledVector(vD,D_ESC*0.3), e2=E1.clone().addScaledVector(dir0,-D_ESC*0.35);
+  const A=helioAt(EARTH,Tesc).add(E1), Bp=pM.clone().addScaledVector(dir1,-D_APP), A0d=A.clone().sub(base(0)), B0d=Bp.clone().sub(base(1));
+  const arc=(s,o)=>{ const sg=s*s*(3-2*s); return base(s,o).addScaledVector(A0d,1-sg).addScaledVector(B0d,sg); };
+  // у Марса: плоскость орбиты проходит над местом посадки в момент спуска
+  const u=siteRel(S,TE).normalize(); let v=dir1.clone().addScaledVector(u,-dir1.dot(u)); if(v.lengthSq()<1e-6) v.set(0,1,0).addScaledVector(u,-u.y); v.normalize();
+  const nO=new V3().crossVectors(u,v).normalize(), oR=mR*1.6, DD=0.5;
+  const revR=orbit?(Tent-TO)/(1.03*DAY_MS):0, revV=Math.min(revR,12);
+  const phi=t=>-DD-2*Math.PI*revV*(Tent-t)/Math.max(1,Tent-TO);
+  const orb=(a,o)=>(o||new V3()).copy(u).multiplyScalar(Math.cos(a)*oR).addScaledVector(v,Math.sin(a)*oR);
+  const Q=orbit?orb(phi(TO)):u.clone().multiplyScalar(mR*1.16).addScaledVector(v,-mR*0.55);
+  const Brel=Bp.clone().sub(pM), a1=Brel.clone().addScaledVector(dir1,D_APP*0.45), a2=Q.clone().addScaledVector(Q.clone().normalize(),mR*1.4);
+  const D0=orbit?orb(-DD):Q.clone(), sTE=siteRel(S,TE), d1=D0.clone().addScaledVector(orbit?u.clone().multiplyScalar(Math.sin(DD)).addScaledVector(v,Math.cos(DD)):D0.clone().normalize().negate(),oR*0.35);
+  const d2=sTE.clone().addScaledVector(u,mR*0.12), Tend=TE+3*3600000;
+  const ph=[];
+  ph.push({k:'asc', name:'СТАРТ', t0:T0, t1:Tin, w:.06, pos:(t,o)=>{ const s=clamp((t-T0)/(Tin-T0),0,1); return helioAt(EARTH,t,o).add(cdir(s*A0,_q).multiplyScalar(eR*1.002+(R0-eR*1.002)*Math.sin(s*Math.PI/2))); }});
+  ph.push({k:'leo', name:'ОПОРНАЯ ОРБИТА', t0:Tin, t1:Tdep, w:.05, pos:(t,o)=>helioAt(EARTH,t,o).add(cdir(A0+(aD-A0)*clamp((t-Tin)/(Tdep-Tin),0,1),_q).multiplyScalar(R0))});
+  ph.push({k:'esc', name:'УХОД ОТ ЗЕМЛИ', t0:Tdep, t1:Tesc, w:.10, pos:(t,o)=>{ const x=clamp((t-Tdep)/(Tesc-Tdep),0,1); return helioAt(EARTH,t,o).add(bz(P1,e1,e2,E1,x+0.5*x*(1-x),_q)); }});
+  ph.push({k:'cruise', name:'ПЕРЕЛЁТ К МАРСУ', t0:Tesc, t1:Tapp, w:orbit?.34:.40, pos:(t,o)=>{ const x=clamp((t-Tesc)/(Tapp-Tesc),0,1); return arc(x+0.12*Math.sin(Math.PI*x),o); }});
+  ph.push({k:'app', name:orbit?'ПОДЛЁТ И ТОРМОЖЕНИЕ':'ПОДЛЁТ', t0:Tapp, t1:Tarr, w:.09, pos:(t,o)=>{ const x=clamp((t-Tapp)/(Tarr-Tapp),0,1); return helioAt(MARS,t,o).add(bz(Brel,a1,a2,Q,x-0.25*x*(1-x),_q)); }});
+  if(orbit) ph.push({k:'orb', name:'ОРБИТА МАРСА', t0:TO, t1:Tent, w:.14, pos:(t,o)=>helioAt(MARS,t,o).add(orb(phi(t),_q))});
+  ph.push({k:'edl', name:S.status==='FAIL'?'СПУСК И АВАРИЯ':'ВХОД И ПОСАДКА', t0:Tent, t1:TE, w:.10, pos:(t,o)=>helioAt(MARS,t,o).add(bz(D0,d1,d2,sTE,clamp((t-Tent)/(TE-Tent),0,1),_q))});
+  ph.push({k:'hold', name:S.status==='FAIL'?'МЕСТО ПАДЕНИЯ':'НА МАРСЕ', t0:TE, t1:Tend, w:.06, pos:(t,o)=>helioAt(MARS,t,o).add(siteRel(S,t,_q))});
+  const sw=ph.reduce((a,p)=>a+p.w,0); let uc=0; ph.forEach(p=>{ p.u0=uc; uc+=p.w/sw; p.u1=uc; });
+  // линии
+  [mfE,mfS,mfM].forEach(clearGrp);
+  const smp=(p,n,rel)=>{ const a=[]; for(let i=0;i<=n;i++){ const t=p.t0+(p.t1-p.t0)*i/n, w=p.pos(t,new V3()); a.push(rel?w.sub(helioAt(rel,t)):w); } return a; };
+  mfE.add(lineOf(smp(ph[0],24,EARTH),0xff6a3d,0.95)); mfE.add(lineOf(smp(ph[1],Math.max(30,Math.round((aD-A0)*30)),EARTH),0xffb84d,0.8));
+  mfS.add(lineOf(smp(ph[2],60),0xffb84d,0.85)); mfS.add(lineOf(smp(ph[3],240),0xffd27a,0.9)); mfS.add(lineOf(smp(ph[4],60),0xff9a5a,0.9));
+  const gh=[], pA=helioAt(MARS,Tarr); for(let i=0;i<64;i++){ const a=i/64*Math.PI*2; gh.push(new V3(pA.x+Math.cos(a)*mR*1.5,pA.y,pA.z+Math.sin(a)*mR*1.5)); }
+  const ghost=lineOf(gh,0xbfe9ff,0.6,true,true,mR*0.35); mfS.add(ghost);
+  if(orbit){ const lp=[]; for(let i=0;i<128;i++) lp.push(orb(i/128*Math.PI*2)); mfM.add(lineOf(lp,0x7fd8ff,0.7,true)); }
+  const dp=[]; for(let i=0;i<=30;i++) dp.push(bz(D0,d1,d2,sTE,i/30,new V3())); mfM.add(lineOf(dp,0xffd27a,0.95));
+  [mfE,mfS,mfM].forEach(g=>g.visible=true);
+  const ext=new THREE.Box3(); for(let i=0;i<=24;i++) ext.expandByPoint(arc(i/24,_h)); ext.expandByPoint(A); ext.expandByPoint(pA);
+  ext.getCenter(mMid.node.position); const span=ext.getSize(_h).length();
+  return {S:S, ph:ph, T0:T0, TE:TE, TO:TO, Tent:Tent, Tarr:Tarr, Tend:Tend, orbit:orbit, revR:revR, revV:revV, ghost:ghost, pA:pA, span:span,
+    rad:rad, t0v:t0v, nE:nE, dir0:dir0, dir1:dir1, u:u, nO:nO, cam:'auto', pk:null, playing:true, k:1, cw:new V3()};
+}
+const phAtT=(f,t)=>f.ph.find(p=>t<p.t1)||f.ph[f.ph.length-1];
+const uOfT=(f,t)=>{ const p=phAtT(f,t); return p.u0+(p.u1-p.u0)*clamp((t-p.t0)/(p.t1-p.t0),0,1); };
+const tOfU=(f,u)=>{ const p=f.ph.find(q=>u<q.u1)||f.ph[f.ph.length-1]; return p.t0+(p.t1-p.t0)*clamp((u-p.u0)/(p.u1-p.u0),0,1); };
+const PLAY_S=50;                                                        // длительность показа при ×1, секунд
+function camFor(f,k){
+  if(k==='asc'||k==='leo') return {rec:EARTH, r:eR*3.6, d:f.rad.clone().multiplyScalar(0.72).addScaledVector(f.t0v,-0.4).addScaledVector(f.nE,0.55).normalize()};
+  if(k==='esc') return {rec:EARTH, r:D_ESC*2.3, d:new V3(0,0.85,0).addScaledVector(f.dir0,-0.5).normalize()};
+  if(k==='cruise') return {rec:mMid, r:Math.max(140,f.span*1.15), d:new V3(0.12,1,0.32).normalize()};
+  if(k==='app') return {rec:MARS, r:D_APP*1.7, d:new V3(0,0.75,0).addScaledVector(f.dir1,-0.6).normalize()};
+  if(k==='orb') return {rec:MARS, r:mR*6.5, d:f.nO.clone().multiplyScalar(0.55).add(new V3(0,0.6,0)).addScaledVector(f.u,0.3).normalize()};
+  return {rec:MARS, r:mR*3.4, d:f.u.clone().multiplyScalar(0.8).add(new V3(0,0.35,0)).normalize()};
+}
+function applyCam(f,k){
+  const c=camFor(f,k); f.camWant=c; if(f.cam==='free') return;
+  B.setFollow(c.rec); B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:c.rec, toR:c.r, dur:1.6});
+}
+const mBar=mk('div','tlBar'); mBar.id='mflBar';
+mBar.innerHTML='<div class="tlTop"><span>▲ <b class="mN">МИССИЯ</b> · ПОЛЁТ К МАРСУ</span><span class="tlNote">реальные даты: Земля и Марс движутся по своим орбитам</span>'+
+  '<div class="tlSeg mSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div>'+
+  '<div class="tlSeg mCam"><button data-c="auto" class="on" title="Камера сама следит за полётом">◎ АВТО</button><button data-c="board" title="Вид с борта: на Землю при старте, на Марс в пути и при посадке">◉ С БОРТА</button><button data-c="free" title="Свободная камера">✥ СВОБОДНО</button></div>'+
+  '<button class="tlX" title="Закрыть и вернуться в реальное время [Esc]">✕</button></div>'+
+  '<div class="tlMain"><button class="tlPlay">❚❚</button><div class="flWhen"><b class="mDate">—</b><small class="mMet">T+ 0</small></div>'+
+  '<div class="flPh"><small>ФАЗА</small><b class="mPh">—</b></div></div>'+
+  '<div class="flTrack"><div class="flSegs"></div><input type="range" min="0" max="1000" step="1" value="0"></div>'+
+  '<div class="tlEv"></div>';
+vp.appendChild(mBar); shield(mBar);
+const mq=s=>mBar.querySelector(s);
+let mPrev=null, mUi=0;
+function startM(S){
+  if(mfl&&mfl.S===S) return;
+  HUBS.forEach(h=>h.histClose()); if(V11.hist&&V11.hist()) V11.histClose();
+  if(V15.fl&&V15.fl()) V15.stopFlight(true);
+  if(!mPrev) mPrev={sim:B.getSim(), live:B.isLive(), speed:B.getSpeed()};
+  mfl=buildM(S);
+  mq('.mN').textContent=S.name.toUpperCase();
+  mq('.flSegs').innerHTML=mfl.ph.map(p=>'<div data-k="'+p.k+'" style="flex:'+(p.u1-p.u0).toFixed(4)+';background:'+PH_COL[p.k]+'">'+p.name+'</div>').join('');
+  [...mq('.mCam').children].forEach(x=>x.classList.toggle('on',x.dataset.c===mfl.cam));
+  B.setSim(mfl.T0); mfl.playing=true;
+  mBar.classList.add('on'); body.classList.add('flOn'); mUi=0;
+}
+function stopM(restore){
+  if(!mfl) return;
+  const wasBoard=mfl.cam==='board'; mfl=null; mBar.classList.remove('on'); if(!(V15.fl&&V15.fl())) body.classList.remove('flOn'); if(wasBoard) B.applyVisibility();
+  [mfE,mfS,mfM].forEach(g=>g.visible=false); mCraft.visible=false; mGhostTxt.style.display='none';
+  const p=mPrev; mPrev=null;
+  B.setSpeed(p&&p.speed?p.speed:1);
+  if(restore!==false&&p) B.setSim(p.live?Date.now():p.sim);
+  B.timeVisCheck&&B.timeVisCheck();
+}
+mq('.tlX').addEventListener('click',()=>{ const s=mfl&&mfl.S; stopM(true); if(s&&B.getSelected()===s) B.focusOn(s); });
+mq('.tlPlay').addEventListener('click',()=>{ if(!mfl) return; if(!mfl.playing&&B.getSim()>=mfl.Tend-60000) B.setSim(mfl.T0); mfl.playing=!mfl.playing; });
+mq('.flTrack input').addEventListener('input',function(){ if(!mfl) return; mfl.playing=false; B.setSim(tOfU(mfl,this.value/1000)); });
+mq('.mSpd').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||!mfl) return; mfl.k=+b.dataset.k; [...mq('.mSpd').children].forEach(x=>x.classList.toggle('on',x===b)); });
+mq('.mCam').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||!mfl) return; mfl.cam=b.dataset.c;
+  [...mq('.mCam').children].forEach(x=>x.classList.toggle('on',x===b)); if(mfl.cam!=='free'&&mfl.pk) applyCam(mfl,mfl.pk); B.applyVisibility(); });
+['pointerdown','wheel'].forEach(ev=>B.renderer.domElement.addEventListener(ev,()=>{ if(mfl&&mfl.cam==='auto'){ mfl.cam='free'; [...mq('.mCam').children].forEach(x=>x.classList.toggle('on',x.dataset.c==='free')); } },{passive:true}));
+hooks.select.push(function(r){
+  if(r&&mflOk(r)&&!isCine()) startM(r);
+  else if(mfl&&r!==mfl.S) stopM(true);
+});
+const DEF_ANG=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
+hooks.post.push(function(dt){
+  if(!mfl) return;
+  if(B.getSelected()!==mfl.S||(V11.hist&&V11.hist())||HUBS.some(h=>h.hist)){ stopM(true); return; }
+  const t=B.getSim();
+  if(t<mfl.T0-6*3600000||t>mfl.Tend+2*DAY_MS){ stopM(false); return; }   // время переставили кнопкой «Сейчас» или командой
+  const u=uOfT(mfl,t), p=phAtT(mfl,t);
+  if(mfl.playing&&u>=0.9999) mfl.playing=false;
+  B.setSpeed(mfl.playing?(p.t1-p.t0)/Math.max(1e-6,p.u1-p.u0)/(PLAY_S*1000)*mfl.k:0);
+  p.pos(t,mfl.cw); mCraft.position.copy(mfl.cw); mCraft.visible=true;
+  mCraft.scale.setScalar(clamp(camera.position.distanceTo(mfl.cw)*0.03,0.02,40));
+  if(p.k!==mfl.pk){ mfl.pk=p.k; if(mfl.cam!=='free') applyCam(mfl,p.k); mfE.visible=p.k==='asc'||p.k==='leo'||p.k==='esc'; }
+  if(mfl.cam==='auto'&&mfl.camWant){ const d=mfl.camWant.d, th=Math.atan2(d.z,d.x), ph=Math.acos(clamp(d.y,-1,1)), k=Math.min(1,dt*1.6);
+    B.sph.theta+=DEF_ANG(B.sph.theta,th)*k; B.sph.phi+=(ph-B.sph.phi)*k; }
+  // подпись «Марс в день прибытия» — пока аппарат в пути
+  const showG=t<mfl.Tarr; mfl.ghost.visible=showG;
+  if(showG){ _w.copy(mfl.pA).project(camera);
+    if(_w.z<1&&Math.abs(_w.x)<1&&Math.abs(_w.y)<1){ mGhostTxt.style.display='block'; mGhostTxt.style.left=((_w.x+1)/2*vp.clientWidth)+'px'; mGhostTxt.style.top=((1-_w.y)/2*vp.clientHeight)+'px'; }
+    else mGhostTxt.style.display='none'; } else mGhostTxt.style.display='none';
+  mUi-=dt; if(mUi>0) return; mUi=0.1;
+  mq('.mDate').textContent=fmtUTC(t); mq('.mMet').textContent=fmtMET(t-mfl.T0)+' · посадка '+fmtD(new Date(mfl.TE).toISOString());
+  mq('.mPh').textContent=p.name; mq('.tlPlay').textContent=mfl.playing?'❚❚':'▶';
+  mq('.flTrack input').value=String(Math.round(u*1000));
+  [...mq('.flSegs').children].forEach(d=>d.classList.toggle('cur',d.dataset.k===p.k));
+  const tx=PH_TXT[p.k](mfl.S,mfl), ev=mq('.tlEv'); if(ev.textContent!==tx) ev.textContent=tx;
+});
+// вид с борта: на Землю при старте, на Марс в пути, у Марса — на место посадки
+hooks.cam.push(function(){
+  if(!mfl||mfl.cam!=='board'||!mfl.pk) return;
+  const k=mfl.pk, c=mfl.cw, atE=k==='asc'||k==='leo'||k==='esc';
+  const tgt=atE?B.worldPos(EARTH).clone():(k==='edl'||k==='hold'?B.worldPos(mfl.S).clone():B.worldPos(MARS).clone()), d=tgt.clone().sub(c).normalize();
+  const back=atE?(k==='esc'?D_ESC*0.08:eR*0.3):(k==='cruise'?mR*1.2:(k==='hold'?mR*0.25:mR*0.5));
+  camera.position.copy(c).addScaledVector(d,-back).add(new V3(0,back*0.3,0));
+  camera.up.set(0,1,0); camera.lookAt(tgt);
+});
+// досье места посадки на Марсе: откуда стартовали и сколько летели
+hooks.live.push(function(r,rows){
+  if(r.kindType!=='site'||r.parentRec!==MARS||!r.D||!r.D.L) return;
+  const D=r.D, pad=V8.MPAD&&V8.MPAD[D.pad], fly=Math.round(((D.O?Date.parse(D.O):Date.parse(D.E))-Date.parse(D.L))/DAY_MS);
+  if(pad) rows.push(['Космодром старта',()=>pad[2]]);
+  rows.push(['Старт',()=>fmtD(D.L)]);
+  rows.push(['Перелёт',()=>fly+' сут'+(D.O?' · орбита Марса с '+fmtD(D.O):' · сразу в атмосферу')]);
+  rows.push(['Полёт по датам',()=>mfl&&mfl.S===r?'идёт — шкала внизу':'щелчок по месту посадки']);
+});
+
+/* ════ 6. СПИСОК «ОБЪЕКТЫ»: НОВЫЕ РАЗДЕЛЫ ═══════════════════════════
+   Завершённые миссии видны на карте только в годы работы: щелчок по такой строке переводит время карты
+   в эти годы (⟲ СЕЙЧАС вернёт назад). */
+const OL=B.objList, LSR=V15.LSR||[];
+const secOf=key=>[...OL.querySelectorAll('.secHdr')].find(h=>h.dataset.key===key);
+const yrOf=r=>{ const a=r.launchMs?new Date(r.launchMs).getUTCFullYear():'', b=r.endMs?new Date(r.endMs).getUTCFullYear():''; return b&&b!==a?a+'–'+b:String(a); };
+function toItsTime(r){
+  if(!r.hiddenByTime||r.launchMs==null) return;
+  const t=r.launchMs+Math.min(30*DAY_MS,r.endMs?(r.endMs-r.launchMs)/2:30*DAY_MS);
+  B.setSim(t); B.timeVisCheck(); toast('ВРЕМЯ КАРТЫ: '+new Date(t).getUTCFullYear()+' — АППАРАТ РАБОТАЛ ТОГДА · ⟲ СЕЙЧАС ВЕРНЁТ НАЗАД','ok',3200);
+}
+function rowFor(r,extra){ const d=B.mkRow(r,true,extra); d.addEventListener('click',()=>toItsTime(r),true); return d; }
+function setCnt(h){ const b=h.nextElementSibling; h.querySelector('.cnt').textContent=(b.style.display==='none'?'▸ ':'▾ ')+b.querySelectorAll('.row').length; }
+function addSection(title,list,extra,afterKey){
+  if(!list.length) return null;
+  const h=B.mkHdr(title); h.dataset.key=title; h.textContent=''; h.appendChild(mk('span',null,title)); h.appendChild(mk('span','cnt'));
+  const b=mk('div','secBody'); list.forEach(r=>b.appendChild(rowFor(r,extra(r))));
+  const prev=afterKey&&secOf(afterKey);
+  if(prev&&prev.nextElementSibling) prev.nextElementSibling.after(h); else OL.appendChild(h);
+  h.after(b); b.style.display='none'; setCnt(h);
+  h.addEventListener('click',()=>{ if($('searchBox').value.trim()) return; b.style.display=b.style.display==='none'?'block':'none'; setCnt(h); });
+  return h;
+}
+const byYear=(a,b)=>(a.launchMs||0)-(b.launchMs||0);
+addSection('ЛУНА · СПУТНИКИ',LSR.slice().sort(byYear),yrOf,'ЛУНА · МЕСТА ПОСАДОК');
+addSection('МАРС · МЕСТА ПОСАДОК',MARS_R,r=>r.year,'ЛУНА · СПУТНИКИ');
+addSection('ВЕНЕРА, ТИТАН, МЕРКУРИЙ · ПОСАДКИ',VENUS_R.concat(FAR_R),r=>r.year,'МАРС · МЕСТА ПОСАДОК');
+addSection('АППАРАТЫ ПРОШЛОГО',PAST_R.slice().sort(byYear),yrOf,'ЗОНДЫ ДАЛЬНЕГО КОСМОСА');
+(function(){ const eb=$('lr_earth')&&$('lr_earth').nextElementSibling; if(eb&&!eb.classList.contains('row')) LAG_R.concat([qq1]).forEach(r=>eb.appendChild(rowFor(r,'')));
+  const tw=$('lr_earth')&&$('lr_earth').querySelector('.twist'); if(tw) tw.style.visibility='';
+  const ph=secOf('ЗОНДЫ ДАЛЬНЕГО КОСМОСА'); if(ph){ HELIO_R.forEach(r=>ph.nextElementSibling.appendChild(rowFor(r,''))); setCnt(ph); }
+  const nS=B.recs.filter(r=>r.kindType==='site'&&r.status!=='PLAN').length;
+  const lf=$('listFoot'); if(lf) lf.innerHTML='ОБЪЕКТОВ В КАТАЛОГЕ: '+B.recs.length+' · МЕСТ ПОСАДОК И ПАДЕНИЙ: '+nS+
+    '<br>ЛУНА '+V15.SITES.filter(r=>r.status!=='PLAN').length+' · МАРС '+MARS_R.length+' · ВЕНЕРА '+VENUS_R.length+' · ТИТАН И МЕРКУРИЙ '+FAR_R.length+
+    '<br>ИСЗ ЗЕМЛИ: КАТАЛОГ CELESTRAK · ДАННЫЕ: JPL/NASA/ESA';
+})();
+// у Венеры, Титана и Меркурия камера разворачивается к месту посадки (сверху), а не смотрит сквозь планету
+let aim=null;
+hooks.select.push(function(r){ aim=null;
+  if(!r||r.kindType!=='site'||PINS.indexOf(r)<0||r.parentRec===MARS) return;
+  aim={r:r, t:1.6};
+});
+hooks.post.push(function(dt){
+  if(!aim) return; if(B.getSelected()!==aim.r||(aim.t-=dt)<=0){ aim=null; return; }
+  const n=B.worldPos(aim.r).clone().sub(B.worldPos(aim.r.parentRec)).normalize(), th=Math.atan2(n.z,n.x), ph=Math.acos(clamp(n.y,-1,1)), k=Math.min(1,dt*3);
+  B.sph.theta+=Math.atan2(Math.sin(th-B.sph.theta),Math.cos(th-B.sph.theta))*k; B.sph.phi+=(clamp(ph,0.12,Math.PI-0.12)-B.sph.phi)*k;
+});
+
+/* ════ 7. ЭПОХИ НА ШКАЛЕ «ИСТОРИИ ОРБИТЫ» ЗЕМЛИ ═════════════════════
+   Как фазы полёта к Луне: цветная полоса этапов под шкалой, текущий — ярче, название — под счётчиком. */
+const E_ERAS=[[1957,1961,'ПЕРВЫЕ СПУТНИКИ','#7a5cff'],[1961,1976,'КОСМИЧЕСКАЯ ГОНКА','#3d8bff'],[1976,1991,'ОРБИТАЛЬНЫЕ СТАНЦИИ','#3dd6c8'],
+  [1991,2010,'НАВИГАЦИЯ И МКС','#9dff5a'],[2010,2019,'МАЛЫЕ СПУТНИКИ','#ffd24d'],[2019,2200,'МЕГАГРУППИРОВКИ','#ff8a3d']];
+(function(){ const hb=$('histBar'); if(!hb||!V15.eraTrack) return;
+  const tr=V15.eraTrack(E_ERAS,1957.5), sc=hb.querySelector('.hbScale'); hb.insertBefore(tr,sc||$('hbEv'));
+  const st=hb.querySelector('.hbStat'), lb=mk('small'); lb.id='hbEra'; if(st) st.appendChild(lb);
+  let ui=0; hooks.post.push(function(dt){ const h=V11.hist&&V11.hist(); if(!h) return; ui-=dt; if(ui>0) return; ui=0.15;
+    tr.set(h.y); const e=V15.eraOf(E_ERAS,h.y), end=msY(Date.now()); lb.textContent='эпоха: '+e[2].toLowerCase()+' · '+e[0]+'–'+(e[1]>end?'сейчас':e[1]); });
+})();
+
+/* ════ 8. ОБУЧЕНИЕ ПО ИНТЕРФЕЙСУ ═════════════════════════════════════
+   Подсветка кнопки и карточка «N / M · НАЗВАНИЕ»: очень коротко, «Назад», «Далее», ✕ и «Пропустить обучение».
+   Показывается один раз; повторить — кнопкой в справке или в окне приветствия. Чего нет на экране (телефон) — пропускается. */
+const OB_KEY='buran_tour_v1';
+const OB=[
+ {c:1, t:'BURAN GALAXY', x:'Живая карта Солнечной системы. Покажу главные кнопки — это меньше минуты. Листать — «Далее» или стрелками.'},
+ {s:['#cmdWrap'], t:'ПОИСК И КОМАНДЫ', x:'Наберите «Марс», «МКС», «Япония» или «ДАТА 1969-07-20» — камера перелетит сама. Клавиша /'},
+ {s:['#lpTabs2','#lpTabs'], t:'СПИСКИ', x:'Объекты, все спутники Земли и запуски с 1957 года; сверху — аномалии и катастрофы. L — спрятать панель.'},
+ {map:1, t:'КАРТА', x:'Мышь — вращать, колесо — приблизить, щелчок — досье, двойной щелчок — подлёт.'},
+ {s:['#modeSw'], t:'РЕЖИМЫ У ЗЕМЛИ', x:'«Всё вместе», страны, спутники или мусор. ⏳ — история орбиты с 1957 года, ◐ — раскраска точек. Клавиша G.',
+  prep:()=>{ if(B.getSelected()!==EARTH){ B.select(EARTH); B.focusOn(EARTH); } }, wait:()=>!!$('modeSw')&&$('modeSw').classList.contains('show'), waitMs:8000},
+ {s:['#rightPanel'], t:'ДОСЬЕ', x:'Описание, вкладка «▲ ЗАПУСК» и телеметрия в реальном времени. ✕ или Esc — закрыть.'},
+ {s:['#bLayers'], t:'СЛОИ', x:'Что показывать на карте: орбиты, подписи, зонды, пояса, небо.'},
+ {s:['#bSlower','#btnPause','#bFaster'], t:'ВРЕМЯ', x:'Медленнее, пауза, быстрее. Ниже ×1 время идёт назад.'},
+ {s:['#simSpeedLbl','#btnNow'], t:'LIVE И «СЕЙЧАС»', x:'Скорость модельного времени; ⟲ возвращает карту в реальный момент.'},
+ {s:['#bHome'], t:'ОБЗОР', x:'Вся Солнечная система одним кадром. Клавиша H.'},
+ {s:['#btnMissions'], t:'МИССИИ И ЗАПУСКИ', x:'Ближайшие старты со всего мира с обратным отсчётом. Клавиша R.'},
+ {s:['#toolRail'], t:'ИНСТРУМЕНТЫ', x:'Кинотур, машина времени, сближения астероидов, сравнение тел, ссылка, снимок, полный экран.'},
+ {s:['#wxHud'], t:'КОСМИЧЕСКАЯ ПОГОДА', x:'Солнечный ветер, магнитные бури, МКС и Луна — живые данные. Щелчок по строке — к объекту.'},
+ {s:['#radarWrap','#radar'], t:'РАДАР', x:'Вся система сверху в логарифмическом масштабе.'},
+ {s:['#musicPill'], t:'МУЗЫКА', x:'Что играет, пауза, следующий трек. M — выключить звук.'},
+ {s:['#bSettings'], t:'НАСТРОЙКИ', x:'Качество графики, стиль и яркость фона, размер интерфейса.'},
+ {s:['#btnHelp'], t:'СПРАВКА', x:'Все клавиши — и это обучение ещё раз.'},
+ {c:1, t:'ЛУНА И МАРС', x:'Подлетите к Луне или Марсу: внизу появятся спутники, миссии и история освоения, а щелчок по месту посадки покажет полёт по реальным датам.'}
+];
+let ob=null;
+const obBlock=mk('div'); obBlock.id='obBlock';
+const obHi=mk('div'); obHi.id='obHi';
+const obCard=mk('div'); obCard.id='obCard';
+obCard.innerHTML='<div class="obTop"><span class="obN"></span><b class="obT"></b><button class="obX" title="Закрыть обучение [Esc]">✕</button></div>'+
+  '<div class="obTx"></div><div class="obDots"></div>'+
+  '<div class="obBtns"><button class="obSkip">Пропустить обучение</button><span class="obGrow"></span><button class="obPrev">← Назад</button><button class="obNext">Далее →</button></div>';
+[obBlock,obHi,obCard].forEach(e=>document.body.appendChild(e));
+const oq=s=>obCard.querySelector(s);
+// затемнение — четыре панели вокруг «окна» с кнопкой (огромная тень box-shadow рисуется не везде)
+const dims=[0,1,2,3].map(()=>{ const d=mk('div','obDim'); obBlock.appendChild(d); return d; });
+function setDims(R){
+  const W=innerWidth, H=innerHeight, S=(d,l,t,w,h)=>{ d.style.left=l+'px'; d.style.top=t+'px'; d.style.width=Math.max(0,w)+'px'; d.style.height=Math.max(0,h)+'px'; };
+  if(!R){ S(dims[0],0,0,W,H); S(dims[1],0,H,W,0); S(dims[2],0,0,0,H); S(dims[3],W,0,0,H); return; }
+  S(dims[0],0,0,W,R.t); S(dims[1],0,R.b,W,H-R.b); S(dims[2],0,R.t,R.l,R.b-R.t); S(dims[3],R.r,R.t,W-R.r,R.b-R.t);
+}
+OB.forEach(()=>oq('.obDots').appendChild(mk('i')));
+function obRect(st){
+  if(st.c) return null;
+  const W=innerWidth, H=innerHeight;
+  if(st.map){ const r=vp.getBoundingClientRect(); return {l:r.left+r.width*0.3, t:r.top+r.height*0.3, r:r.left+r.width*0.7, b:r.top+r.height*0.66}; }
+  let R=null;
+  st.s.forEach(q=>{ const e=document.querySelector(q); if(!e) return; const b=e.getBoundingClientRect(); if(b.width<4||b.height<4) return;
+    const cs=getComputedStyle(e); if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<0.05) return;
+    if(b.right<0||b.left>W||b.bottom<0||b.top>H) return;
+    R=R?{l:Math.min(R.l,b.left),t:Math.min(R.t,b.top),r:Math.max(R.r,b.right),b:Math.max(R.b,b.bottom)}:{l:b.left,t:b.top,r:b.right,b:b.bottom}; });
+  return R;
+}
+function obPlace(st,R){
+  const W=innerWidth, H=innerHeight, cw=Math.min(320,W-24), pad=6; obCard.style.width=cw+'px';
+  if(R){ obHi.classList.remove('c'); obHi.style.left=(R.l-pad)+'px'; obHi.style.top=(R.t-pad)+'px'; obHi.style.width=(R.r-R.l+pad*2)+'px'; obHi.style.height=(R.b-R.t+pad*2)+'px';
+    setDims({l:R.l-pad, t:R.t-pad, r:R.r+pad, b:R.b+pad}); }
+  else { obHi.classList.add('c'); setDims(null); }
+  const ch=obCard.offsetHeight||150; let x=(W-cw)/2, y=(H-ch)/2;
+  if(R){ x=clamp((R.l+R.r)/2-cw/2,12,W-cw-12);
+    if(R.b+pad+12+ch<H-8) y=R.b+pad+12; else if(R.t-pad-12-ch>8) y=R.t-pad-12-ch;
+    else { y=clamp((R.t+R.b)/2-ch/2,8,H-ch-8); x=R.r+pad+12+cw<W-8?R.r+pad+12:(R.l-pad-12-cw>8?R.l-pad-12-cw:x); } }
+  obCard.style.left=Math.round(x)+'px'; obCard.style.top=Math.round(y)+'px';
+}
+function obShow(st,R){
+  const i=ob.i, n=OB.length;
+  oq('.obN').textContent=(i+1)+' / '+n; oq('.obT').textContent=st.t; oq('.obTx').textContent=st.x;
+  oq('.obPrev').disabled=i===0; oq('.obNext').textContent=i===n-1?'Готово ✓':'Далее →';
+  [...oq('.obDots').children].forEach((d,k)=>{ d.className=k===i?'on':(k<i?'done':''); });
+  ob.st=st; obPlace(st,R);
+}
+function obGo(i,dir){
+  if(!ob) return;
+  dir=dir||1; if(i<0){ i=0; dir=1; } if(i>=OB.length){ obEnd(true); return; }
+  const st=OB[i], tok=++ob.tok; ob.i=i;
+  if(st.prep) st.prep();
+  if(st.wait) obShow(st,null);                                          // пока камера летит — карточка уже с текстом этого шага
+  const t0=performance.now();
+  (function tryShow(){
+    if(!ob||ob.tok!==tok) return;
+    const R=obRect(st), ok=(!st.wait||st.wait())&&(st.c||R);
+    if(ok){ obShow(st,R); return; }
+    if(st.wait&&performance.now()-t0<(st.waitMs||3200)){ setTimeout(tryShow,120); return; }
+    obGo(i+dir,dir);                                                    // кнопки нет на экране — следующий шаг
+  })();
+}
+function obStart(){
+  if(ob) return;
+  ['welcomeOv','setOv','tmOverlay'].forEach(id=>{ const e=$(id); if(e) e.style.display='none'; });
+  const h=$('helpOverlay'); if(h) h.style.display='none';
+  ob={i:0, tok:0, st:null}; body.classList.add('obOn'); obGo(0,1);
+}
+function obEnd(done){
+  if(!ob) return; ob=null; body.classList.remove('obOn'); setLS(OB_KEY,'1');
+  toast(done?'ОБУЧЕНИЕ ПРОЙДЕНО · ПОВТОРИТЬ — В СПРАВКЕ [?]':'ОБУЧЕНИЕ МОЖНО ПРОЙТИ В ЛЮБОЙ МОМЕНТ: СПРАВКА [?]','ok',2600);
+}
+oq('.obX').addEventListener('click',()=>obEnd(false));
+oq('.obSkip').addEventListener('click',()=>obEnd(false));
+oq('.obPrev').addEventListener('click',()=>{ if(ob) obGo(ob.i-1,-1); });
+oq('.obNext').addEventListener('click',()=>{ if(ob) obGo(ob.i+1,1); });
+obBlock.addEventListener('click',()=>{ obCard.classList.remove('pulse'); void obCard.offsetWidth; obCard.classList.add('pulse'); });
+['wheel','pointerdown','mousedown','touchstart'].forEach(ev=>obBlock.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+let obT=0;
+hooks.post.push(function(dt){ if(!ob||!ob.st) return; obT-=dt; if(obT>0) return; obT=0.4; const R=obRect(ob.st); if(ob.st.c||R) obPlace(ob.st,R); });
+addEventListener('resize',()=>{ if(ob&&ob.st) obPlace(ob.st,obRect(ob.st)); });
+// кнопки запуска: в окне приветствия и в справке
+(function(){
+  const wb=document.querySelector('#welcomeOv .wBtns');
+  if(wb){ const b=mk('button',null,'? ОБУЧЕНИЕ ПО КНОПКАМ'); b.id='wGuide'; b.title='Короткий тур по всем основным кнопкам'; wb.insertBefore(b,wb.firstChild);
+    b.addEventListener('click',()=>{ $('welcomeOv').style.display='none'; obStart(); }); }
+  const hb=$('helpBox');
+  if(hb){ const b=mk('button','hGuide','▶ ПРОЙТИ ОБУЧЕНИЕ ПО ИНТЕРФЕЙСУ'); b.addEventListener('click',e=>{ e.stopPropagation(); obStart(); });
+    hb.insertBefore(b,hb.children[1]||null); }
+})();
+// первый запуск: обучение один раз, когда окно приветствия закрыто (по ссылке на объект — не мешаем)
+(function(){
+  if(getLS(OB_KEY)||location.hash.length>2) return;
+  let tries=0;
+  setTimeout(function chk(){
+    if(ob||getLS(OB_KEY)) return;
+    const open=id=>{ const e=$(id); return !!e&&getComputedStyle(e).display!=='none'; };
+    const busy=open('welcomeOv')||open('setOv')||open('tmOverlay')||open('missionsOverlay')||($('helpOverlay')&&$('helpOverlay').style.display==='flex')||isCine();
+    if(busy){ if(++tries<900) setTimeout(chk,700); return; }
+    obStart();
+  },2600);
+})();
+// клавиши: обучение, перелёт к Марсу
+hooks.key.unshift(function(e){
+  if(ob){ if(e.key==='Escape') obEnd(false); else if(e.key==='ArrowRight'||e.key==='Enter') obGo(ob.i+1,1); else if(e.key==='ArrowLeft') obGo(ob.i-1,-1); return true; }
+  if(e.ctrlKey||e.altKey||e.metaKey) return false;
+  if(mfl&&e.key==='Escape'){ stopM(true); return true; }
+  if(mfl&&e.key===' '){ mq('.tlPlay').click(); return true; }
+  return false;
+});
+
+/* ════ 9. СПРАВКА, ЭКСПОРТ ═══════════════════════════════════════════ */
+(function(){ const hb=$('helpBox'); if(!hb) return; const sec=mk('div','hsec');
+  sec.innerHTML='<h3>НОВОЕ В v0.16</h3><table>'+
+   '<tr><td>Обучение</td><td>короткий тур по всем основным кнопкам: «Далее», «Назад», ✕ и «Пропустить обучение»; повторить — кнопкой выше</td></tr>'+
+   '<tr><td>Марс: ◎ · ◌ · ⚑</td><td>как у Луны: всё вместе, спутники Марса или 16 мест посадок; ⏳ (J) — история освоения 1960 → сейчас, ◐ — раскраска по стране и эпохе</td></tr>'+
+   '<tr><td>Щелчок по миссии на Марсе</td><td>перелёт по реальным датам: старт, уход от Земли, дуга вокруг Солнца к точке встречи с Марсом, орбита и «семь минут ужаса»</td></tr>'+
+   '<tr><td>◎ ВСЁ ВМЕСТЕ</td><td>у Земли, Луны и Марса первая кнопка — спутники и всё остальное сразу</td></tr>'+
+   '<tr><td>Эпохи на шкале</td><td>история орбиты Земли, Луны и Марса разделена на цветные этапы</td></tr>'+
+   '<tr><td>Новые объекты</td><td>посадки на Венере, Титане и Меркурии; ACE, Wind, DSCOVR, «Адитья-L1», «Спектр-РГ», Gaia, «Цюэцяо-1», «Хаябуса-2», Kepler, Spitzer; станции прошлого и завершённые миссии — в годы работы</td></tr>'+
+   '<tr><td>Списки слева</td><td>аномалии, катастрофы и запуски — раскрывающимися категориями, как спутники</td></tr></table>';
+  const g=hb.querySelector('.hGuide'); hb.insertBefore(sec,g?g.nextSibling:(hb.children[1]||null)); })();
+window.__v16={MARS_R:MARS_R, VENUS_R:VENUS_R, FAR_R:FAR_R, PAST_R:PAST_R, MARS_HIST:MARS_HIST, MARS_ALL:MARS_ALL, LAG_R:LAG_R, HELIO_R:HELIO_R, qq1:qq1,
+  marsHub:marsHub, nearMars:nearMars, mfl:()=>mfl, startM:startM, stopM:stopM, buildM:buildM, helioAt:helioAt, siteRel:siteRel,
+  obStart:obStart, obEnd:obEnd, ob:()=>ob, OB:OB, E_ERAS:E_ERAS, PINS:PINS};
 })();
 </script>
 
