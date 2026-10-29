@@ -773,6 +773,90 @@ button{font-family:inherit;}
 #rpTabs button.on{background:var(--amber); color:#000; border-color:var(--amber); font-weight:bold;}
 #rpPane{display:none; padding-top:2px;}
 #rpPane .faBox:first-child>.rpSecT:first-child{margin-top:4px;}
+/* ── v0.15: у Луны — переключатель «Спутники / Миссии / Всё вместе» ── */
+#moonSw{position:absolute; left:50%; bottom:14px; transform:translateX(-50%) translateY(8px); z-index:8; display:flex; opacity:0;
+  pointer-events:none; transition:opacity .25s, transform .25s; background:rgba(6,6,6,.92); border:1px solid #2f5670;
+  box-shadow:0 0 22px rgba(0,0,0,.85), 0 0 14px rgba(127,216,255,.12);}
+#moonSw.show{opacity:1; transform:translateX(-50%); pointer-events:auto;}
+#moonSw button{background:transparent; border:none; color:var(--dim); font-family:inherit; cursor:pointer; padding:5px 14px 4px;
+  display:flex; flex-direction:column; align-items:center; min-width:124px; letter-spacing:1px;}
+#moonSw button + button{border-left:1px solid var(--line);}
+#moonSw button b{font-size:12px; font-weight:bold;}
+#moonSw button small{font-size:9.5px; letter-spacing:.3px; color:var(--dim2); margin-top:1px;}
+#moonSw button:hover{color:#bfe9ff;}
+#moonSw button.on{background:#7fd8ff; color:#001018;} #moonSw button.on small{color:#0b3a52;}
+#moonSw button.mx{min-width:96px; background:#071219;} #moonSw button.mx.on{background:#123245; color:#7fd8ff;} #moonSw button.mx.on small{color:#7fb7cf;}
+.moonSwOn #toastBox{bottom:76px;} .moonSwOn #hint{bottom:58px;}
+@media (max-width:700px){ #moonSw{bottom:8px;} #moonSw button{min-width:0; padding:5px 8px 4px;} #moonSw button small{display:none;} }
+/* полосы времени у Луны: история освоения и полёт миссии */
+.tlBar{position:absolute; left:50%; bottom:64px; transform:translateX(-50%); z-index:9; width:min(780px,94%); display:none;
+  background:rgba(6,6,6,.93); border:1px solid #2f5670; box-shadow:0 0 24px rgba(0,0,0,.8),0 0 16px rgba(127,216,255,.10); padding:6px 12px 8px;}
+.tlBar.on{display:block;}
+.tlTop{display:flex; align-items:center; gap:10px; font-size:10px; letter-spacing:1px; color:#7fd8ff;}
+.tlTop b{color:#fff; font-weight:normal;}
+.tlTop .tlNote{color:var(--dim); letter-spacing:.3px; flex:1; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.tlTop .tlX{background:none; border:none; color:var(--dim); font-size:14px; cursor:pointer; font-family:inherit;}
+.tlTop .tlX:hover{color:#bfe9ff;}
+.tlSeg{display:flex; flex:0 0 auto;}
+.tlSeg button{background:#141414; border:1px solid var(--line); color:var(--dim); font-family:inherit; font-size:10px; padding:2px 7px; cursor:pointer; margin-left:-1px; white-space:nowrap;}
+.tlSeg button:hover{color:#bfe9ff;}
+.tlSeg button.on{background:#7fd8ff; color:#001018; border-color:#7fd8ff;}
+.tlMain{display:flex; align-items:center; gap:14px; margin:3px 0;}
+.tlPlay{background:#0d2633; border:1px solid #2f5670; color:#7fd8ff; font-size:13px; width:34px; height:30px; cursor:pointer; flex:0 0 auto;}
+.tlPlay:hover{background:#7fd8ff; color:#001018;}
+.tlYear{font-size:34px; color:#fff; letter-spacing:2px; font-variant-numeric:tabular-nums; min-width:96px; text-shadow:0 0 14px rgba(127,216,255,.35);}
+.tlStat{font-size:12px; color:#d0d0d0; flex:1; min-width:0;} .tlStat b{color:#bfe9ff; font-size:17px; font-weight:normal;}
+.tlStat small{display:block; color:var(--dim); font-size:10px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.tlR{width:100%; accent-color:#7fd8ff; margin:2px 0 0;}
+.tlScale{display:flex; justify-content:space-between; font-size:9px; color:var(--dim2); margin-top:-2px;}
+.tlEv{min-height:30px; font-size:11.5px; line-height:15px; color:#bfe9ff; transition:opacity .5s; margin-top:3px;}
+.tlEv b{color:#fff; font-weight:normal;}
+.lhOn #hint, .flOn #hint{display:none;} .lhOn #toastBox, .flOn #toastBox{bottom:230px;}
+.flOn #modeSw, .flOn #moonSw, .flOn #colLeg, .lhOn #modeSw{display:none !important;}
+.flWhen{display:flex; flex-direction:column; min-width:210px;}
+.flWhen b{font-size:16px; color:#fff; font-weight:normal; letter-spacing:1px; font-variant-numeric:tabular-nums;}
+.flWhen small{font-size:10.5px; color:var(--dim); font-variant-numeric:tabular-nums;}
+.flPh{display:flex; flex-direction:column; flex:1; min-width:0;}
+.flPh small{font-size:9px; color:var(--dim); letter-spacing:1px;} .flPh b{font-size:13px; color:#ffd27a; font-weight:normal; letter-spacing:1px;}
+.flTrack{position:relative; height:24px; margin-top:2px;}
+.flSegs{position:absolute; left:0; right:0; top:4px; height:14px; display:flex; gap:2px; pointer-events:none;}
+.flSegs div{height:100%; min-width:0; font-size:8.5px; line-height:14px; color:#0a0a0a; text-align:center; overflow:hidden; white-space:nowrap; letter-spacing:.4px; opacity:.45;}
+.flSegs div.cur{opacity:1;}
+.flTrack input{position:absolute; left:0; right:0; top:0; width:100%; margin:0; height:22px; background:transparent; accent-color:#fff; cursor:pointer;}
+.flGhost{position:absolute; transform:translate(-50%,-190%); font-size:10px; color:#bfe9ff; white-space:nowrap; text-shadow:0 0 4px #000,0 0 4px #000; pointer-events:none;}
+@media (max-width:700px){ .tlBar{bottom:58px; padding:5px 8px 6px;} .tlYear{font-size:26px; min-width:70px;} .tlTop .tlNote{display:none;}
+  .flWhen{min-width:0;} .flWhen b{font-size:13px;} #flCam button{padding:2px 4px;}
+  #flBar{top:112px; bottom:auto;} #flBar .tlTop{flex-wrap:wrap; row-gap:4px;} #flBar .tlMain{gap:8px;} .flPh b{font-size:11px;} #flEv{font-size:10.5px; min-height:0;} }
+/* новая посадка в истории освоения Луны — вспышка подписи */
+@keyframes bornPulse{0%{filter:brightness(2.6) drop-shadow(0 0 6px #fff);} 100%{filter:none;}}
+.olabel.born{animation:bornPulse 1.8s ease-out;}
+/* вкладки «Аномалии» и «Катастрофы» */
+#lpTabs2{display:flex; flex:0 0 auto; border-bottom:1px solid var(--line); background:#060606;}
+#lpTabs2 .lpTab[data-t="anom"]:hover, #lpTabs2 .lpTab[data-t="anom"].on{color:#c9a7ff;}
+#lpTabs2 .lpTab[data-t="anom"].on{background:#120a1c; box-shadow:inset 0 -2px 0 #a07cff;}
+#lpTabs2 .lpTab[data-t="cata"]:hover, #lpTabs2 .lpTab[data-t="cata"].on{color:#ff8a7a;}
+#lpTabs2 .lpTab[data-t="cata"].on{background:#1c0a08; box-shadow:inset 0 -2px 0 #ff5a4a;}
+#lpTabs2 .lpTab b{color:var(--dim2);}
+.stList{flex:1; overflow-y:auto; min-height:0; padding-bottom:10px;}
+.stIntro{padding:8px 10px 6px; font-size:10.5px; line-height:15px; color:var(--dim);}
+.stGrp{padding:9px 10px 3px; font-size:10px; letter-spacing:1px; color:var(--amber); border-bottom:1px solid var(--line2);}
+.stRow{display:block; padding:5px 10px 6px; border-bottom:1px solid #121212; cursor:pointer;}
+.stRow:hover{background:#151007;} .stRow.on{background:#1f1405; box-shadow:inset 2px 0 0 var(--amber);}
+.stRow .t{display:flex; gap:8px; align-items:baseline;} .stRow .t b{color:#e6e6e6; font-weight:normal; font-size:12px; flex:1; min-width:0;}
+.stRow .t i{font-style:normal; color:var(--dim); font-size:10px; font-variant-numeric:tabular-nums; white-space:nowrap;}
+.stRow small{display:block; color:#9a9a9a; font-size:10.5px; line-height:13px; margin-top:1px;}
+.stRow .new{color:#a07cff; font-size:9px; margin-left:6px; white-space:nowrap;}
+/* история в досье */
+#rpStory{display:none; margin:8px 10px 4px; border:1px solid var(--line); background:#0b0b0b;}
+#rpStory.on{display:block;}
+#rpStory .sh{display:flex; justify-content:space-between; align-items:center; gap:8px; padding:2px 8px; font-size:9.5px; letter-spacing:1px; color:#000;}
+#rpStory.anom .sh{background:#a07cff;} #rpStory.cata .sh{background:#ff5a4a;}
+#rpStory .sh button{background:none; border:none; color:#000; cursor:pointer; font-family:inherit; font-size:12px; padding:0;}
+#rpStory .sn{padding:6px 8px 0; color:#fff; font-size:13px; letter-spacing:.5px;}
+#rpStory .sy{padding:0 8px; color:var(--dim); font-size:10px;}
+#rpStory .sx{padding:5px 8px 7px; color:#cfcfcf; font-size:12px; line-height:17px;}
+#rpStory .sf div{display:flex; justify-content:space-between; gap:10px; font-size:11px; padding:2px 8px; border-top:1px solid #161616;}
+#rpStory .sf span{color:var(--dim);} #rpStory .sf b{color:#e6e6e6; font-weight:normal; text-align:right;}
 </style>
 </head>
 <body>
@@ -2146,7 +2230,18 @@ const VERSIONS = [
 {v:'0.14', date:'29.10.2026', title:'Честная история орбиты и тусклые границы',
  items:['История орбиты (J): станции, телескопы и зонды появляются в год запуска — «Хаббл» в 1990-м, МКС в 1998-м, «Тяньгун» в 2021-м — а не висят над Землёй с 1957 года',
   'История в режиме «Мусор»: дымка мелкого мусора (модель ≈1 млн неотслеживаемых обломков) больше не видна с самого начала — она густеет вместе с отслеживаемым мусором; подпись «ИСЗ LIVE» с сегодняшними числами на время истории скрыта',
-  'Границы стран в режимах «Спутники» и «Мусор» плавно гаснут до ≈15 % и не спорят с точками; в режиме «Земля» — прежняя яркость']}
+  'Границы стран в режимах «Спутники» и «Мусор» плавно гаснут до ≈15 % и не спорят с точками; в режиме «Земля» — прежняя яркость']},
+{v:'0.15', date:'30.10.2026', title:'Луна со спутниками и миссиями, полёты по таймлайну, аномалии и катастрофы',
+ items:['Спутники Луны: 7 работающих сейчас (LRO, ARTEMIS P1 и P2, «Чандраян-2», Danuri, CAPSTONE, «Цюэцяо-2») и 13 исторических — от «Луны-10» до LADEE. Каждый кликабелен: в досье высота, скорость, над какой стороной Луны он сейчас и вкладка «▲ ЗАПУСК»',
+  'У Луны внизу переключатель «◌ Спутники Луны / ⚑ Миссии / ◎ Всё вместе» и кнопка «⏳ История»; фон у Луны — без звёзд, как у Земли',
+  'История освоения Луны (J у Луны): 1959 → сейчас; места посадок вспыхивают в свой день, спутники видны только в годы работы, вехи от «Луны-2» до Blue Ghost',
+  'Полёт миссии по таймлайну: щелчок по месту посадки включает реальные даты — старт с космодрома, опорная орбита (у «Чандраяна-3», Beresheet и Blue Ghost — витки с ростом апогея, у SLIM — петля за Луну), перелёт к точке, где Луна окажется в момент прибытия (пунктирный круг), окололунная орбита и посадка точно в место посадки. Земля вращается, Луна идёт по орбите; шкала с фазами, пауза, перемотка, ×½–×2',
+  'Камера в полёте: «◎ Авто» сама переходит от Земли к Луне; «◉ С борта» — вид из аппарата, и на орбите Луны каждый виток показывает «восход Земли»; «✥ Свободно»',
+  'Вкладки «◬ Аномалии» и «✸ Катастрофы» над списком слева: 72 истории — странные орбиты и тела, рукотворные загадки, аварии ракет и кораблей, падения станций, столкновения на орбите и удары из космоса. Щелчок — камера к объекту или месту на глобусе, история — вверху досье',
+  'На карте новые тела: Эрида, Седна, Хаумеа, Макемаке, Аррокот, Фаэтон, Камоалева, 2015 BZ509, Дидим, «Улисс» и Tesla Roadster',
+  '«Сейчас падает» — самые низкие объекты каталога, которые скоро сгорят в атмосфере (вверху вкладки «Катастрофы»)',
+  'В «Истории орбиты» Земли, когда шкала проходит 4 октября 1957 года, звучит «бип-бип» первого спутника (если звук включён)',
+  'Площадки ближайших запусков больше не светятся на глобусе, когда время карты далеко от сегодняшнего']}
 ];
 </script>
 <script>
@@ -5117,7 +5212,7 @@ Object.keys(SG_START).forEach(id=>{ if(byId[id]) byId[id].launchMs=Date.parse(SG
 function timeVisCheck(){
   // во время «Истории орбиты» (J) — год на её шкале, а не модельное время: станции и телескопы появляются в год запуска
   const t=B.timeOverride!=null?B.timeOverride:B.getSim(); let ch=false;
-  B.recs.forEach(r=>{ if(r.launchMs==null) return; const h=t<r.launchMs; if(r.hiddenByTime!==h){ r.hiddenByTime=h; ch=true; } });
+  B.recs.forEach(r=>{ if(r.launchMs==null) return; const h=t<r.launchMs||(r.endMs!=null&&t>r.endMs); if(r.hiddenByTime!==h){ r.hiddenByTime=h; ch=true; } });
   if(ch) B.applyVisibility();
 }
 B.timeVisCheck=timeVisCheck;
@@ -6906,9 +7001,10 @@ TABS.forEach(t=>{ const b=mk('button','lpTab'); b.dataset.t=t[0]; b.title=t[2]; 
 const paneObj=mk('div','lpPane on'), paneSat=mk('div','lpPane'), paneLnc=mk('div','lpPane');
 [$('searchWrap'),$('objList'),$('listFoot')].forEach(n=>paneObj.appendChild(n));
 LP.appendChild(tabsBar); LP.appendChild(paneObj); LP.appendChild(paneSat); LP.appendChild(paneLnc);
+const PANES={obj:paneObj, sat:paneSat, lnc:paneLnc};
 let curTab='obj';
 function showTab(t){
-  curTab=t; [['obj',paneObj],['sat',paneSat],['lnc',paneLnc]].forEach(p=>p[1].classList.toggle('on',p[0]===t));
+  curTab=t; Object.keys(PANES).forEach(k=>PANES[k].classList.toggle('on',k===t));
   Object.keys(tabBtn).forEach(k=>tabBtn[k].classList.toggle('on',k===t));
   if(LP.classList.contains('collapsed')&&V5().setCatalog) V5().setCatalog(true,false);
   if(t==='sat'){ if(!cat.ready) loadCatalog().catch(()=>{}); satList.draw(); }
@@ -7541,7 +7637,7 @@ function setLine(line,pts){ line.geometry.dispose(); line.geometry=new THREE.Buf
 let tjRebuild=0;
 B.setTrajFn(function(){
   const S=B.getSelected();
-  if(!S||S.kindType!=='site'){ trajL.visible=trajLaunch.visible=craft.visible=padMark.visible=false; tj.id=null; return; }
+  if(!S||S.kindType!=='site'||(window.__flightOn&&window.__flightOn(S))){ trajL.visible=trajLaunch.visible=craft.visible=padMark.visible=false; tj.id=null; return; }
   if(tj.id!==S.id||++tjRebuild%45===0){ const g=buildLunarTraj(S); if(tj.id!==S.id) tj.t=0; tj.id=S.id; Object.assign(tj,g);
     setLine(trajL,g.pts); setLine(trajLaunch,g.launch); }
   trajL.visible=trajLaunch.visible=true;
@@ -7817,9 +7913,9 @@ function applySky(){
 function setSky(on){ skyOn=on; try{ localStorage.setItem('buran_sky',on?'1':'0'); }catch(e){} if(on) loadSky(); applySky(); }
 if(skyOn) loadSky();
 let skyG=0, skyE=0, skyS=0;
-const SAT_KINDS={sat:1, station:1, orbiter:1, satgroup:1, swarm:1};
-function skyFocus(){ // 0 — космос, 1 — камера у Земли (и вид с МКС), 2 — выбран спутник или группировка
-  if(!nearE) return 0; if(pov) return 1;
+const SAT_KINDS={sat:1, station:1, orbiter:1, satgroup:1, swarm:1, lsat:1};
+function skyFocus(){ // 0 — космос, 1 — камера у Земли или у Луны (и вид с МКС), 2 — выбран спутник или группировка
+  if(!nearE&&!(B.skyNear&&B.skyNear())) return 0; if(pov) return 1;
   const s=B.getSelected(), f=B.getFollow();
   return (s&&SAT_KINDS[s.kindType])||(f&&SAT_KINDS[f.kindType])?2:1;
 }
@@ -7925,7 +8021,8 @@ window.__v8={cat:cat, satRec:satRec, openSat:openSat, openLaunch:openLaunch, loa
   togglePov:togglePov, pov:()=>pov, showTab:showTab, restyle:restyle, IDB:IDB, sound:B.sound, pickSat:pickSat, buildLunarTraj:buildLunarTraj, tj:()=>tj,
   // v0.11: для части 6 (запуски, история орбиты, раскраска)
   loadSnapshot:loadSnapshot, snapFile:snapFile, padOf:padOf, ORBIT_RU:ORBIT_RU, SH:SH, satMat:satMat, setHighlight:setHighlight, refreshHL:refreshHL,
-  isJunk:isJunk, onMap:onMap, CLS_BY:CLS_BY, satColor:satColor, nearE:()=>nearE, cloud:()=>cloud, haze:()=>haze, loadApprox:loadApprox, toggleSats:toggleSats, satsOn:()=>satsOn,
+  isJunk:isJunk, onMap:onMap, CLS_BY:CLS_BY, faBlock:faBlock, fillExtra:fillExtra, MPAD:MPAD, SITE_PAD:SITE_PAD,
+  regTab:(id,btn,pane)=>{ tabBtn[id]=btn; PANES[id]=pane; LP.appendChild(pane); }, satColor:satColor, nearE:()=>nearE, cloud:()=>cloud, haze:()=>haze, loadApprox:loadApprox, toggleSats:toggleSats, satsOn:()=>satsOn,
   hlTest:()=>hlTest, catInTime:catInTime, fmtDate:fmtDate};
 })();
 </script>
@@ -8069,7 +8166,7 @@ const _pw=new THREE.Vector3(), _pn=new THREE.Vector3(), _pc=new THREE.Vector3(),
 let padsOn=false, lblT=0;
 function padFacing(p){ p.sp.getWorldPosition(_pw); _pn.copy(_pw).sub(_ew).normalize(); _pc.copy(camera.position).sub(_pw).normalize(); return _pn.dot(_pc); }
 hooks.post.push(function(dt,now){
-  padsOn=!!(LN&&toggles.launches&&V8.nearE()&&!V8.pov()&&!document.body.classList.contains('histOn')&&pads.length);
+  padsOn=!!(LN&&toggles.launches&&V8.nearE()&&!V8.pov()&&!document.body.classList.contains('histOn')&&pads.length&&Math.abs(B.getSim()-Date.now())<30*DAY_MS);
   padGrp.visible=padsOn;
   if(!padsOn){ padLbl.style.display='none'; return; }
   _ew.copy(B.worldPos(EARTH)); EARTH.mesh.getWorldScale(_ws);
@@ -8406,5 +8503,919 @@ setColor(colMode);
 window.__v11={LN:()=>LN, loadLaunches:loadLaunches, pads:pads, histOpen:histOpen, histClose:histClose, hist:()=>hist, setColor:setColor, colMode:()=>colMode, upRec:upRec};
 })();
 </script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   ЧАСТЬ 7. v0.15: ЛУНА — СПУТНИКИ, МИССИИ, ИСТОРИЯ ОСВОЕНИЯ, ПОЛЁТ МИССИИ ПО ТАЙМЛАЙНУ;
+   ВКЛАДКИ «АНОМАЛИИ» И «КАТАСТРОФЫ»; «СЕЙЧАС ПАДАЕТ»; ЗВУК «СПУТНИКА-1» В ИСТОРИИ ОРБИТЫ.
+   Положение Луны считается той же формулой, что в ядре, поэтому в полёте аппарат приходит
+   туда, где Луна окажется в момент прибытия, а Земля и Луна движутся вместе со временем.
+   ═══════════════════════════════════════════════════════════════════ */
+(function(){
+'use strict';
+const B=window.BURAN, V8=window.__v8, V11=window.__v11||{}, V4=window.__v4||{}; if(!B||!V8) return;
+const THREE=B.THREE, camera=B.camera, byId=B.byId, hooks=B.hooks;
+const D2R=B.D2R, DAY_MS=B.DAY_MS, J2000=B.J2000, clamp=B.clamp, two=B.two, V3=THREE.Vector3;
+const EARTH=byId.earth, MOON=byId.moon, eR=EARTH.visR, mR=MOON.visR, vp=B.viewport, $=id=>document.getElementById(id);
+const toast=V4.toast||function(){};
+const fmtNum=n=>Math.round(n).toLocaleString('ru-RU');
+const plur=(n,a,b,c)=>{ const m=n%10, h=n%100; return m===1&&h!==11?a:(m>=2&&m<=4&&(h<12||h>14)?b:c); };
+function mk(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+function setLS(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+function getLS(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+const shield=el=>['mousedown','mouseup','wheel','dblclick','click','pointerdown'].forEach(ev=>el.addEventListener(ev,e=>e.stopPropagation()));
+const body=document.body, isCine=()=>body.classList.contains('cine')||body.classList.contains('touring');
+Object.assign(B.TYPE_LBL,{lsat:'ИСКУССТВЕННЫЙ СПУТНИК ЛУНЫ', place:'МЕСТО СОБЫТИЯ'});
+Object.assign(B.STATUS_LBL,{END:'МИССИЯ ЗАВЕРШЕНА'});
+
+/* ── время ── */
+const yMs=y=>{ const Y=Math.floor(y); return Date.UTC(Y,0,1)+(y-Y)*365.2425*DAY_MS; };
+const msY=t=>{ const d=new Date(t), Y=d.getUTCFullYear(), a=Date.UTC(Y,0,1); return Y+(t-a)/(Date.UTC(Y+1,0,1)-a); };
+const fmtD=s=>s?s.split('-').reverse().join('.'):'—';
+function fmtUTC(t){ const d=new Date(t); return two(d.getUTCDate())+'.'+two(d.getUTCMonth()+1)+'.'+d.getUTCFullYear()+' · '+two(d.getUTCHours())+':'+two(d.getUTCMinutes())+' UTC'; }
+function fmtMET(ms){ const s=Math.max(0,ms)/1000, d=Math.floor(s/86400); return 'T+ '+(d?d+' сут ':'')+two(Math.floor(s%86400/3600))+':'+two(Math.floor(s%3600/60)); }
+const fmtDays=ms=>{ const d=ms/DAY_MS; return d<1.5?Math.round(d*24)+' ч':(d<10?d.toFixed(1).replace('.',','):Math.round(d))+' сут'; };
+
+/* ── геометрия Земля — Луна (система координат узла Земли: без вращения, Y — север эклиптики) ── */
+const TILT=EARTH.tiltGrp.rotation.x;
+const moonAng=t=>(218.316+13.176396*(t-J2000)/DAY_MS)*D2R;      // как в ядре (updatePositions)
+function moonRel(t,o){ const a=moonAng(t); return (o||new V3()).set(Math.cos(a)*MOON.rOrb,0,-Math.sin(a)*MOON.rOrb); }
+function rotY(v,a,o){ const c=Math.cos(a), s=Math.sin(a); return (o||new V3()).set(v.x*c+v.z*s, v.y, -v.x*s+v.z*c); }
+const siteOff=(S,t,o)=>rotY(S.node.position,moonAng(t)+Math.PI,o);   // Луна повёрнута к Земле одной стороной
+function padRel(lat,lon,t,o){ const q=rotY(B.surfPoint(lat,lon,eR*1.002),B.gmstRad((t-J2000)/DAY_MS)), c=Math.cos(TILT), s=Math.sin(TILT);
+  return (o||new V3()).set(q.x, q.y*c-q.z*s, q.y*s+q.z*c); }
+function bz(p0,p1,p2,p3,t,o){ const it=1-t, a=it*it*it, b=3*it*it*t, c=3*it*t*t, d=t*t*t;
+  return (o||new V3()).set(a*p0.x+b*p1.x+c*p2.x+d*p3.x, a*p0.y+b*p1.y+c*p2.y+d*p3.y, a*p0.z+b*p1.z+c*p2.z+d*p3.z); }
+function kepE(M,e){ M%=2*Math.PI; let E=e<0.8?M:Math.PI; for(let k=0;k<14;k++){ const f=E-e*Math.sin(E)-M; E-=f/(1-e*Math.cos(E)); } return E; }
+// неподвижная (невращающаяся) система у центра Луны: орбиты спутников и линии полёта у Луны
+const lfr=new THREE.Group(); EARTH.node.add(lfr);
+hooks.pos.push(function(){ lfr.position.copy(MOON.node.position); });
+
+/* ════ 1. СПУТНИКИ ЛУНЫ ══════════════════════════════════════════════
+   Орбиты примерные: перицентр/апоцентр и наклонение по открытым данным миссий, фаза — условная.
+   Высокие орбиты (ARTEMIS, «Цюэцяо-2», CAPSTONE) сжаты логарифмически, иначе они не поместились бы
+   между Землёй и Луной, расстояние до которой на карте тоже сжато. */
+const RM_KM=1737.4, MU_M=4902.8;
+const rrK=h=>1+2.2*Math.log10(1+h/RM_KM);
+const LSATS=[
+ {id:'lro', name:'LRO', code:'LRO', ag:'NASA (США)', L:'2009-06-18', O:'2009-06-23', pe:30, ap:180, inc:90, lc:'2009-031', st:'ACT',
+  desc:'Lunar Reconnaissance Orbiter — самый долгоживущий спутник Луны: с 2009 года снимает поверхность с разрешением до 0,5 м. Нашёл посадочные ступени «Аполлонов», следы колёс луноходов и места падения аппаратов; составил карты температур и водяного льда в вечно затенённых кратерах у полюсов.'},
+ {id:'artemis1', name:'ARTEMIS P1', code:'AP1', ag:'NASA (США)', L:'2007-02-17', O:'2011-06-27', pe:1000, ap:18000, inc:170, incOk:false, lc:'2007-004', st:'ACT',
+  desc:'Бывший спутник THEMIS-B, изучавший магнитосферу Земли. В 2011 году его вместе с близнецом перевели к Луне: оба измеряют солнечный ветер и «хвост» земной магнитосферы, через который Луна проходит каждый месяц. Орбита сильно вытянута и почти экваториальна; P1 летит в обратную сторону.'},
+ {id:'artemis2', name:'ARTEMIS P2', code:'AP2', ag:'NASA (США)', L:'2007-02-17', O:'2011-07-17', pe:1000, ap:18000, inc:12, incOk:false, lc:'2007-004', st:'ACT',
+  desc:'Близнец ARTEMIS P1 (бывший THEMIS-C): вдвоём они меряют плазму и магнитное поле в двух точках сразу — так видно, как меняется солнечный ветер около Луны.'},
+ {id:'ch2', name:'«Чандраян-2»', code:'CH2', ag:'ISRO (Индия)', L:'2019-07-22', O:'2019-08-20', pe:100, ap:100, inc:90, lc:'2019-042', st:'ACT',
+  desc:'Орбитальный модуль индийской миссии 2019 года: посадочный модуль «Викрам» разбился, а орбитер работает до сих пор. У него лучшая камера на орбите Луны — 0,25 м на пиксель — и радар, который ищет лёд в полярных кратерах. В 2023 году он держал связь с «Чандраяном-3».'},
+ {id:'danuri', name:'Danuri (KPLO)', code:'KPL', ag:'KARI (Южная Корея)', L:'2022-08-04', O:'2022-12-16', pe:100, ap:100, inc:90, lc:'2022-097', st:'ACT',
+  desc:'Первый лунный аппарат Южной Кореи. Добирался 4,5 месяца по энергосберегающей траектории через точку Лагранжа L1 системы Солнце — Земля. На борту — камера NASA ShadowCam, которая видит дно вечно затенённых кратеров в свете, отражённом от их склонов.'},
+ {id:'capstone', name:'CAPSTONE', code:'CAP', ag:'NASA / Advanced Space (США)', L:'2022-06-28', O:'2022-11-13', pe:3000, ap:70000, inc:90, lc:'2022-070', st:null,
+  desc:'Микроспутник размером с микроволновку первым вышел на «почти прямолинейную гало-орбиту» (NRHO), по которой полетит будущая станция Gateway: около 3 000 км над северным полюсом Луны и 70 000 км над южным, один виток — 6,5 суток. Миссию несколько раз продлевали.'},
+ {id:'queqiao2', name:'«Цюэцяо-2»', code:'QQ2', ag:'CNSA (Китай)', L:'2024-03-20', O:'2024-03-24', pe:200, ap:16000, inc:62, incOk:false, st:'ACT',
+  desc:'Китайский спутник-ретранслятор: держит связь с аппаратами на обратной стороне Луны, которые сами Земли «не видят». Через него в 2024 году работал «Чанъэ-6», впервые доставивший грунт с обратной стороны. Орбита вытянутая, один виток — 24 часа.'},
+ // история: спутники, которых на орбите больше нет
+ {id:'luna10', name:'«Луна-10»', code:'L10', ag:'СССР', L:'1966-03-31', O:'1966-04-03', E:'1966-05-30', pe:350, ap:1017, inc:72, lc:'1966-027', st:'END',
+  desc:'Первый в истории искусственный спутник Луны (3 апреля 1966 года). Почти два месяца измерял излучение и магнитное поле у Луны и по гамма-излучению определял состав лунных пород.'},
+ {id:'lo1', name:'Lunar Orbiter 1', code:'LO1', ag:'NASA (США)', L:'1966-08-10', O:'1966-08-14', E:'1966-10-29', pe:190, ap:1870, inc:12, lc:'1966-073', st:'END',
+  desc:'Первый американский спутник Луны: снимал районы будущих посадок «Аполлонов» и 23 августа 1966 года сделал первый снимок Земли со стороны Луны. В конце миссии его направили на поверхность.'},
+ {id:'apollo8', name:'«Аполлон-8»', code:'A08', ag:'NASA (США)', L:'1968-12-21', O:'1968-12-24', E:'1968-12-25', pe:110, ap:112, inc:12, lc:'1968-118', st:'END',
+  desc:'Первые люди на орбите Луны: Фрэнк Борман, Джеймс Ловелл и Уильям Андерс сделали 10 витков в сочельник 1968 года. Андерс снял знаменитый «Восход Земли» — Земля над лунным горизонтом.'},
+ {id:'hiten', name:'«Хитэн»', code:'HIT', ag:'ISAS (Япония)', L:'1990-01-24', O:'1992-02-15', E:'1993-04-10', pe:420, ap:49400, inc:30, incOk:false, lc:'1990-007', st:'END',
+  desc:'Первый японский лунный аппарат: Япония стала третьей страной у Луны. «Хитэн» первым прошёл к ней по энергосберегающей траектории Белбруно, а в 1993 году его направили на поверхность.'},
+ {id:'clementine', name:'Clementine', code:'CLM', ag:'BMDO / NASA (США)', L:'1994-01-25', O:'1994-02-19', E:'1994-05-03', pe:415, ap:2940, inc:90, lc:'1994-004', st:'END',
+  desc:'Аппарат для испытания военных датчиков снял всю Луну в 11 спектральных каналах. Радарный эксперимент Clementine первым намекнул на лёд в вечно затенённых кратерах у южного полюса.'},
+ {id:'prospector', name:'Lunar Prospector', code:'LPR', ag:'NASA (США)', L:'1998-01-07', O:'1998-01-11', E:'1999-07-31', pe:100, ap:100, inc:90, lc:'1998-001', st:'END',
+  desc:'Нашёл избыток водорода у полюсов — признак водяного льда. В конце миссии его направили в кратер у южного полюса; на борту был прах планетолога Юджина Шумейкера — единственное захоронение на Луне.'},
+ {id:'smart1', name:'SMART-1', code:'SM1', ag:'ESA (Европа)', L:'2003-09-27', O:'2004-11-15', E:'2006-09-03', pe:470, ap:2900, inc:90, lc:'2003-043', st:'END',
+  desc:'Первый европейский лунный аппарат: летел к Луне больше года на ионном двигателе, израсходовав всего около 80 кг ксенона. В 2006 году завершил миссию управляемым падением.'},
+ {id:'kaguya', name:'«Кагуя» (SELENE)', code:'KAG', ag:'JAXA (Япония)', L:'2007-09-14', O:'2007-10-03', E:'2009-06-10', pe:100, ap:100, inc:90, lc:'2007-039', st:'END',
+  desc:'Снял первое HD-видео восхода Земли над Луной и составил точнейшую для своего времени карту гравитации, включая обратную сторону — для этого ему помогали два малых спутника-ретранслятора.'},
+ {id:'ce1', name:'«Чанъэ-1»', code:'CE1', ag:'CNSA (Китай)', L:'2007-10-24', O:'2007-11-05', E:'2009-03-01', pe:200, ap:200, inc:90, lc:'2007-051', st:'END',
+  desc:'Первый китайский лунный аппарат: составил полную карту Луны. С него началась программа «Чанъэ», которая через 12 лет посадила аппарат на обратную сторону.'},
+ {id:'chandrayaan1', name:'«Чандраян-1»', code:'CY1', ag:'ISRO (Индия)', L:'2008-10-22', O:'2008-11-08', E:'2009-08-29', pe:100, ap:100, inc:90, lc:'2008-052', st:'END',
+  desc:'Первый индийский лунный аппарат: прибор NASA M3 на его борту подтвердил воду на поверхности Луны. Связь потеряли в 2009 году, а в 2016 году «потерянный» спутник нашли радаром с Земли — он всё ещё летает.'},
+ {id:'ce2', name:'«Чанъэ-2»', code:'CE2', ag:'CNSA (Китай)', L:'2010-10-01', O:'2010-10-06', E:'2011-06-09', pe:100, ap:100, inc:90, lc:'2010-050', st:'END',
+  desc:'Снял Луну с разрешением около 7 м, затем ушёл к точке Лагранжа L2, а в 2012 году пролетел мимо астероида Таутатис.'},
+ {id:'grail', name:'GRAIL (Ebb и Flow)', code:'GRL', ag:'NASA (США)', L:'2011-09-10', O:'2012-01-01', E:'2012-12-17', pe:55, ap:55, inc:89, lc:'2011-046', st:'END',
+  desc:'Два спутника-близнеца летели друг за другом и по изменению расстояния между ними составили лучшую карту гравитации Луны. В конце миссии оба врезались в гору у северного полюса, место назвали в честь астронавта Салли Райд.'},
+ {id:'ladee', name:'LADEE', code:'LAD', ag:'NASA (США)', L:'2013-09-07', O:'2013-10-06', E:'2014-04-18', pe:20, ap:60, inc:157, incOk:false, lc:'2013-047', st:'END',
+  desc:'Изучал разреженную «атмосферу» и пыль над Луной и впервые испытал лазерную связь с Луной — 622 Мбит/с. Летал на очень низкой экваториальной орбите в обратную сторону.'}
+];
+function lsFacts(D,P){
+  const f=[['Страна / агентство',D.ag],['Запуск',fmtD(D.L)],['На орбите Луны',fmtD(D.O)+(D.E?' — '+fmtD(D.E):' — по сей день')],
+    ['Орбита',(D.pe===D.ap?'≈ '+fmtNum(D.pe)+' км, круговая':'≈ '+fmtNum(D.pe)+' × '+fmtNum(D.ap)+' км')+(D.incOk!==false?' · наклонение '+D.inc+'°':'')],
+    ['Виток',P<3*3600000?Math.round(P/60000)+' мин':(P<48*3600000?(P/3600000).toFixed(1).replace('.',',')+' ч':(P/DAY_MS).toFixed(1).replace('.',',')+' сут')]];
+  if(D.ap>2500) f.push(['На карте','высокая орбита показана в сжатом масштабе']);
+  return f;
+}
+function orbPt(k,E,o){ const x=k.as*(Math.cos(E)-k.es), y=k.as*Math.sqrt(1-k.es*k.es)*Math.sin(E);
+  const x1=x*Math.cos(k.w)-y*Math.sin(k.w), y1=x*Math.sin(k.w)+y*Math.cos(k.w), y2=y1*Math.cos(k.inc), z2=y1*Math.sin(k.inc);
+  return o.set(x1*Math.cos(k.O)-y2*Math.sin(k.O), z2, -(x1*Math.sin(k.O)+y2*Math.cos(k.O))); }
+const LSR=LSATS.map(D=>{
+  const rp=RM_KM+D.pe, ra=RM_KM+D.ap, a=(rp+ra)/2, P=2*Math.PI*Math.sqrt(a*a*a/MU_M)*1000;
+  const rps=mR*rrK(D.pe), ras=mR*rrK(D.ap);
+  const k={a:a, er:(ra-rp)/(ra+rp), P:P, as:(rps+ras)/2, es:(ras-rps)/(ras+rps), inc:D.inc*D2R,
+    O:B.hash01('O'+D.id)*Math.PI*2, w:B.hash01('w'+D.id)*Math.PI*2, M0:B.hash01('M'+D.id)*Math.PI*2, E:0};
+  const act=D.st!=='END', col=act?0x7fd8ff:0x8f8f8f;
+  const node=new THREE.Group(); lfr.add(node);
+  const glow=B.glowSprite(B.GLOW.white,0.2,act?0.95:0.6); glow.material.color.setHex(col); node.add(glow);
+  const pts=[]; for(let i=0;i<=160;i++) pts.push(orbPt(k,i/160*Math.PI*2,new V3()));
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,transparent:true,opacity:act?0.24:0.14}));
+  line.userData={baseColor:col, baseOp:act?0.24:0.14}; lfr.add(line);
+  return B.addRec({id:'ls_'+D.id, code:D.code, name:D.name, kindType:'lsat', type:'lsat', node:node, visR:0.05, hitR:0.42, minR:0.08, focusR:mR*1.7,
+    parentRec:MOON, labelColor:act?'#7fd8ff':'#8f8f8f', status:D.st, agency:D.ag, noDistRows:true, orbit:line, spr:glow, cat:'lsat',
+    launchMs:Date.parse(D.O+'T00:00:00Z'), endMs:D.E?Date.parse(D.E+'T23:59:00Z'):null, lc:D.lc||null, ls:k, D:D,
+    tip:D.ag+' · '+(D.E?'на орбите Луны '+D.O.slice(0,4)+'–'+D.E.slice(0,4):'на орбите Луны с '+D.O.slice(0,4)),
+    facts:lsFacts(D,P), desc:D.desc});
+});
+hooks.pos.push(function(t){
+  LSR.forEach(r=>{ const k=r.ls, ph=((t-J2000)/k.P)%1; k.E=kepE(k.M0+2*Math.PI*ph,k.es); orbPt(k,k.E,r.node.position); });
+});
+// точки спутников Луны — постоянного экранного размера
+hooks.post.push(function(){ LSR.forEach(r=>{ if(!r.node.visible) return; r.spr.scale.setScalar(clamp(camera.position.distanceTo(B.worldPos(r))*0.016,0.02,1.4)*(B.getSelected()===r?1.6:1)); }); });
+hooks.live.push(function(r,rows){
+  if(r.kindType!=='lsat') return;
+  const k=r.ls, rr=()=>k.a*(1-k.er*Math.cos(k.E));
+  rows.push(['Высота над Луной',()=>'≈ '+fmtNum(Math.max(0,rr()-RM_KM))+' км']);
+  rows.push(['Скорость',()=>Math.sqrt(MU_M*(2/rr()-1/k.a)).toFixed(2).replace('.',',')+' км/с']);
+  rows.push(['Сейчас над',()=>r.node.position.dot(MOON.node.position)<0?'видимой стороной Луны':'обратной стороной — Земли не видно']);
+});
+// спутник Луны: вкладка «▲ ЗАПУСК» по Flight Atlas
+hooks.select.push(function(r){
+  if(!r||r.kindType!=='lsat'||!r.lc||!V8.faBlock) return;
+  V8.loadFA().then(fa=>{ if(B.getSelected()!==r) return; V8.fillExtra([V8.faBlock(fa.byCospar.get(r.lc)||null,{cospar:r.lc})]); }).catch(()=>{});
+});
+
+/* ════ 2. У ЛУНЫ: ПЕРЕКЛЮЧАТЕЛЬ «СПУТНИКИ / МИССИИ / ВСЁ ВМЕСТЕ» ════════ */
+const SITES=B.recs.filter(r=>r.kindType==='site');
+const LANDED=SITES.filter(r=>r.status!=='PLAN');
+let moonMode=getLS('buran_moonmode'); if(['sats','missions','both'].indexOf(moonMode)<0) moonMode='both';
+let lh=null, fl=null;                                   // история освоения Луны, полёт миссии
+const lsOn=()=>!!lh||moonMode!=='missions', msOn=()=>!!lh||moonMode!=='sats';
+LSR.forEach(r=>{ const lc=r.labelCheck, pc=r.pickCheck;
+  r.labelCheck=()=>(!lc||lc())&&(lsOn()||B.getSelected()===r); r.pickCheck=()=>(!pc||pc())&&(lsOn()||B.getSelected()===r); });
+SITES.forEach(r=>{ const lc=r.labelCheck, pc=r.pickCheck, plan=r.status==='PLAN';   // планы в истории не показываем
+  r.labelCheck=()=>(!lc||lc())&&(msOn()||B.getSelected()===r)&&!(lh&&plan); r.pickCheck=()=>(!pc||pc())&&(msOn()||B.getSelected()===r)&&!(lh&&plan); });
+hooks.vis.push(function(){
+  const sel=B.getSelected();
+  if(fl&&fl.cam==='board') B.recs.forEach(r=>{ if(r.orbit) r.orbit.visible=false; });
+  LSR.forEach(r=>{ const on=!r.hiddenByTime&&(lsOn()||sel===r); r.node.visible=on; if(r.orbit&&!on) r.orbit.visible=false; });
+  if(!msOn()) SITES.forEach(r=>{ if(r!==sel) r.node.visible=false; });
+  if(lh) SITES.forEach(r=>{ if(r.status==='PLAN') r.node.visible=false; });
+});
+const moonSw=mk('div'); moonSw.id='moonSw';
+moonSw.innerHTML='<button data-m="sats" title="Искусственные спутники Луны — работающие сейчас и в выбранный момент времени"><b>◌ СПУТНИКИ ЛУНЫ</b><small id="msLs">—</small></button>'+
+  '<button data-m="missions" title="Места посадок; щелчок по миссии — полёт по таймлайну"><b>⚑ МИССИИ</b><small id="msLm">—</small></button>'+
+  '<button data-m="both" title="Спутники и места посадок вместе"><b>◎ ВСЁ ВМЕСТЕ</b><small>спутники и посадки</small></button>'+
+  '<button class="mx" id="msLh" title="История освоения Луны: 1959 → сейчас [J]"><b>⏳ ИСТОРИЯ</b><small>1959 → сейчас</small></button>';
+vp.appendChild(moonSw); shield(moonSw);
+function setMoonMode(m,user){
+  moonMode=m; setLS('buran_moonmode',m);
+  moonSw.querySelectorAll('button[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  const sel=B.getSelected();
+  if(user&&sel&&((m==='sats'&&sel.kindType==='site')||(m==='missions'&&sel.kindType==='lsat'))) B.select(null);
+  B.applyVisibility();
+  if(user) toast(m==='sats'?'◌ СПУТНИКИ ЛУНЫ: ЩЕЛЧОК ПО ТОЧКЕ — ДОСЬЕ':(m==='missions'?'⚑ МИССИИ: ЩЕЛЧОК ПО МЕСТУ ПОСАДКИ — ПОЛЁТ ПО ТАЙМЛАЙНУ':'◎ СПУТНИКИ И МИССИИ ВМЕСТЕ'),'',2400);
+}
+moonSw.querySelectorAll('button[data-m]').forEach(b=>b.addEventListener('click',()=>setMoonMode(b.dataset.m,true)));
+$('msLh').addEventListener('click',()=>lhToggle());
+setMoonMode(moonMode,false);
+function nearMoon(){
+  if(isCine()) return false;
+  const f=B.getFollow(), cp=camera.position, dM=cp.distanceTo(B.worldPos(MOON));
+  if(f===MOON||(f&&(f.kindType==='site'||f.kindType==='lsat'))) return dM<mR*40;
+  if(f) return false;
+  return dM<mR*14&&dM<cp.distanceTo(B.worldPos(EARTH));
+}
+let mswVis=false, mswT=0;
+hooks.post.push(function(dt){
+  const show=nearMoon()&&!fl;
+  if(show!==mswVis){ mswVis=show; moonSw.classList.toggle('show',show); body.classList.toggle('moonSwOn',show); }
+  mswT-=dt; if(mswT>0||!show) return; mswT=1;
+  const t=B.getSim(), nLs=LSR.filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs)).length, nLm=LANDED.filter(r=>t>=r.launchMs).length;
+  $('msLs').textContent=nLs+' на орбите'; $('msLm').textContent=nLm+' '+plur(nLm,'миссия','миссии','миссий');
+  $('msLh').classList.toggle('on',!!lh);
+});
+
+/* ════ 3. ИСТОРИЯ ОСВОЕНИЯ ЛУНЫ: 1959 → СЕЙЧАС ═══════════════════════
+   Как «История орбиты» у Земли: места посадок появляются в день посадки, спутники Луны —
+   на время своей работы (ядро скрывает их по году шкалы через B.timeOverride). */
+const LH_EV=[[1959.70,'13 сентября 1959 — <b>«Луна-2»</b>: первый рукотворный объект на Луне'],
+  [1966.09,'3 февраля 1966 — <b>«Луна-9»</b>: первая мягкая посадка и первые панорамы с поверхности'],
+  [1966.25,'3 апреля 1966 — <b>«Луна-10»</b>: первый искусственный спутник Луны'],
+  [1968.98,'24 декабря 1968 — <b>«Аполлон-8»</b>: люди впервые на орбите Луны, снимок «Восход Земли»'],
+  [1969.55,'20 июля 1969 — <b>«Аполлон-11»</b>: первая высадка людей'],
+  [1970.71,'1970 — <b>«Луна-16»</b> привозит грунт автоматически, <b>«Луноход-1»</b> ездит по Луне'],
+  [1972.94,'Декабрь 1972 — <b>«Аполлон-17»</b>: последние люди на Луне'],
+  [1976.63,'Август 1976 — <b>«Луна-24»</b>; после неё 37 лет ни одной мягкой посадки'],
+  [1992.12,'1992 — японский <b>«Хитэн»</b>: третья страна у Луны'],
+  [1998.03,'1998 — <b>Lunar Prospector</b> находит признаки льда у полюсов'],
+  [2009.47,'2009 — <b>LRO</b>: самый долгоживущий спутник Луны работает до сих пор'],
+  [2013.95,'Декабрь 2013 — <b>«Чанъэ-3»</b> и луноход «Юйту»: Китай на Луне'],
+  [2019.00,'3 января 2019 — <b>«Чанъэ-4»</b>: первая посадка на обратной стороне'],
+  [2019.28,'Апрель 2019 — израильский <b>Beresheet</b> разбивается при посадке'],
+  [2020.92,'Декабрь 2020 — <b>«Чанъэ-5»</b> возвращает грунт спустя 44 года'],
+  [2023.63,'Август 2023 — <b>«Луна-25»</b> разбивается, <b>«Чандраян-3»</b> садится у южного полюса'],
+  [2024.05,'2024 — <b>SLIM</b> садится «на нос», <b>Odysseus</b> — первая частная посадка, <b>«Чанъэ-6»</b> везёт грунт с обратной стороны'],
+  [2025.17,'Март 2025 — <b>Blue Ghost</b>: первая полностью успешная частная посадка'],
+  [2025.6,'Сегодня у Луны работают несколько спутников; следующие — «Чанъэ-7» и «Артемида»']];
+const lhBar=mk('div','tlBar'); lhBar.id='lhBar';
+lhBar.innerHTML='<div class="tlTop"><span>⏳ ИСТОРИЯ ОСВОЕНИЯ ЛУНЫ</span><span class="tlNote">посадки и спутники Луны появляются в свой год · вспышка — новая посадка</span>'+
+  '<div class="tlSeg" id="lhSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div><button class="tlX" id="lhX" title="Выйти [J / Esc]">✕</button></div>'+
+  '<div class="tlMain"><button class="tlPlay" id="lhPlay">❚❚</button><div class="tlYear" id="lhYear">1959</div>'+
+  '<div class="tlStat"><b id="lhN">0</b> <span id="lhNl">посадок и падений</span> · <b id="lhS">0</b> <span id="lhSl">спутников на орбите</span><small id="lhAdd"></small></div></div>'+
+  '<input type="range" class="tlR" id="lhR" min="1959.5" max="2027" step="0.01" value="1959.5"><div class="tlScale"><span>1959</span><span>1970</span><span>1990</span><span>2010</span><span>сейчас</span></div>'+
+  '<div class="tlEv" id="lhEv"></div>';
+vp.appendChild(lhBar); shield(lhBar);
+let lhK=1, lhUi=0;
+function lhOpen(){
+  if(fl) stopFlight(true);
+  if(V11.hist&&V11.hist()) V11.histClose();
+  if(B.getSelected()&&(B.getSelected().kindType==='site'||B.getSelected().kindType==='lsat')) B.select(null);
+  lh={y:1959.5, play:true, ev:-1, seen:new Set()};
+  B.setFollow(MOON); B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:MOON, toR:mR*5.4, dur:1.4});
+  B.timeOverride=yMs(lh.y); B.timeVisCheck(); B.applyVisibility();
+  lhBar.classList.add('on'); body.classList.add('lhOn');
+}
+function lhClose(){ if(!lh) return; lh=null; lhBar.classList.remove('on'); body.classList.remove('lhOn');
+  B.timeOverride=null; B.timeVisCheck(); B.applyVisibility(); }
+function lhToggle(){ if(lh) lhClose(); else lhOpen(); }
+$('lhX').addEventListener('click',lhClose);
+$('lhPlay').addEventListener('click',()=>{ if(!lh) return; if(!lh.play&&lh.y>=msY(Date.now())-0.01){ lh.y=1959.5; lh.seen.clear(); } lh.play=!lh.play; });
+$('lhR').addEventListener('input',function(){ if(!lh) return; lh.y=+this.value; lh.play=false; });
+$('lhSpd').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; lhK=+b.dataset.k; [...$('lhSpd').children].forEach(x=>x.classList.toggle('on',x===b)); });
+hooks.post.push(function(dt){
+  if(!lh) return;
+  if(V11.hist&&V11.hist()){ lhClose(); return; }                     // открыли «Историю орбиты» Земли
+  const end=msY(Date.now());
+  if(lh.play){ const y=lh.y, rate=(y<1977?1.4:(y<2007?3.2:1.1))*lhK; lh.y=Math.min(end,y+dt*rate); if(lh.y>=end) lh.play=false; }
+  B.timeOverride=yMs(lh.y);
+  lhUi-=dt; if(lhUi>0) return; lhUi=0.06;
+  B.timeVisCheck();
+  $('lhPlay').textContent=lh.play?'❚❚':'▶';
+  $('lhYear').textContent=lh.y>=end-0.01?'СЕЙЧАС':String(Math.floor(lh.y));
+  $('lhR').value=String(lh.y);
+  const t=yMs(lh.y), land=LANDED.filter(r=>t>=r.launchMs), on=LSR.filter(r=>t>=r.launchMs&&(r.endMs==null||t<=r.endMs));
+  $('lhN').textContent=land.length; $('lhS').textContent=on.length; $('lhNl').textContent=plur(land.length,'посадка или падение','посадки и падения','посадок и падений'); $('lhSl').textContent=plur(on.length,'спутник на орбите','спутника на орбите','спутников на орбите');
+  $('lhAdd').textContent=on.length?'на орбите: '+on.map(r=>r.name).join(', '):'';
+  land.forEach(r=>{ if(lh.seen.has(r)) return; lh.seen.add(r); const el=r.labelEl; if(el){ el.classList.remove('born'); void el.offsetWidth; el.classList.add('born'); } });
+  let ei=-1; LH_EV.forEach((e,i)=>{ if(e[0]<=lh.y) ei=i; });
+  if(ei!==lh.ev){ lh.ev=ei; const ev=$('lhEv'); ev.style.opacity=0; setTimeout(()=>{ ev.innerHTML=ei>=0?LH_EV[ei][1]:''; ev.style.opacity=1; },220); }
+});
+
+/* ════ 4. ПОЛЁТ МИССИИ ПО ТАЙМЛАЙНУ ═════════════════════════════════
+   Выбор места посадки запускает реальное время миссии: модельные часы ставятся на момент старта
+   и идут быстрее (на старте и посадке — медленно, в перелёте — быстро). Аппарат летит по траектории,
+   построенной под даты миссии: старт с космодрома, опорная орбита, разгон, перелёт к той точке,
+   где Луна окажется в момент прибытия, окололунная орбита и посадка. Время: L — старт, O — выход
+   на орбиту Луны, T — уход к Луне (если были витки у Земли), E — посадка/падение (UTC). */
+const MT={
+ luna2:{L:'1959-09-12T06:39Z', E:'1959-09-13T21:02Z', tli:0.2},
+ luna9:{L:'1966-01-31T11:41Z', E:'1966-02-03T18:45Z', tli:1.1},
+ surveyor1:{L:'1966-05-30T14:41Z', E:'1966-06-02T06:17Z', tli:0.2},
+ apollo11:{L:'1969-07-16T13:32Z', O:'1969-07-19T17:22Z', E:'1969-07-20T20:17Z', tli:2.73},
+ apollo12:{L:'1969-11-14T16:22Z', O:'1969-11-18T03:47Z', E:'1969-11-19T06:54Z', tli:2.8},
+ apollo14:{L:'1971-01-31T21:03Z', O:'1971-02-04T07:00Z', E:'1971-02-05T09:18Z', tli:2.6},
+ apollo15:{L:'1971-07-26T13:34Z', O:'1971-07-29T20:06Z', E:'1971-07-30T22:16Z', tli:2.9},
+ apollo16:{L:'1972-04-16T17:54Z', O:'1972-04-19T20:22Z', E:'1972-04-21T02:23Z', tli:2.6},
+ apollo17:{L:'1972-12-07T05:33Z', O:'1972-12-10T19:47Z', E:'1972-12-11T19:55Z', tli:3.3},
+ luna16:{L:'1970-09-12T13:26Z', O:'1970-09-17T00:00Z', E:'1970-09-20T05:18Z', tli:1.2},
+ luna17:{L:'1970-11-10T14:44Z', O:'1970-11-15T00:00Z', E:'1970-11-17T03:47Z', tli:1.2},
+ luna21:{L:'1973-01-08T06:56Z', O:'1973-01-12T00:00Z', E:'1973-01-15T22:35Z', tli:1.2},
+ luna24:{L:'1976-08-09T15:04Z', O:'1976-08-14T00:00Z', E:'1976-08-18T06:36Z', tli:1.2},
+ change3:{L:'2013-12-01T17:30Z', O:'2013-12-06T09:53Z', E:'2013-12-14T13:11Z', tli:0.4},
+ change4:{L:'2018-12-07T18:23Z', O:'2018-12-12T08:45Z', E:'2019-01-03T02:26Z', tli:0.4},
+ change5:{L:'2020-11-23T20:30Z', O:'2020-11-28T12:58Z', E:'2020-12-01T15:11Z', tli:0.6},
+ change6:{L:'2024-05-03T09:27Z', O:'2024-05-08T02:12Z', E:'2024-06-01T22:23Z', tli:0.6},
+ chandrayaan3:{L:'2023-07-14T09:05Z', T:'2023-07-31T18:30Z', O:'2023-08-05T13:45Z', E:'2023-08-23T12:32Z'},
+ slim:{L:'2023-09-06T23:42Z', T:'2023-09-30T00:00Z', O:'2023-12-25T07:51Z', E:'2024-01-19T15:20Z'},
+ im1:{L:'2024-02-15T06:05Z', O:'2024-02-21T08:11Z', E:'2024-02-22T23:23Z', tli:0.8},
+ blueghost1:{L:'2025-01-15T06:11Z', T:'2025-02-09T00:00Z', O:'2025-02-13T21:45Z', E:'2025-03-02T08:34Z'},
+ im2:{L:'2025-02-27T00:16Z', O:'2025-03-03T00:00Z', E:'2025-03-06T17:28Z', tli:0.8},
+ luna25:{L:'2023-08-10T23:10Z', O:'2023-08-16T09:57Z', E:'2023-08-19T11:57Z', tli:1.1},
+ beresheet:{L:'2019-02-22T01:45Z', T:'2019-03-28T00:00Z', O:'2019-04-04T14:18Z', E:'2019-04-11T19:23Z'}
+};
+const PH_TXT={
+  asc:S=>'Старт: '+(S._pad||'космодром')+' — ракета выводит аппарат на опорную орбиту около 190 км. Земля вращается — космодром уплывает из-под траектории.',
+  leo:()=>'Опорная орбита: виток за полтора часа, проверка систем перед разгоном к Луне.',
+  loops:()=>'Витки у Земли: двигатель включают в перигее, и апогей растёт с каждым витком — так экономят топливо.',
+  trans:(S,f)=>'Перелёт: аппарат летит не туда, где Луна сейчас, а туда, где она будет через '+fmtDays(f.Tloi-f.Ttli)+' (пунктирный круг). Луна движется навстречу.',
+  llo:(S,f)=>'Орбита Луны: '+(f.revR>10?'≈ '+Math.round(f.revR)+' витков (показано меньше)':'витки')+' в ожидании, пока место посадки окажется под трассой.'+(f.cam==='board'?' С борта видно, как Земля восходит над лунным горизонтом.':''),
+  desc:S=>S.status==='FAIL'?'Спуск закончился аварией: '+(S.tip||''):'Спуск: торможение с 1,7 км/с почти до нуля за 12–15 минут.',
+  hold:S=>S.status==='FAIL'?'Аппарат разбился — на карте отмечено место падения.':'На Луне. '+(S.tip||'')
+};
+const PH_COL={asc:'#ff6a3d', leo:'#ffb84d', loops:'#ffb84d', trans:'#ffd27a', llo:'#7fd8ff', desc:'#ffd27a', hold:'#9bff9b'};
+const flE=new THREE.Group(); EARTH.node.add(flE);                     // линии в системе Земли
+const flM=new THREE.Group(); lfr.add(flM);                            // линии у Луны (неподвижные относительно звёзд)
+const flCraft=B.glowSprite(B.GLOW.amber,1,1); flCraft.visible=false; B.scene.add(flCraft);
+const flMid={node:new THREE.Group(), visR:1, minR:2, kindType:'flmid', name:'перелёт'}; EARTH.node.add(flMid.node);
+const flGhostTxt=mk('div','flGhost','Луна в момент прибытия'); flGhostTxt.style.display='none'; B.labelsRoot.appendChild(flGhostTxt);
+const _r=new V3(), _q=new V3(), _w=new V3();
+function lineOf(pts,col,op,loop,dash){
+  const g=new THREE.BufferGeometry().setFromPoints(pts);
+  const m=dash?new THREE.LineDashedMaterial({color:col,transparent:true,opacity:op,dashSize:mR*0.18,gapSize:mR*0.12}):new THREE.LineBasicMaterial({color:col,transparent:true,opacity:op});
+  const l=new (loop?THREE.LineLoop:THREE.Line)(g,m); l.frustumCulled=false; if(dash) l.computeLineDistances(); return l;
+}
+function clearGrp(g){ g.children.slice().forEach(c=>{ g.remove(c); if(c.geometry) c.geometry.dispose(); if(c.material) c.material.dispose(); }); }
+function mtOf(S){
+  if(MT[S.id]) return MT[S.id];
+  const m=String(S.date||'').match(/(\d{2})\.(\d{2})\.(\d{4})/); if(!m) return null;
+  const E=Date.UTC(+m[3],+m[2]-1,+m[1],12); const iso=t=>new Date(t).toISOString().slice(0,16)+'Z';
+  return {L:iso(E-4.5*DAY_MS), O:iso(E-DAY_MS), E:iso(E), tli:1};
+}
+const flightOk=S=>!!S&&S.kindType==='site'&&S.status!=='PLAN'&&!!mtOf(S);
+window.__flightOn=S=>!!fl&&fl.S===S;
+B.skyNear=()=>!!fl||nearMoon();
+function buildFlight(S){
+  const m=mtOf(S), type=S.traj||'orbit', direct=type==='direct', phasing=type==='phasing';
+  const T0=Date.parse(m.L), TE=Date.parse(m.E), Tin=T0+12*60000, PLEO=88.5*60000;
+  let Ttli=m.T?Date.parse(m.T):T0+(m.tli||1)*3600000; if(Ttli<Tin+15*60000) Ttli=Tin+15*60000;
+  const Tloi=direct?TE:(m.O?Date.parse(m.O):TE-DAY_MS), Tdes=direct?TE:TE-15*60000, Tend=TE+3*3600000;
+  const pad=(V8.MPAD&&V8.MPAD[V8.SITE_PAD[S.id]])||[45.92,63.34,'Байконур']; S._pad=pad[2];
+  const P0=padRel(pad[0],pad[1],T0), rad=P0.clone().normalize();
+  const mArr=moonRel(Tloi), toM=mArr.clone().normalize();
+  let n=new V3().crossVectors(rad,toM); if(n.lengthSq()<1e-6) n.set(0,1,0); n.normalize();
+  const tg=new V3().crossVectors(n,rad).normalize();
+  const R0=eR*1.03, A0=0.35, dir=(a,o)=>(o||new V3()).copy(rad).multiplyScalar(Math.cos(a)).addScaledVector(tg,Math.sin(a));
+  let aT=Math.atan2(toM.dot(tg),toM.dot(rad))+Math.PI-0.25; while(aT<A0+0.3) aT+=2*Math.PI;
+  if(!phasing){ const k=Math.max(0,Math.round((A0+(Ttli-Tin)/PLEO*2*Math.PI-aT)/(2*Math.PI))); aT+=2*Math.PI*k; }
+  const Tpk=phasing?Tin+Math.min(0.9,(aT-A0)/(2*Math.PI))*PLEO:Ttli;
+  const ph=[];
+  ph.push({k:'asc', name:'СТАРТ', t0:T0, t1:Tin, w:.07, pos:(t,o)=>{ const s=clamp((t-T0)/(Tin-T0),0,1); return dir(s*A0,o).multiplyScalar(eR*1.002+(R0-eR*1.002)*Math.sin(s*Math.PI/2)); }});
+  ph.push({k:'leo', name:'ОРБИТА ЗЕМЛИ', t0:Tin, t1:Tpk, w:phasing?.04:.10, pos:(t,o)=>dir(A0+(aT-A0)*clamp((t-Tin)/(Tpk-Tin),0,1),o).multiplyScalar(R0)});
+  const dEM=MOON.rOrb, loops=[];
+  if(phasing){
+    let sw=0; for(let i=1;i<=4;i++){ const ra=R0+(dEM*0.62-R0)*i/4, a=(R0+ra)/2; loops.push({a:a, e:(ra-R0)/(ra+R0), wg:Math.pow(a,1.5)}); sw+=Math.pow(a,1.5); }
+    let tc=Tpk; loops.forEach(L=>{ L.t0=tc; L.t1=tc+(Ttli-Tpk)*L.wg/sw; tc=L.t1; });
+    ph.push({k:'loops', name:'ВИТКИ У ЗЕМЛИ', t0:Tpk, t1:Ttli, w:.28, pos:(t,o)=>{ const L=loops.find(x=>t<x.t1)||loops[loops.length-1];
+      const E=kepE(2*Math.PI*clamp((t-L.t0)/(L.t1-L.t0),0,1),L.e), nu=2*Math.atan2(Math.sqrt(1+L.e)*Math.sin(E/2),Math.sqrt(1-L.e)*Math.cos(E/2));
+      return dir(aT+nu,o).multiplyScalar(L.a*(1-L.e*Math.cos(E))); }});
+  }
+  // окололунная орбита (инерциальная) в плоскости, проходящей над местом посадки в момент посадки
+  const sTE=siteOff(S,TE), u=sTE.clone().normalize(), aM=moonAng(TE);
+  let nl=new V3().crossVectors(u,new V3(-Math.sin(aM),0,-Math.cos(aM))); if(nl.lengthSq()<1e-6) nl.set(0,1,0); nl.normalize();
+  const v=new V3().crossVectors(nl,u).normalize(), oR=mR*1.35, DD=0.5, PLL=2*3600000;
+  const revR=Math.max(0,(Tdes-Tloi)/PLL), revV=Math.min(revR,10);
+  const phi=t=>-DD-2*Math.PI*revV*(Tdes-t)/Math.max(1,Tdes-Tloi);
+  const llo=(a,o)=>(o||new V3()).copy(u).multiplyScalar(Math.cos(a)*oR).addScaledVector(v,Math.sin(a)*oR);
+  const aOff=direct?sTE.clone():llo(phi(Tloi)), A=mArr.clone().add(aOff);
+  const P1=dir(aT).multiplyScalar(R0), vT=rad.clone().multiplyScalar(-Math.sin(aT)).addScaledVector(tg,Math.cos(aT)).normalize();
+  const mv=new V3(-toM.z,0,toM.x).normalize();
+  let trans;
+  if(type==='wsb'){ // уход за Луну и возвращение (SLIM): две дуги
+    const F=toM.clone().multiplyScalar(dEM*1.9).addScaledVector(mv,dEM*0.55);
+    const c1=P1.clone().addScaledVector(vT,dEM*0.6), c2=F.clone().addScaledVector(mv,-dEM*0.3), c3=F.clone().addScaledVector(toM,-dEM*0.4), c4=A.clone().addScaledVector(toM,mR*6);
+    trans=(s,o)=>s<0.5?bz(P1,c1,c2,F,s*2,o):bz(F,c3,c4,A,(s-0.5)*2,o);
+  } else {
+    const c1=P1.clone().addScaledVector(vT,dEM*(direct?0.42:0.36));
+    const c2=direct?A.clone().addScaledVector(aOff.clone().normalize(),mR*3).addScaledVector(toM,-dEM*0.12):A.clone().addScaledVector(toM,-dEM*0.22).addScaledVector(mv,-mR*1.2);
+    trans=(s,o)=>bz(P1,c1,c2,A,s,o);
+  }
+  const ease=s=>1-Math.pow(1-s,1.6);                                   // у Земли быстро, к Луне медленнее
+  ph.push({k:'trans', name:direct?'ПЕРЕЛЁТ И ПОСАДКА':'ПЕРЕЛЁТ К ЛУНЕ', t0:Ttli, t1:Tloi, w:direct?.75:(phasing?.24:(type==='wsb'?.46:.38)),
+    pos:(t,o)=>trans(ease(clamp((t-Ttli)/(Tloi-Ttli),0,1)),o)});
+  const D0=llo(-DD), c1d=D0.clone().addScaledVector(v,oR*0.35), c2d=sTE.clone().addScaledVector(u,mR*0.14);
+  if(!direct){
+    ph.push({k:'llo', name:'ОРБИТА ЛУНЫ', t0:Tloi, t1:Tdes, w:phasing?.22:(type==='wsb'?.24:.28), pos:(t,o)=>moonRel(t,o).add(llo(phi(t),_q))});
+    ph.push({k:'desc', name:S.status==='FAIL'?'ПАДЕНИЕ':'ПОСАДКА', t0:Tdes, t1:TE, w:.10, pos:(t,o)=>moonRel(t,o).add(bz(D0,c1d,c2d,sTE,clamp((t-Tdes)/(TE-Tdes),0,1),_q))});
+  }
+  ph.push({k:'hold', name:S.status==='FAIL'?'МЕСТО ПАДЕНИЯ':'НА ЛУНЕ', t0:TE, t1:Tend, w:.08, pos:(t,o)=>moonRel(t,o).add(siteOff(S,t,_q))});
+  const sw=ph.reduce((a,p)=>a+p.w,0); let uc=0; ph.forEach(p=>{ p.u0=uc; uc+=p.w/sw; p.u1=uc; });
+  // линии
+  clearGrp(flE); clearGrp(flM);
+  const smp=(p,nn)=>{ const a=[]; for(let i=0;i<=nn;i++) a.push(p.pos(p.t0+(p.t1-p.t0)*i/nn,new V3())); return a; };
+  flE.add(lineOf(smp(ph[0],24),0xff6a3d,0.95));
+  const leoN=Math.max(30,Math.round((aT-A0)*30)); flE.add(lineOf(smp(ph[1],leoN),0xffb84d,0.75));
+  if(phasing) loops.forEach(L=>{ const a=[]; for(let i=0;i<=120;i++){ const E=i/120*Math.PI*2, nu=2*Math.atan2(Math.sqrt(1+L.e)*Math.sin(E/2),Math.sqrt(1-L.e)*Math.cos(E/2));
+    a.push(dir(aT+nu).multiplyScalar(L.a*(1-L.e*Math.cos(E)))); } flE.add(lineOf(a,0xffb84d,0.45)); });
+  const tp=[]; for(let i=0;i<=160;i++) tp.push(trans(i/160,new V3())); flE.add(lineOf(tp,0xffd27a,0.9));
+  const gh=[]; for(let i=0;i<64;i++){ const a=i/64*Math.PI*2; gh.push(new V3(mArr.x+Math.cos(a)*mR*1.12,mArr.y,mArr.z+Math.sin(a)*mR*1.12)); }
+  const ghost=lineOf(gh,0xbfe9ff,0.55,true,true); flE.add(ghost);
+  if(!direct){ const lp=[]; for(let i=0;i<128;i++) lp.push(llo(i/128*Math.PI*2)); flM.add(lineOf(lp,0x7fd8ff,0.7,true));
+    const dp=[]; for(let i=0;i<=30;i++) dp.push(bz(D0,c1d,c2d,sTE,i/30,new V3())); flM.add(lineOf(dp,0xffd27a,0.95)); }
+  flE.visible=flM.visible=true; flMid.node.position.copy(type==='wsb'?toM.clone().multiplyScalar(dEM*0.85):mArr.clone().multiplyScalar(0.42));
+  return {S:S, ph:ph, T0:T0, TE:TE, Tin:Tin, Ttli:Ttli, Tloi:Tloi, Tdes:Tdes, Tend:Tend, revR:revR, ghost:ghost, mArr:mArr,
+    P0n:rad.clone(), tg:tg, n:n, toM:toM, u:u, wsb:type==='wsb', cam:'auto', pk:null, playing:true, k:1, cw:new V3()};
+}
+const phAtT=(f,t)=>f.ph.find(p=>t<p.t1)||f.ph[f.ph.length-1];
+const uOfT=(f,t)=>{ const p=phAtT(f,t); return p.u0+(p.u1-p.u0)*clamp((t-p.t0)/(p.t1-p.t0),0,1); };
+const tOfU=(f,u)=>{ const p=f.ph.find(q=>u<q.u1)||f.ph[f.ph.length-1]; return p.t0+(p.t1-p.t0)*clamp((u-p.u0)/(p.u1-p.u0),0,1); };
+const PLAY_S=46;                                                        // длительность показа при ×1, секунд
+function camFor(f,k){
+  if(k==='asc'||k==='leo') return {rec:EARTH, r:eR*3.6, d:f.P0n.clone().multiplyScalar(0.72).addScaledVector(f.tg,-0.4).addScaledVector(f.n,0.55).normalize()};
+  if(k==='loops'||k==='trans') return {rec:flMid, r:MOON.rOrb*(k==='loops'?1.9:(f.wsb?3.1:1.8)), d:new V3(0,0.9,0).addScaledVector(f.toM,-0.42).normalize()};
+  return {rec:MOON, r:mR*4.4, d:f.u.clone().multiplyScalar(0.72).addScaledVector(new V3(0,1,0),0.4).addScaledVector(f.toM,-0.35).normalize()};
+}
+function applyCam(f,k,fast){
+  const c=camFor(f,k); f.camWant=c;
+  if(f.cam==='free') return;
+  B.setFollow(c.rec); B.setFocusAnim({t:0, fromT:B.camTarget.clone(), fromR:B.sph.r, rec:c.rec, toR:c.r, dur:fast?0.01:1.6});
+}
+const flBar=mk('div','tlBar'); flBar.id='flBar';
+flBar.innerHTML='<div class="tlTop"><span>▲ <b id="flName">МИССИЯ</b> · ПОЛЁТ К ЛУНЕ</span><span class="tlNote" id="flNote">реальные даты: Земля и Луна движутся вместе со временем</span>'+
+  '<div class="tlSeg" id="flSpd"><button data-k="0.5">×½</button><button data-k="1" class="on">×1</button><button data-k="2">×2</button></div>'+
+  '<div class="tlSeg" id="flCam"><button data-c="auto" class="on" title="Камера сама следит за полётом">◎ АВТО</button><button data-c="board" title="Вид с борта: на Луну, а на орбите Луны — на восход Земли">◉ С БОРТА</button><button data-c="free" title="Свободная камера">✥ СВОБОДНО</button></div>'+
+  '<button class="tlX" id="flX" title="Закрыть и вернуться в реальное время [Esc]">✕</button></div>'+
+  '<div class="tlMain"><button class="tlPlay" id="flPlay">❚❚</button><div class="flWhen"><b id="flDate">—</b><small id="flMet">T+ 0</small></div>'+
+  '<div class="flPh"><small>ФАЗА</small><b id="flPhase">—</b></div></div>'+
+  '<div class="flTrack"><div class="flSegs" id="flSegs"></div><input type="range" id="flR" min="0" max="1000" step="1" value="0"></div>'+
+  '<div class="tlEv" id="flEv"></div>';
+vp.appendChild(flBar); shield(flBar);
+let flPrev=null, flUi=0;
+function startFlight(S){
+  if(fl&&fl.S===S) return;
+  if(lh) lhClose();
+  if(V11.hist&&V11.hist()) V11.histClose();
+  if(!flPrev) flPrev={sim:B.getSim(), live:B.isLive(), speed:B.getSpeed()};
+  fl=buildFlight(S);
+  $('flName').textContent=S.name.toUpperCase();
+  $('flSegs').innerHTML=fl.ph.map(p=>'<div data-k="'+p.k+'" style="flex:'+(p.u1-p.u0).toFixed(4)+';background:'+PH_COL[p.k]+'">'+p.name+'</div>').join('');
+  [...$('flCam').children].forEach(x=>x.classList.toggle('on',x.dataset.c===fl.cam));
+  B.setSim(fl.T0); fl.playing=true;
+  flBar.classList.add('on'); body.classList.add('flOn');
+  fl.pk=null; flUi=0;
+}
+function stopFlight(restore){
+  if(!fl) return;
+  const wasBoard=fl.cam==='board'; fl=null; flBar.classList.remove('on'); body.classList.remove('flOn'); if(wasBoard) B.applyVisibility();
+  flE.visible=flM.visible=flCraft.visible=false; flGhostTxt.style.display='none';
+  const p=flPrev; flPrev=null;
+  B.setSpeed(p&&p.speed?p.speed:1);
+  if(restore!==false&&p) B.setSim(p.live?Date.now():p.sim);
+  B.timeVisCheck&&B.timeVisCheck();
+}
+$('flX').addEventListener('click',()=>{ stopFlight(true); if(B.getSelected()&&B.getSelected().kindType==='site'){ B.focusOn(B.getSelected()); } });
+$('flPlay').addEventListener('click',()=>{ if(!fl) return; if(!fl.playing&&B.getSim()>=fl.Tend-60000) B.setSim(fl.T0); fl.playing=!fl.playing; });
+$('flR').addEventListener('input',function(){ if(!fl) return; fl.playing=false; B.setSim(tOfU(fl,this.value/1000)); });
+$('flSpd').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||!fl) return; fl.k=+b.dataset.k; [...$('flSpd').children].forEach(x=>x.classList.toggle('on',x===b)); });
+$('flCam').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||!fl) return; fl.cam=b.dataset.c;
+  [...$('flCam').children].forEach(x=>x.classList.toggle('on',x===b)); if(fl.cam!=='free'&&fl.pk) applyCam(fl,fl.pk,false); B.applyVisibility(); });
+// жест пользователя мышью — камера становится свободной
+['pointerdown','wheel'].forEach(ev=>B.renderer.domElement.addEventListener(ev,()=>{ if(fl&&fl.cam==='auto'){ fl.cam='free'; [...$('flCam').children].forEach(x=>x.classList.toggle('on',x.dataset.c==='free')); } },{passive:true}));
+hooks.select.push(function(r){
+  if(r&&flightOk(r)&&!isCine()) startFlight(r);
+  else if(fl&&r!==fl.S) stopFlight(true);
+});
+const DEF_ANG=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
+hooks.post.push(function(dt){
+  if(!fl) return;
+  if(B.getSelected()!==fl.S){ stopFlight(true); return; }
+  const t=B.getSim();
+  if(t<fl.T0-6*3600000||t>fl.Tend+2*DAY_MS){ stopFlight(false); return; }   // время переставили кнопкой «Сейчас» или командой
+  const u=uOfT(fl,t), p=phAtT(fl,t);
+  if(fl.playing&&u>=0.9999){ fl.playing=false; }
+  // скорость модельных часов на следующий кадр: нужная фаза за свою долю показа
+  B.setSpeed(fl.playing?(p.t1-p.t0)/Math.max(1e-6,p.u1-p.u0)/(PLAY_S*1000)*fl.k:0);
+  p.pos(t,_r); fl.cw.copy(EARTH.node.position).add(_r);
+  flCraft.position.copy(fl.cw); flCraft.visible=true;
+  flCraft.scale.setScalar(clamp(camera.position.distanceTo(fl.cw)*0.03,0.02,40));
+  if(p.k!==fl.pk){ fl.pk=p.k; if(fl.cam!=='free') applyCam(fl,p.k,false); flE.visible=!(p.k==='llo'||p.k==='desc'||p.k==='hold'); }
+  // автокамера: плавно разворачиваемся к нужному ракурсу
+  if(fl.cam==='auto'&&fl.camWant){ const d=fl.camWant.d, th=Math.atan2(d.z,d.x), ph=Math.acos(clamp(d.y,-1,1)), k=Math.min(1,dt*1.6);
+    B.sph.theta+=DEF_ANG(B.sph.theta,th)*k; B.sph.phi+=(ph-B.sph.phi)*k; }
+  // подпись «Луна в момент прибытия» — пока аппарат в пути
+  const showG=t<fl.Tloi&&(p.k==='trans'||p.k==='loops'||p.k==='leo');
+  fl.ghost.visible=showG;
+  if(showG){ _w.copy(EARTH.node.position).add(fl.mArr).project(camera);
+    if(_w.z<1&&Math.abs(_w.x)<1&&Math.abs(_w.y)<1){ flGhostTxt.style.display='block'; flGhostTxt.style.left=((_w.x+1)/2*vp.clientWidth)+'px'; flGhostTxt.style.top=((1-_w.y)/2*vp.clientHeight)+'px'; }
+    else flGhostTxt.style.display='none'; } else flGhostTxt.style.display='none';
+  flUi-=dt; if(flUi>0) return; flUi=0.1;
+  $('flDate').textContent=fmtUTC(t); $('flMet').textContent=fmtMET(t-fl.T0)+' · посадка '+fmtD(new Date(fl.TE).toISOString().slice(0,10));
+  $('flPhase').textContent=p.name; $('flPlay').textContent=fl.playing?'❚❚':'▶';
+  $('flR').value=String(Math.round(u*1000));
+  [...$('flSegs').children].forEach(d=>d.classList.toggle('cur',d.dataset.k===p.k));
+  const tx=PH_TXT[p.k](fl.S,fl); if($('flEv').textContent!==tx) $('flEv').textContent=tx;
+});
+// вид с борта: к Луне в пути, к Земле — на орбите Луны и на поверхности («Восход Земли»)
+hooks.cam.push(function(){
+  if(!fl||fl.cam!=='board'||!fl.pk) return;
+  const k=fl.pk, toEarth=k==='llo'||k==='desc'||k==='hold', c=fl.cw;
+  const tgt=(toEarth?B.worldPos(EARTH):B.worldPos(MOON)).clone(), d=tgt.clone().sub(c).normalize();
+  if(toEarth){ const up=c.clone().sub(B.worldPos(MOON)).normalize(), hz=d.clone().addScaledVector(up,-d.dot(up)); if(hz.lengthSq()<1e-6) hz.copy(fl.u); hz.normalize();
+    camera.position.copy(c).addScaledVector(up,k==='hold'?mR*0.05:mR*0.06).addScaledVector(hz,-(k==='hold'?mR*0.12:mR*0.2)); }
+  else camera.position.copy(c).addScaledVector(d,-(k==='asc'||k==='leo'?eR*0.3:mR*0.9)).add(new V3(0,mR*0.25,0));
+  camera.up.set(0,1,0); camera.lookAt(tgt);
+});
+
+/* ════ 5. НОВЫЕ ТЕЛА ДЛЯ ВКЛАДКИ «АНОМАЛИИ»: КАРЛИКОВЫЕ ПЛАНЕТЫ, АСТЕРОИДЫ, ЗОНДЫ ═══
+   Элементы орбит — приближённые (JPL/MPC, эпоха J2000 по средней аномалии); положение условное
+   в пределах нескольких градусов. */
+const BODIES=[
+ {id:'eris', name:'Эрида', code:'ERI', kind:'dwarf', rKm:1163, el:{a:67.86,e:0.4361,i:44.04,O:35.95,w:151.64,M0:195},
+  facts:[['Класс','карликовая планета'],['Диаметр','2 326 км'],['Наклон орбиты','44°'],['Период','≈ 560 лет']],
+  desc:'Самая массивная известная карликовая планета: на четверть тяжелее Плутона. Летает под углом 44° к плоскости планет и сейчас находится почти в самой дальней точке орбиты — около 96 а.е. от Солнца.'},
+ {id:'sedna', name:'Седна', code:'SED', kind:'dwarf', rKm:500, el:{a:506,e:0.855,i:11.93,O:144.4,w:311.4,M0:357.6},
+  facts:[['Перигелий','76 а.е. (2076 год)'],['Афелий','≈ 940 а.е.'],['Период','≈ 11 400 лет']],
+  desc:'Одно из самых далёких известных тел Солнечной системы. Сейчас подлетает к перигелию, который пройдёт в 2076 году, а потом снова уйдёт почти на тысячу астрономических единиц.'},
+ {id:'haumea', name:'Хаумеа', code:'HAU', kind:'dwarf', rKm:780, el:{a:43.1,e:0.195,i:28.2,O:122.2,w:239.0,M0:190.8},
+  facts:[['Класс','карликовая планета'],['Сутки','3,9 часа'],['Наклон орбиты','28°'],['Особенность','кольцо, два спутника']],
+  desc:'Быстро вращающаяся карликовая планета пояса Койпера, вытянутая в эллипсоид. В 2017 году у неё обнаружили кольцо.'},
+ {id:'makemake', name:'Макемаке', code:'MAK', kind:'dwarf', rKm:715, el:{a:45.4,e:0.161,i:29.0,O:79.6,w:294.8,M0:141},
+  facts:[['Класс','карликовая планета'],['Наклон орбиты','29°'],['Период','≈ 305 лет']],
+  desc:'Карликовая планета пояса Койпера с поверхностью из метанового льда. В 2016 году у неё нашли маленький тёмный спутник.'},
+ {id:'arrokoth', name:'Аррокот', code:'ARR', kind:'asteroid', rKm:18, el:{a:44.58,e:0.034,i:2.45,O:158.9,w:174.4,M0:291},
+  facts:[['Пролёт New Horizons','1 января 2019'],['Длина','36 км']],
+  desc:'Объект пояса Койпера, похожий на снеговик из двух слипшихся лепёшек. Самое далёкое и древнее тело, которое снимали вблизи.'},
+ {id:'phaethon', name:'Фаэтон', code:'PHA', kind:'asteroid', rKm:3, el:{a:1.271,e:0.8898,i:22.26,O:265.2,w:322.2,M0:143.5},
+  facts:[['Перигелий','0,14 а.е.'],['Метеорный поток','Геминиды']],
+  desc:'Астероид, подходящий к Солнцу ближе Меркурия. Родитель метеорного потока Геминиды.'},
+ {id:'kamooalewa', name:'Камоалева', code:'KAM', kind:'asteroid', rKm:0.05, el:{a:1.0,e:0.103,i:7.79,O:66.0,w:305.0,M0:89.5},
+  facts:[['Тип','квазиспутник Земли'],['Размер','40–100 м']],
+  desc:'Квазиспутник Земли: обращается вокруг Солнца почти синхронно с Землёй и год за годом остаётся рядом. Возможно, осколок Луны.'},
+ {id:'bz509', name:'2015 BZ509', code:'BZ5', kind:'asteroid', rKm:1.5, el:{a:5.14,e:0.381,i:163.0,O:307.4,w:257.4,M0:100},
+  facts:[['Наклон орбиты','163° — обратная'],['Период','≈ 11,6 года']],
+  desc:'Астероид, который делит орбиту с Юпитером, но обращается в обратную сторону.'},
+ {id:'didymos', name:'Дидим и Диморф', code:'DID', kind:'asteroid', rKm:0.4, el:{a:1.6427,e:0.3832,i:3.414,O:73.19,w:319.3,M0:59.8},
+  facts:[['Дидим','≈ 780 м'],['Диморф','≈ 160 м'],['Удар DART','26 сентября 2022']],
+  desc:'Двойной астероид. В его спутник Диморф врезался аппарат NASA DART — первый опыт защиты Земли от астероидов. Сейчас к паре летит европейский зонд Hera.'},
+ {id:'ulysses', name:'Улисс', code:'ULS', kind:'probe', el:{a:3.37,e:0.603,i:79.13,O:337.2,w:22.8,M0:30}, status:'INA',
+  facts:[['Агентства','ESA и NASA'],['Запуск','6 октября 1990'],['Наклон орбиты','80°'],['Работал до','2009']],
+  desc:'Единственный аппарат, ушедший далеко от плоскости планет: гравитация Юпитера в 1992 году развернула его на орбиту под углом 80°, и он трижды пролетел над полюсами Солнца.'},
+ {id:'roadster', name:'Tesla Roadster', code:'TSL', kind:'probe', launch:'2018-02-06', el:{a:1.3248,e:0.2558,i:1.077,O:317.4,w:177.3,M0:232.4},
+  facts:[['Запуск','6 февраля 2018, Falcon Heavy'],['Орбита','0,99–1,66 а.е.'],['Период','≈ 557 сут']],
+  desc:'Вишнёвый электромобиль с манекеном Starman в скафандре — груз первого пуска Falcon Heavy. Летает вокруг Солнца, заходя за орбиту Марса.'}
+];
+const NEWB={};
+BODIES.forEach(A=>{
+  const e=A.el, grp=new THREE.Group(); B.scene.add(grp); let mesh=null, vR;
+  let glow;
+  if(A.kind==='probe'){ vR=0.5; glow=B.glowSprite(B.GLOW.cyan,1.6,0.9); grp.add(glow); }
+  else { vR=Math.max(0.5,B.visRad(A.rKm)*0.8); const mat=new THREE.MeshPhongMaterial({color:A.kind==='dwarf'?0xb8aa98:0x8f8a82, shininess:3});
+    mesh=new THREE.Mesh(new THREE.SphereGeometry(vR,16,12),mat); grp.add(mesh); glow=B.glowSprite(B.GLOW.white,vR*2.6,0.22); grp.add(glow); }
+  const pts=[]; for(let k=0;k<=240;k++) pts.push(B.sv(B.elToPos(e.a,e.e,e.i,e.O,e.w,k/240*360)));
+  const col=A.kind==='probe'?0x3f8fa8:0x6a5f88;
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:col,transparent:true,opacity:0.28}));
+  line.userData={baseColor:col, baseOp:0.28}; B.scene.add(line);
+  const r=B.addRec({id:A.id, code:A.code, name:A.name, kindType:A.kind==='probe'?'probe':(A.kind==='dwarf'?'dwarf':'asteroid'), type:A.kind,
+    node:grp, mesh:mesh, glow:glow, visR:vR, orbit:line, el:e, labelColor:A.kind==='probe'?'#7fd8ff':'#b9a6e8', approx:true, status:A.status,
+    cat:A.kind==='probe'?'probe':'asteroid', facts:A.facts, desc:A.desc});
+  if(A.launch) r.launchMs=Date.parse(A.launch+'T00:00:00Z');
+  NEWB[A.id]=r;
+});
+B.timeVisCheck&&B.timeVisCheck(); B.applyVisibility();
+
+/* ════ 6. ВКЛАДКИ «АНОМАЛИИ» И «КАТАСТРОФЫ» ══════════════════════════
+   go: rec — объект карты; name — по имени; body — новое тело (раздел 5); earth — место на Земле;
+   sat — спутник каталога (NORAD или RegExp по имени); deb — подсветить облако обломков. */
+const STORIES=[
+ // ── АНОМАЛИИ И СТРАННОСТИ
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'pluto', t:'Плутон: орбита под углом', y:'1930', h:'17° к эклиптике и заход внутрь орбиты Нептуна', go:{rec:'pluto'},
+  x:'Орбита Плутона наклонена к плоскости планет на 17° и так вытянута, что в 1979–1999 годах он был ближе к Солнцу, чем Нептун. Столкнуться они не могут: Плутон делает два оборота, пока Нептун делает три, и в моменты пересечения орбит Нептун всегда далеко.',
+  f:[['Наклон орбиты','17,1°'],['Резонанс с Нептуном','3 : 2'],['Ближе Нептуна','1979–1999']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'pallas', t:'Паллада: астероид «набок»', y:'1802', h:'35° — рекорд среди крупных астероидов', go:{rec:'pallas'},
+  x:'Паллада — третий по массе астероид, но её орбита наклонена к эклиптике на 35°. Чтобы долететь до неё, аппарату пришлось бы сильно менять плоскость полёта, поэтому Паллада до сих пор не изучена вблизи.',
+  f:[['Наклон орбиты','34,8°'],['Диаметр','≈ 510 км']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'eris', t:'Эрида: из-за неё «разжаловали» Плутон', y:'2005', h:'44° к эклиптике, массивнее Плутона', go:{body:'eris'},
+  x:'Эриду открыли в 2005 году: она на четверть массивнее Плутона и летает под углом 44° к плоскости планет. Спор, считать ли её десятой планетой, закончился в 2006 году новым определением планеты — и Плутон стал карликовой планетой вместе с ней.',
+  f:[['Наклон орбиты','44°'],['Расстояние сейчас','≈ 96 а.е.'],['Спутник','Дисномия']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'haumea', t:'Хаумеа: вращающаяся «дыня»', y:'2004', h:'оборот за 3,9 часа, кольцо, 28° к эклиптике', go:{body:'haumea'},
+  x:'Хаумеа вращается так быстро — один оборот за 3,9 часа, — что вытянулась в эллипсоид почти вдвое длиннее своей ширины. В 2017 году у неё нашли кольцо — впервые у тела за орбитой Нептуна.',
+  f:[['Наклон орбиты','28°'],['Сутки','3,9 часа'],['Спутники','Хииака и Намака']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'makemake', t:'Макемаке: метановый мир', y:'2005', h:'29° к эклиптике', go:{body:'makemake'},
+  x:'Карликовая планета пояса Койпера, покрытая метановым льдом. Её орбита наклонена на 29°; в 2016 году телескоп «Хаббл» нашёл у неё маленький тёмный спутник.',
+  f:[['Наклон орбиты','29°'],['Период','≈ 305 лет']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'sedna', t:'Седна: год длиной 11 400 лет', y:'2003', h:'уходит почти на 1 000 а.е. — Нептун её не держит', go:{body:'sedna'},
+  x:'В ближайшей точке Седна подходит к Солнцу на 76 а.е., а в дальней уходит почти на 1 000 а.е. Нептун на таком расстоянии на неё не влияет — значит, орбиту вытянуло что-то другое: пролетавшая мимо звезда или гипотетическая Девятая планета.',
+  f:[['Перигелий','76 а.е. (2076 год)'],['Афелий','≈ 940 а.е.'],['Период','≈ 11 400 лет']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'halley', t:'Комета Галлея летит навстречу', y:'1758', h:'обратная орбита — против движения планет', go:{rec:'halley'},
+  x:'Почти все тела Солнечной системы обращаются в одну сторону. Комета Галлея — наоборот: её орбита наклонена на 162°, то есть она летит навстречу планетам. Поэтому её метеоры — Ориониды и эта-Аквариды — влетают в атмосферу со скоростью около 66 км/с.',
+  f:[['Наклон орбиты','162° (обратная)'],['Период','≈ 76 лет'],['Следующее возвращение','2061']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'bz509', t:'2015 BZ509: встречный сосед Юпитера', y:'2015', h:'делит орбиту с Юпитером, но летит в обратную сторону', go:{body:'bz509'},
+  x:'Этот небольшой астероид обращается вокруг Солнца за то же время, что и Юпитер, но в противоположную сторону — и при этом не сталкивается с планетой. По одной из гипотез, он пришёл из другой звёздной системы.',
+  f:[['Наклон орбиты','163° (обратная)'],['Период','≈ 11,6 года'],['Диаметр','≈ 3 км']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'ulysses', t:'«Улисс»: над полюсами Солнца', y:'1990', h:'единственный аппарат на орбите под 80° к эклиптике', go:{body:'ulysses'},
+  x:'Ракеты разгоняют аппараты в плоскости планет, а выйти из неё очень дорого. «Улисс» (ESA и NASA) в 1992 году пролетел у Юпитера, и гравитация планеты развернула его на орбиту под углом 80°. До 2009 года он трижды пролетел над полюсами Солнца.',
+  f:[['Наклон орбиты','80°'],['Работал','1990–2009']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'solo', t:'Solar Orbiter заглянул на полюс Солнца', y:'2025', h:'первые снимки полярных областей Солнца', go:{name:'Solar Orbiter'},
+  x:'Каждый пролёт у Венеры наклоняет орбиту Solar Orbiter всё сильнее. В 2025 году наклон достиг 17°, и впервые удалось снять полюс Солнца — там, где формируется его магнитное поле. К 2029 году наклон вырастет до 33°.',
+  f:[['Наклон в 2025 году','17°'],['К 2029 году','33°']]},
+ {tab:'anom', g:'НАКЛОНЫ И СТРАННЫЕ ОРБИТЫ', id:'voyagers', t:'Вояджеры разлетелись вверх и вниз', y:'1977', h:'один ушёл к северу от эклиптики, другой — к югу', go:{rec:'voyager1'},
+  x:'«Вояджер-1» пролетел над Титаном, и гравитация Сатурна отправила его на север от плоскости планет. «Вояджер-2» после Нептуна ушёл на юг. Поэтому сегодня один виден в созвездии Змееносца, а другой — в южном созвездии Телескопа.',
+  f:[['«Вояджер-1»','≈ 35° к северу'],['«Вояджер-2»','≈ 48° к югу']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'oumuamua', t:'ʻОумуамуа: гость с ускорением', y:'2017', h:'межзвёздный объект ускорялся без видимого хвоста', go:{rec:'oumuamua'},
+  x:'Первый замеченный межзвёздный объект оказался вытянутым, как сигара или блин, и уходил от Солнца чуть быстрее, чем позволяет гравитация. Хвоста и газа не увидели. Самое вероятное объяснение — незаметное испарение льда, но спор не закрыт.',
+  f:[['Открыт','19 октября 2017'],['Размер','≈ 100–400 м']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'atlas3i', t:'3I/ATLAS: возможно, старше Солнца', y:'2025', h:'третий межзвёздный гость', go:{rec:'atlas3i'},
+  x:'Комета 3I/ATLAS, открытая 1 июля 2025 года, прилетела из другой звёздной системы со скоростью около 58 км/с. По её траектории предполагают, что она могла образоваться у звезды толстого диска Галактики и быть старше Солнечной системы.',
+  f:[['Открыта','1 июля 2025'],['Скорость','≈ 58 км/с']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'triton', t:'Тритон крутится в обратную сторону', y:'1989', h:'пойманный объект пояса Койпера', go:{rec:'triton'},
+  x:'Тритон — единственная крупная луна, обращающаяся против вращения своей планеты: скорее всего, Нептун захватил его из пояса Койпера. «Вояджер-2» в 1989 году увидел на Тритоне гейзеры азота высотой до 8 км. Через миллиарды лет приливы разорвут его в кольцо.',
+  f:[['Орбита','обратная'],['Гейзеры','до 8 км']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'nereid', t:'Нереида: самая вытянутая орбита', y:'1949', h:'то в 1,4 млн, то в 9,6 млн км от Нептуна', go:{rec:'nereid'},
+  x:'Спутник Нептуна Нереида летает по орбите с эксцентриситетом 0,75: в ближней точке он в 1,4 млн км от планеты, в дальней — в 9,6 млн км. Вероятно, орбиту «испортил» захват Тритона.',
+  f:[['Эксцентриситет','0,75'],['Период','360 суток']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'iapetus', t:'Япет: двуликая луна с хребтом', y:'1671', h:'одна сторона чёрная, другая белая', go:{rec:'iapetus'},
+  x:'Передняя сторона Япета тёмная, как уголь, задняя — белая, как снег: ещё Кассини в XVII веке замечал, что Япет «пропадает» с одной стороны от Сатурна. А по экватору тянется хребет высотой до 20 км — как шов на грецком орехе.',
+  f:[['Открыт','1671, Дж. Кассини'],['Хребет','до 20 км']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'miranda', t:'Миранда: луна-Франкенштейн', y:'1986', h:'обрыв высотой около 20 км', go:{rec:'miranda'},
+  x:'Поверхность спутника Урана выглядит сшитой из разных кусков: каньоны, полосатые «гоночные трассы», гладкие равнины. Здесь же обрыв Верона высотой около 20 км: камень падал бы с него около 12 минут.',
+  f:[['Снята','«Вояджер-2», 1986'],['Обрыв Верона','≈ 20 км']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'phobos', t:'Фобос падает на Марс', y:'1877', h:'через 30–50 млн лет станет кольцом', go:{rec:'phobos'},
+  x:'Фобос летает ниже синхронной орбиты, и приливы Марса тормозят его: он приближается к планете примерно на 2 м за столетие. Через 30–50 млн лет его разорвёт в кольцо или он упадёт на Марс.',
+  f:[['Высота орбиты','≈ 6 000 км'],['Виток','7 ч 39 мин']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'venus', t:'Венера: сутки длиннее года', y:'1962', h:'Солнце встаёт на западе', go:{rec:'venus'},
+  x:'Венера вращается в обратную сторону и очень медленно: оборот вокруг оси занимает 243 земных суток, а вокруг Солнца — 225. Поэтому Солнце там встаёт на западе, а солнечные сутки длятся 117 земных.',
+  f:[['Оборот вокруг оси','243 сут'],['Год','225 сут'],['Солнечные сутки','117 сут']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'uranus', t:'Уран лежит на боку', y:'1781', h:'ось наклонена на 98°', go:{rec:'uranus'},
+  x:'Ось вращения Урана наклонена на 98°: планета катится по орбите «на боку». Каждый полюс по 42 года освещён непрерывно, а потом столько же длится полярная ночь. Скорее всего, когда-то в Уран врезалось тело размером с Землю.',
+  f:[['Наклон оси','97,8°'],['Полярный день','42 года']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'mercury', t:'Орбита Меркурия «не сходилась»', y:'1859', h:'43″ в век объяснила только теория относительности', go:{rec:'mercury'},
+  x:'Перигелий Меркурия смещается быстрее, чем следует из законов Ньютона, — на 43 угловые секунды за столетие. В XIX веке искали невидимую планету Вулкан. Ответ нашёл Эйнштейн в 1915 году: это искривление пространства вблизи Солнца.',
+  f:[['Лишнее смещение','43″ за 100 лет'],['Объяснение','общая теория относительности']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'kamooalewa', t:'Камоалева: кусочек Луны рядом с Землёй', y:'2016', h:'квазиспутник, к которому летит «Тяньвэнь-2»', go:{body:'kamooalewa'},
+  x:'Небольшой астероид обращается вокруг Солнца почти как Земля и год за годом остаётся неподалёку, будто спутник. Его спектр похож на лунные породы — возможно, это осколок, выбитый из Луны ударом. Китайский зонд «Тяньвэнь-2» должен доставить с него грунт.',
+  f:[['Размер','40–100 м'],['Зонд','«Тяньвэнь-2» (запущен в 2025)']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'minimoons', t:'Мини-луны Земли', y:'2020, 2024', h:'2020 CD3 и 2024 PT5 на время становились спутниками', go:{rec:'earth'},
+  x:'Иногда Земля ненадолго захватывает маленькие астероиды. 2020 CD3 размером с автомобиль кружил вокруг неё около двух лет, а 2024 PT5 осенью 2024 года почти два месяца был нашей «второй луной», после чего ушёл дальше вокруг Солнца.',
+  f:[['2020 CD3','≈ 2 м, 2018–2020'],['2024 PT5','≈ 10 м, 29.09–25.11.2024']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'arrokoth', t:'Аррокот: снеговик на краю системы', y:'2019', h:'два слипшихся тела, снятые New Horizons', go:{body:'arrokoth'},
+  x:'1 января 2019 года New Horizons пролетел мимо Аррокота — самого далёкого и самого древнего тела, которое когда-либо снимали вблизи. Он состоит из двух сплюснутых «лепёшек», которые когда-то мягко соприкоснулись и слиплись.',
+  f:[['Пролёт','1 января 2019'],['Расстояние','≈ 44 а.е.'],['Длина','36 км']]},
+ {tab:'anom', g:'СТРАННЫЕ ТЕЛА', id:'phaethon', t:'Фаэтон: каменная комета', y:'1983', h:'астероид — родитель Геминид', go:{body:'phaethon'},
+  x:'Метеорные потоки обычно рождаются из комет, но Геминиды — из астероида Фаэтон. Он подходит к Солнцу ближе Меркурия, раскаляется до 700 °C и, вероятно, трескается, теряя пыль. К нему готовят японский зонд DESTINY+.',
+  f:[['Перигелий','0,14 а.е.'],['Нагрев','до 700 °C'],['Поток','Геминиды (декабрь)']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'roadster', t:'Tesla Roadster в космосе', y:'2018', h:'автомобиль на орбите вокруг Солнца', go:{body:'roadster'},
+  x:'При первом пуске Falcon Heavy в феврале 2018 года вместо груза-макета SpaceX отправила вишнёвый Tesla Roadster с манекеном Starman в скафандре. Машина летает вокруг Солнца по орбите, заходящей за орбиту Марса.',
+  f:[['Запуск','6 февраля 2018'],['Орбита','0,99–1,66 а.е.']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'j002e3', t:'Астероиды, которые оказались ступенями', y:'2002, 2020', h:'J002E3 и 2020 SO — забытые ступени «Аполлона-12» и «Сервейера-2»', go:{rec:'earth'},
+  x:'В 2002 году любитель нашёл «новый спутник Земли» J002E3. Спектр показал белую краску с диоксидом титана, как у ракет «Сатурн»: это была ступень S-IVB «Аполлона-12», вернувшаяся к Земле. В 2020 году так же «нашёлся» разгонный блок «Сервейера-2», запущенного в 1966 году.',
+  f:[['J002E3','ступень «Аполлона-12» (1969)'],['2020 SO','ступень «Сервейера-2» (1966)']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'zombie', t:'Зомби-спутники', y:'2002, 2013, 2018', h:'AMSAT-OSCAR 7 ожил после 21 года молчания', go:{sat:7530},
+  x:'Радиолюбительский спутник AMSAT-OSCAR 7 замолчал в 1981 году, когда в аккумуляторе случилось замыкание, а в 2002 году замыкание исчезло — и он снова заработал от солнечных батарей. LES-1, запущенный в 1965 году, заговорил в 2013-м, а NASA-вский IMAGE потеряли в 2005 году и нашли в 2018-м по сигналу, пойманному любителем.',
+  f:[['AO-7','запуск 1974, ожил в 2002'],['LES-1','запуск 1965, ожил в 2013'],['IMAGE','потерян в 2005, найден в 2018']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'blackknight', t:'«Чёрный рыцарь»', y:'1998', h:'миф о спутнике пришельцев и потерянное термоодеяло', go:{rec:'iss'},
+  x:'Слухи о загадочном «Чёрном рыцаре» на орбите ходили с 1960-х. В 1998 году астронавты шаттла «Индевор», собиравшие МКС, сфотографировали чёрный объект — это было термоодеяло, упущенное во время выхода в открытый космос. Через несколько дней оно сгорело в атмосфере.',
+  f:[['Снимок','декабрь 1998, STS-88'],['Что это','термоодеяло']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'westford', t:'«Вест Форд»: облако медных иголок', y:'1963', h:'480 млн иголок вокруг Земли', go:{deb:/WESTFORD/},
+  x:'В 1963 году США вывели на орбиту около 480 млн медных иголок длиной 1,8 см, чтобы создать искусственное «зеркало» для дальней радиосвязи. Астрономы возмутились, проект закрыли, большинство иголок сгорело — но несколько слипшихся сгустков летают до сих пор.',
+  f:[['Год','1963'],['Иголок','≈ 480 млн']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'lageos', t:'LAGEOS: письмо через 8 млн лет', y:'1976', h:'зеркальный шар с посланием Карла Сагана', go:{sat:8820},
+  x:'Геодезический спутник LAGEOS — шар, покрытый 426 уголковыми отражателями: по лазерным импульсам с Земли измеряют дрейф материков. Он сойдёт с орбиты примерно через 8,4 млн лет, поэтому на борту табличка Карла Сагана для потомков с картами материков в прошлом и будущем.',
+  f:[['Запуск','1976'],['Отражателей','426'],['Сойдёт с орбиты','через ≈ 8,4 млн лет']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'ofeq', t:'«Офек»: против вращения Земли', y:'1988', h:'израильские спутники запускают на запад', go:{sat:/OFEQ/},
+  x:'Обычно ракеты стартуют на восток, чтобы им помогало вращение Земли. Израиль запускает спутники «Офек» на запад, над Средиземным морем, — чтобы ступени не падали на соседние страны. Орбиты получаются обратными, а ракета теряет часть грузоподъёмности.',
+  f:[['Первый запуск','1988'],['Наклонение','≈ 140°']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'molniya', t:'«Молния»: орбита с «магическим» углом', y:'1965', h:'наклон 63,4° держит апогей над Россией', go:{sat:/MOLNIYA/},
+  x:'Геостационарные спутники плохо видны с высоких широт. Для «Молний» придумали вытянутую 12-часовую орбиту с наклоном 63,4°: при этом угле апогей не смещается, и спутник по 8 часов «висит» над северным полушарием. Японская QZSS по похожей идее рисует над Азией восьмёрку.',
+  f:[['Наклонение','63,4°'],['Период','12 ч'],['Первый спутник','1965']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'pioneer', t:'Аномалия «Пионеров»', y:'1980–2012', h:'загадочное торможение, объяснённое через 30 лет', go:{rec:'pioneer10'},
+  x:'Зонды «Пионер-10» и «Пионер-11» тормозились чуть сильнее расчётного — на 8,7·10⁻¹⁰ м/с². Обсуждали даже новую физику. В 2012 году нашли причину: тепло от бортовых радиоизотопных генераторов отражалось от антенны и создавало крошечную тягу.',
+  f:[['Лишнее торможение','8,7·10⁻¹⁰ м/с²'],['Объяснено','2012']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'hubble', t:'«Хаббл» с близорукостью', y:'1990', h:'ошибка в 2 микрометра и «очки» от астронавтов', go:{rec:'hubble'},
+  x:'После запуска в 1990 году снимки «Хаббла» оказались размытыми: главное зеркало отшлифовали с ошибкой — край получился на 2,2 мкм площе. В 1993 году астронавты установили корректирующую оптику, и телескоп стал самым знаменитым в истории.',
+  f:[['Ошибка','2,2 мкм'],['Исправлено','декабрь 1993, STS-61']]},
+ {tab:'anom', g:'РУКОТВОРНЫЕ СТРАННОСТИ', id:'v1fix', t:'Ремонт «Вояджера-1» за 24 млрд км', y:'2024', h:'в 2023–2024 годах он присылал бессмыслицу', go:{rec:'voyager1'},
+  x:'В ноябре 2023 года «Вояджер-1» начал присылать бессмысленные данные: отказал чип памяти. Инженеры по документации 1970-х нашли сбой и в апреле 2024 года перенесли код в другую область памяти. Каждая команда шла до зонда около 22,5 часа.',
+  f:[['Сбой','ноябрь 2023'],['Починили','апрель 2024'],['Сигнал в одну сторону','≈ 22,5 ч']]},
+ // ── КАТАСТРОФЫ
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'apollo1', t:'«Аполлон-1»', y:'27.01.1967', h:'пожар на стартовом столе, трое погибших', go:{earth:[28.522,-80.561]}, pl:'Стартовый комплекс 34, мыс Канаверал',
+  x:'Во время тренировки на стартовом столе в кабине, заполненной чистым кислородом, вспыхнул пожар. Люк открывался внутрь, и давление не дало его открыть. Погибли Вирджил Гриссом, Эдвард Уайт и Роджер Чаффи; корабль переделали, и программа «Аполлон» продолжилась.',
+  f:[['Погибли','3 человека'],['Причина','искра в атмосфере чистого кислорода']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'soyuz1', t:'«Союз-1»', y:'24.04.1967', h:'отказ парашюта, погиб Владимир Комаров', go:{earth:[51.36,59.56]}, pl:'Место гибели «Союза-1», Оренбургская область',
+  x:'Первый полёт нового корабля сопровождался отказами, и Владимира Комарова вернули досрочно. При спуске не вышел основной парашют, а запасной запутался в нём. Комаров стал первым человеком, погибшим в космическом полёте.',
+  f:[['Погиб','Владимир Комаров'],['Причина','отказ парашютной системы']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'soyuz11', t:'«Союз-11»', y:'30.06.1971', h:'разгерметизация: единственные погибшие в самом космосе', go:{earth:[47.36,70.12]}, pl:'Место посадки «Союза-11», Казахстан',
+  x:'Экипаж первой орбитальной станции «Салют-1» возвращался на Землю. При разделении отсеков открылся клапан, и воздух ушёл из спускаемого аппарата меньше чем за минуту. Георгий Добровольский, Владислав Волков и Виктор Пацаев — единственные люди, погибшие выше границы космоса. С тех пор на спуске космонавты надевают скафандры.',
+  f:[['Погибли','3 человека'],['Высота','≈ 168 км']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'challenger', t:'«Челленджер»', y:'28.01.1986', h:'уплотнительное кольцо на морозе, 73 секунды полёта', go:{earth:[28.627,-80.621]}, pl:'Стартовый комплекс 39B, мыс Канаверал',
+  x:'Утро было морозным, и резиновое уплотнительное кольцо твердотопливного ускорителя потеряло упругость. Через 73 секунды после старта прорвавшееся пламя разрушило внешний бак — погибли семь человек, в том числе учительница Криста Маколифф. Инженеры предупреждали о риске накануне.',
+  f:[['Погибли','7 человек'],['Время полёта','73 с']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'columbia', t:'«Колумбия»', y:'01.02.2003', h:'пробоина от куска пены, разрушение при возвращении', go:{earth:[31.4,-94.1]}, pl:'Восточный Техас, поле обломков «Колумбии»',
+  x:'При старте кусок теплоизоляционной пены пробил переднюю кромку левого крыла. Через 16 суток при входе в атмосферу горячая плазма проникла внутрь крыла, и шаттл разрушился над Техасом. Погибли семь астронавтов, в том числе первый израильский астронавт Илан Рамон.',
+  f:[['Погибли','7 человек'],['Причина','пробоина в крыле']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'apollo13', t:'«Аполлон-13»: успешная неудача', y:'13.04.1970', h:'взрыв кислородного бака на пути к Луне — все живы', go:{rec:'moon'},
+  x:'На пути к Луне взорвался кислородный бак служебного модуля. Экипаж перебрался в лунный модуль, как в спасательную шлюпку, облетел Луну и через четверо суток вернулся на Землю. Самодельный переходник для поглотителей углекислого газа собрали из картона, пакетов и скотча.',
+  f:[['Экипаж','Ловелл, Суиджерт, Хейз'],['Итог','все живы']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'voskhod2', t:'«Восход-2»: возвращение в шлюз', y:'18.03.1965', h:'раздувшийся скафандр Леонова и посадка в тайге', go:{earth:[59.6,56.5]}, pl:'Место посадки «Восхода-2», Пермский край',
+  x:'Алексей Леонов первым вышел в открытый космос — и не смог вернуться: скафандр раздулся. Он стравил часть воздуха, рискуя кислородным голоданием, и протиснулся в шлюз. Потом отказала автоматика посадки, корабль сел вручную в тайге под Пермью, и экипаж двое суток ждал спасателей.',
+  f:[['Экипаж','Беляев, Леонов'],['Итог','все живы']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'soyuzsaved', t:'Спасённые «Союзы»', y:'1975–2018', h:'система аварийного спасения уводила экипажи от гибели', go:{earth:[45.92,63.34]}, pl:'Космодром Байконур',
+  x:'«Союз-18-1» (1975): авария ракеты, экипаж пережил перегрузку до 21 g. «Союз Т-10-1» (1983): пожар на стартовом столе, капсулу унесло примерно за 2 секунды до взрыва. «Союз МС-10» (2018): авария на второй минуте полёта, экипаж приземлился в степи невредимым.',
+  f:[['«Союз-18-1»','5 апреля 1975'],['«Союз Т-10-1»','26 сентября 1983'],['«Союз МС-10»','11 октября 2018']]},
+ {tab:'cata', g:'ПИЛОТИРУЕМЫЕ', id:'mir1997', t:'«Мир», 1997: пожар и столкновение', y:'1997', h:'две аварии за полгода — станция уцелела', go:{rec:'earth'},
+  x:'В феврале 1997 года на «Мире» загорелась кислородная шашка — экипаж тушил пожар в дыму. А в июне грузовик «Прогресс М-34» при ручной стыковке врезался в модуль «Спектр» и пробил его. Модуль успели изолировать, станция уцелела.',
+  f:[['Пожар','23 февраля 1997'],['Столкновение','25 июня 1997']]},
+ {tab:'cata', g:'НА СТАРТЕ', id:'nedelin', t:'Неделинская катастрофа', y:'24.10.1960', h:'взрыв ракеты Р-16 на Байконуре', go:{earth:[46.04,63.65]}, pl:'Байконур, площадка 41',
+  x:'На Байконуре готовили к пуску межконтинентальную ракету Р-16. Из-за ошибочной команды запустился двигатель второй ступени, и заправленная ракета взорвалась. Погибли, по разным данным, от 78 до 126 человек, в том числе маршал Митрофан Неделин. Катастрофу засекретили почти на 30 лет.',
+  f:[['Погибли','78–126 человек'],['Ракета','Р-16']]},
+ {tab:'cata', g:'НА СТАРТЕ', id:'plesetsk', t:'Взрыв в Плесецке', y:'18.03.1980', h:'пожар при заправке «Востока-2М»', go:{earth:[62.93,40.58]}, pl:'Космодром Плесецк',
+  x:'При заправке ракеты «Восток-2М» на космодроме Плесецк загорелось топливо, и ракета взорвалась на стартовом столе. Погибли 48 человек. Позже выяснилось, что материал фильтров вызывал разложение перекиси водорода.',
+  f:[['Погибли','48 человек'],['Ракета','«Восток-2М»']]},
+ {tab:'cata', g:'НА СТАРТЕ', id:'xichang', t:'Сичан, 1996', y:'15.02.1996', h:'ракета упала на деревню', go:{earth:[28.25,102.03]}, pl:'Космодром Сичан',
+  x:'Ракета «Чанчжэн-3B» со спутником Intelsat 708 сразу после старта начала заваливаться и через 22 секунды упала на деревню рядом с космодромом. Официально погибли 6 человек; очевидцы считают, что жертв было больше.',
+  f:[['Погибли','6 (официально)'],['Причина','отказ системы управления']]},
+ {tab:'cata', g:'НА СТАРТЕ', id:'alcantara', t:'Алкантара, 2003', y:'22.08.2003', h:'взрыв бразильской ракеты VLS-1', go:{earth:[-2.37,-44.40]}, pl:'Космодром Алкантара, Бразилия',
+  x:'За три дня до старта бразильской ракеты VLS-1 самопроизвольно включился один из двигателей первой ступени. Ракета взорвалась вместе со стартовой башней; погиб 21 специалист. Бразильская космическая программа так и не оправилась от этой потери.',
+  f:[['Погибли','21 человек'],['Ракета','VLS-1']]},
+ {tab:'cata', g:'НА СТАРТЕ', id:'n1', t:'Лунная ракета Н-1', y:'1969–1972', h:'четыре пуска — четыре аварии', go:{earth:[45.996,63.564]}, pl:'Байконур, площадка 110',
+  x:'Советская ракета Н-1 для полёта на Луну стартовала четыре раза, и все четыре — неудачно. 3 июля 1969 года, за две недели до «Аполлона-11», она рухнула на стартовый комплекс: это один из крупнейших неядерных взрывов в истории. В 1974 году программу закрыли.',
+  f:[['Пусков','4, все аварийные'],['Двигателей первой ступени','30']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'ariane', t:'Ariane 5: самый дорогой баг', y:'04.06.1996', h:'переполнение при переводе числа из 64 бит в 16', go:{earth:[5.24,-52.77]}, pl:'Космодром Куру, Французская Гвиана',
+  x:'Первая Ariane 5 через 37 секунд после старта развернулась и самоуничтожилась вместе с четырьмя спутниками Cluster. Программа навигации, перенесённая с Ariane 4, попыталась записать 64-битное число в 16-битную переменную — и переполнение отключило обе системы управления.',
+  f:[['Время полёта','37 с'],['Причина','переполнение 64 → 16 бит']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'mco', t:'Mars Climate Orbiter: фунты против ньютонов', y:'23.09.1999', h:'аппарат сгорел из-за путаницы единиц', go:{rec:'mars'},
+  x:'Одна команда считала импульс двигателей в фунт-силах на секунду, другая ждала ньютоны на секунду. Ошибка в 4,45 раза накапливалась весь перелёт, аппарат прошёл слишком низко над Марсом и сгорел в атмосфере.',
+  f:[['Высота у Марса','≈ 57 км вместо 226'],['Стоимость','125 млн долларов']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'protonm', t:'«Протон-М» вверх ногами', y:'02.07.2013', h:'датчики угловых скоростей поставили перевёрнутыми', go:{earth:[45.92,63.34]}, pl:'Космодром Байконур',
+  x:'Через несколько секунд после старта ракета начала отклоняться, развернулась и врезалась в землю рядом со стартом. Причина — датчики угловых скоростей установили перевёрнутыми. Вместе с ракетой погибли три спутника ГЛОНАСС.',
+  f:[['Время полёта','≈ 17 с'],['Груз','3 спутника ГЛОНАСС-М']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'genesis', t:'Genesis: датчики наоборот', y:'08.09.2004', h:'капсула с солнечным ветром разбилась в пустыне', go:{earth:[40.2,-113.2]}, pl:'Полигон Дагуэй, Юта',
+  x:'Капсула Genesis три года собирала частицы солнечного ветра. При возвращении парашют не раскрылся: датчики перегрузки поставили в перевёрнутом положении. Капсула врезалась в пустыню Юты на скорости около 310 км/ч, но часть образцов учёные спасли.',
+  f:[['Скорость удара','≈ 310 км/ч'],['Причина','перевёрнутые датчики']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'marsloss', t:'Потери на пути к Марсу', y:'1996–2016', h:'«Марс-96», Beagle 2, «Фобос-Грунт», Schiaparelli', go:{rec:'mars'},
+  x:'«Марс-96» не ушёл к Марсу и упал на Землю. Британский Beagle 2 в 2003 году сел на Марс, но не раскрыл все солнечные панели — его нашли на снимках только через 11 лет. «Фобос-Грунт» в 2011 году так и не включил двигатель для ухода с орбиты Земли. Посадочный модуль Schiaparelli в 2016 году разбился из-за сбоя датчика.',
+  f:[['«Марс-96»','1996'],['Beagle 2','2003, найден в 2015'],['«Фобос-Грунт»','2011'],['Schiaparelli','2016']]},
+ {tab:'cata', g:'ОШИБКИ В КОДЕ И ЖЕЛЕЗЕ', id:'starlink22', t:'Starlink и магнитная буря', y:'февраль 2022', h:'38 из 49 новых спутников сгорели', go:{rec:'earth'},
+  x:'SpaceX вывела 49 спутников Starlink на очень низкую орбиту — и на следующий день началась геомагнитная буря. Атмосфера нагрелась, разбухла и стала тормозить спутники гораздо сильнее. 38 из 49 не смогли подняться выше и сгорели.',
+  f:[['Потеряно','38 из 49'],['Пуск','3 февраля 2022']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'fengyun', t:'Фэнъюнь-1C: самое большое облако обломков', y:'11.01.2007', h:'противоспутниковое испытание на высоте 865 км', go:{deb:/FENGYUN 1C/},
+  x:'Китай сбил собственный старый метеоспутник ракетой, запущенной с Земли. Получилось более 3 500 отслеживаемых обломков — крупнейшее облако мусора в истории; многие из них будут летать ещё десятилетия. Они подсвечены на карте.',
+  f:[['Обломков','> 3 500'],['Высота','865 км']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'iridium', t:'Iridium 33 × «Космос-2251»', y:'10.02.2009', h:'первое случайное столкновение спутников', go:{deb:/IRIDIUM 33|COSMOS 2251/},
+  x:'Над Сибирью на высоте 789 км работающий американский спутник связи столкнулся с неработающим советским «Космосом-2251» на скорости 11,7 км/с. Это первое случайное столкновение двух спутников; оба превратились в облака обломков — они подсвечены на карте.',
+  f:[['Высота','789 км'],['Скорость удара','11,7 км/с']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'kosmos1408', t:'«Космос-1408»', y:'15.11.2021', h:'экипаж МКС укрывался в кораблях', go:{deb:/COSMOS 1408/},
+  x:'Россия уничтожила свой старый спутник ракетой, запущенной с Земли. Образовалось около 1 500 отслеживаемых обломков, и экипаж МКС несколько часов укрывался в кораблях на случай удара. Большая часть обломков сгорела к 2024 году.',
+  f:[['Обломков','≈ 1 500'],['Высота','≈ 480 км']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'asat', t:'Ещё два перехвата: USA-193 и «Шакти»', y:'2008, 2019', h:'низкие перехваты — обломки быстро сгорели', go:{rec:'earth'},
+  x:'В 2008 году США сбили ракетой с крейсера аварийный спутник-разведчик USA-193 с полным баком ядовитого топлива. В 2019 году Индия испытала противоспутниковую ракету на своём спутнике Microsat-R. Оба перехвата прошли на небольшой высоте, и почти все обломки быстро сгорели.',
+  f:[['USA-193','21 февраля 2008'],['«Шакти»','27 марта 2019']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'breakups', t:'Разрушения 2024 года', y:'2024', h:'ступень «Чанчжэн-6А» и спутник Intelsat 33e', go:{deb:/INTELSAT 33E|CZ-6A/},
+  x:'В августе 2024 года на орбите развалилась верхняя ступень китайской ракеты «Чанчжэн-6А» — более 700 обломков. В октябре на геостационарной орбите разрушился спутник Intelsat 33e. Мусор появляется не только от столкновений, но и от взрывов остатков топлива и аккумуляторов.',
+  f:[['«Чанчжэн-6А»','август 2024, 700+ обломков'],['Intelsat 33e','октябрь 2024, ГСО']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'skylab', t:'Скайлэб упал на Австралию', y:'11.07.1979', h:'штраф 400 долларов за мусор', go:{earth:[-33.86,121.89]}, pl:'Эсперанс, Западная Австралия',
+  x:'Американская станция Скайлэб массой 77 тонн сошла с орбиты неуправляемо, и её обломки упали на юго-запад Австралии. Никто не пострадал, а городок Эсперанс выставил NASA штраф в 400 долларов за мусор. Его заплатил в 2009 году американский радиоведущий.',
+  f:[['Масса','77 т'],['Штраф','400 долларов']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'kosmos954', t:'«Космос-954»: реактор над Канадой', y:'24.01.1978', h:'радиоактивные обломки на 600 км', go:{earth:[62.5,-114.4]}, pl:'Северо-Западные территории, Канада',
+  x:'Советский спутник-разведчик с ядерным реактором на борту потерял управление и вошёл в атмосферу над северо-западом Канады. Радиоактивные обломки рассеялись полосой около 600 км. Поиски длились месяцы; СССР выплатил Канаде компенсацию.',
+  f:[['Топливо реактора','≈ 50 кг урана'],['Район','Большое Невольничье озеро']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'falls', t:'Неуправляемые падения', y:'1991–2022', h:'«Салют-7», «Тяньгун-1», ступени «Чанчжэн-5B»', go:{earth:[-32.82,-60.72]}, pl:'Капитан-Бермудес, Аргентина',
+  x:'«Салют-7» в 1991 году рассыпался над Аргентиной, «Тяньгун-1» в 2018 году упал в Тихий океан, а огромные ступени «Чанчжэн-5B» в 2020–2022 годах сходили с орбиты неуправляемо — в 2020 году обломки упали на деревни в Кот-д’Ивуаре. Крупные аппараты сегодня стараются топить в «кладбище кораблей» у точки Немо.',
+  f:[['«Салют-7»','7 февраля 1991'],['«Тяньгун-1»','2 апреля 2018'],['«Чанчжэн-5B»','2020–2022']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'envisat', t:'Envisat: 8 тонн мёртвого железа', y:'2012', h:'один из самых опасных объектов на орбите', go:{sat:27386},
+  x:'Европейский спутник наблюдения Земли Envisat перестал отвечать в апреле 2012 года. Он весит 8 тонн и летает на высоте около 770 км, где сам сойдёт с орбиты примерно через 150 лет. Если в него попадёт обломок, образуется новое облако мусора.',
+  f:[['Масса','8,2 т'],['Высота','≈ 770 км']]},
+ {tab:'cata', g:'НА ОРБИТЕ', id:'kessler', t:'Синдром Кесслера', y:'1978', h:'цепная реакция столкновений', go:{deb:/ DEB$|\bDEB\b/},
+  x:'Астрофизик NASA Дональд Кесслер в 1978 году показал: если на какой-то высоте мусора станет слишком много, столкновения начнут порождать обломки быстрее, чем те сгорают. Цепная реакция может сделать орбиту непригодной на десятилетия. На карте подсвечены все обломки — видно, где риск выше всего.',
+  f:[['Автор','Дональд Кесслер'],['Опаснее всего','≈ 750–1 000 км']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'tunguska', t:'Тунгусский метеорит', y:'30.06.1908', h:'взрыв над тайгой мощностью 10–15 мегатонн', go:{earth:[60.886,101.894]}, pl:'Эпицентр Тунгусского взрыва',
+  x:'Над тайгой у реки Подкаменная Тунгуска взорвалось космическое тело размером в несколько десятков метров. Взрыв мощностью 10–15 мегатонн повалил около 80 млн деревьев на площади 2 000 км². Кратера нет — тело разрушилось в воздухе.',
+  f:[['Мощность','10–15 Мт'],['Повален лес','≈ 2 000 км²']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'chelyabinsk', t:'Челябинский метеорит', y:'15.02.2013', h:'около 1 600 пострадавших', go:{earth:[54.8,61.1]}, pl:'Челябинская область',
+  x:'Астероид около 18 метров вошёл в атмосферу на скорости 19 км/с и взорвался над Челябинской областью на высоте около 30 км. Ударная волна выбила окна в тысячах домов, пострадали около 1 600 человек. Крупнейший осколок весом около 650 кг подняли со дна озера Чебаркуль.',
+  f:[['Размер','≈ 18 м'],['Пострадали','≈ 1 600 человек'],['Осколок','≈ 650 кг']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'sl9', t:'Комета врезается в Юпитер', y:'июль 1994', h:'21 обломок кометы Шумейкеров — Леви 9', go:{rec:'jupiter'},
+  x:'Комета Шумейкеров — Леви 9 подошла к Юпитеру слишком близко и рассыпалась на 21 обломок. В июле 1994 года они один за другим врезались в планету; тёмные следы размером с Землю были видны даже в любительские телескопы. Впервые столкновение тел в Солнечной системе наблюдали вживую.',
+  f:[['Обломков','21'],['Удары','16–22 июля 1994']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'chicxulub', t:'Астероид, погубивший динозавров', y:'66 млн лет назад', h:'кратер Чиксулуб диаметром 180 км', go:{earth:[21.3,-89.5]}, pl:'Кратер Чиксулуб, Юкатан',
+  x:'Тело диаметром около 10 км упало у полуострова Юкатан и оставило кратер Чиксулуб диаметром около 180 км. Пыль и сажа надолго закрыли Солнце; вымерло около трёх четвертей видов, включая нептичьих динозавров.',
+  f:[['Диаметр тела','≈ 10 км'],['Кратер','≈ 180 км']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'carrington', t:'Событие Кэррингтона и магнитные бури', y:'1859, 1989, 2024', h:'сияния у тропиков и блэкаут в Квебеке', go:{rec:'sun'},
+  x:'В 1859 году после вспышки на Солнце полярные сияния видели даже в тропиках, а телеграфные линии искрили. Буря 1989 года на 9 часов обесточила Квебек, а в мае 2024 года сияния наблюдали по всему миру, даже в средних широтах.',
+  f:[['1859','событие Кэррингтона'],['1989','блэкаут в Квебеке'],['2024','буря в мае']]},
+ {tab:'cata', g:'ПРИРОДНЫЕ', id:'dart', t:'DART: люди сдвинули астероид', y:'26.09.2022', h:'орбита Диморфа стала короче на 32 минуты', go:{body:'didymos'},
+  x:'Аппарат NASA DART на скорости около 6 км/с врезался в Диморф — 160-метровый спутник астероида Дидим. Период его обращения сократился на 32 минуты. Это первая проверка защиты Земли от астероидов; сейчас к паре летит европейский зонд Hera.',
+  f:[['Скорость удара','≈ 6,1 км/с'],['Период сократился','на 32 мин'],['Следом летит','Hera (ESA)']]}
+];
+
+// вкладки над «Объекты / Спутники / Запуски»
+const LP=$('leftPanel'), tabs1=$('lpTabs');
+const row2=mk('div'); row2.id='lpTabs2';
+const TAB2=[['anom','◬ АНОМАЛИИ','Странные орбиты, тела и рукотворные загадки'],['cata','✸ КАТАСТРОФЫ','Аварии, падения, столкновения и удары из космоса']];
+const panes2={};
+TAB2.forEach(T=>{
+  const b=mk('button','lpTab'); b.dataset.t=T[0]; b.title=T[2]; b.innerHTML=T[1]+'<b>'+STORIES.filter(s=>s.tab===T[0]).length+' историй</b>';
+  b.addEventListener('click',()=>{ V8.showTab(T[0]); if(T[0]==='cata') drawFalling(); });
+  row2.appendChild(b);
+  const pane=mk('div','lpPane'), list=mk('div','stList'); pane.appendChild(list); panes2[T[0]]={pane:pane, list:list};
+  if(V8.regTab) V8.regTab(T[0],b,pane);
+});
+if(tabs1&&tabs1.parentNode) tabs1.parentNode.insertBefore(row2,tabs1);
+let stActive=null, stTarget=null, stHL=false;
+function drawList(tab){
+  const L=panes2[tab].list; L.innerHTML='';
+  L.appendChild(mk('div','stIntro',tab==='anom'?'Наклоны «не как у всех», загадочные тела и странные истории спутников. Щелчок — камера к объекту, история — в досье справа.':
+    'Аварии ракет и кораблей, падения станций, столкновения на орбите и удары из космоса. Щелчок — место события, история — в досье справа.'));
+  if(tab==='cata'){ const box=mk('div'); box.id='stFall'; L.appendChild(box); }
+  let g='';
+  STORIES.filter(s=>s.tab===tab).forEach(s=>{
+    if(s.g!==g){ g=s.g; L.appendChild(mk('div','stGrp',g)); }
+    const d=mk('div','stRow'+(stActive===s?' on':'')); d.dataset.id=s.id;
+    const t=mk('div','t'); t.appendChild(mk('b',null,s.t)); t.appendChild(mk('i',null,s.y)); d.appendChild(t);
+    const h=mk('small',null,s.h); if(s.go.body) h.appendChild(mk('span','new','● новое на карте')); d.appendChild(h);
+    d.addEventListener('click',()=>openStory(s)); L.appendChild(d);
+  });
+}
+TAB2.forEach(T=>drawList(T[0]));
+// «СЕЙЧАС ПАДАЕТ»: самые низкие объекты каталога — первые кандидаты сгореть в атмосфере
+function drawFalling(){
+  const box=$('stFall'); if(!box) return;
+  const c=V8.cat; box.innerHTML='';
+  if(!c||!c.ready){ box.appendChild(mk('div','stGrp','СЕЙЧАС ПАДАЕТ')); box.appendChild(mk('div','stIntro','каталог спутников загружается…')); return; }
+  const L=c.list.filter(s=>!s.bad&&!s.approx&&s.peri<215&&s.apo<700&&s.peri>60).sort((a,b)=>a.peri-b.peri);
+  box.appendChild(mk('div','stGrp','СЕЙЧАС ПАДАЕТ · '+L.length+' объектов ниже 215 км'));
+  box.appendChild(mk('div','stIntro','Чем ниже перигей, тем сильнее тормозит атмосфера. Оценка срока грубая: точный прогноз зависит от Солнца и формы объекта.'));
+  L.slice(0,12).forEach(s=>{ const d=mk('div','stRow'), t=mk('div','t');
+    t.appendChild(mk('b',null,s.nm||s.N)); t.appendChild(mk('i',null,fmtNum(s.peri)+' км')); d.appendChild(t);
+    d.appendChild(mk('small',null,(s.peri<150?'сгорит в ближайшие часы–сутки':(s.peri<180?'сгорит в ближайшие дни':'сгорит в ближайшие недели'))+' · NORAD '+s.norad));
+    d.addEventListener('click',()=>{ closeStory(); V8.openSat(s,true); }); box.appendChild(d); });
+}
+setInterval(()=>{ if(panes2.cata.pane.classList.contains('on')) drawFalling(); },60000);
+// история — сверху досье выбранного объекта
+const stBox=mk('div'); stBox.id='rpStory';
+const rpScroll=$('rpScroll'); if(rpScroll) rpScroll.insertBefore(stBox,rpScroll.firstChild);
+function renderStory(s){
+  stBox.className='on '+s.tab; stBox.innerHTML='';
+  const h=mk('div','sh'); h.appendChild(mk('span',null,(s.tab==='anom'?'◬ АНОМАЛИЯ':'✸ КАТАСТРОФА')+' · '+s.g)); const x=mk('button',null,'✕'); x.title='Скрыть историю'; x.addEventListener('click',closeStory); h.appendChild(x); stBox.appendChild(h);
+  stBox.appendChild(mk('div','sn',s.t)); stBox.appendChild(mk('div','sy',s.y)); stBox.appendChild(mk('div','sx',s.x));
+  const f=mk('div','sf'); (s.f||[]).forEach(p=>{ const d=mk('div'); d.appendChild(mk('span',null,p[0])); d.appendChild(mk('b',null,p[1])); f.appendChild(d); }); stBox.appendChild(f);
+  if(rpScroll) rpScroll.scrollTop=0;
+}
+function closeStory(){
+  stActive=null; stTarget=null; stBox.className=''; stBox.innerHTML='';
+  if(stHL){ stHL=false; V8.setHighlight(null); V8.refreshHL&&V8.refreshHL(); }
+  document.querySelectorAll('.stRow.on').forEach(e=>e.classList.remove('on'));
+}
+function placeRec(s){
+  let r=byId['pl_'+s.id]; if(r) return r;
+  const node=new THREE.Group(); node.position.copy(B.surfPoint(s.go.earth[0],s.go.earth[1],eR*1.004)); EARTH.mesh.add(node);
+  const spr=B.glowSprite(s.tab==='cata'?B.GLOW.red:B.GLOW.white,0.5,0.95); node.add(spr);
+  r=B.addRec({id:'pl_'+s.id, code:s.tab==='cata'?'✸':'◬', name:s.pl||s.t, kindType:'place', type:'place', node:node, visR:0.04, hitR:0.35, minR:0.3, focusR:eR*2.3,
+    parentRec:EARTH, labelColor:s.tab==='cata'?'#ff8a7a':'#c9a7ff', noDistRows:true, spr:spr, story:s,
+    facts:[['Координаты',Math.abs(s.go.earth[0]).toFixed(2)+'° '+(s.go.earth[0]>=0?'с. ш.':'ю. ш.')+', '+Math.abs(s.go.earth[1]).toFixed(2)+'° '+(s.go.earth[1]>=0?'в. д.':'з. д.')],['Дата',s.y]],
+    desc:'Место события на карте. История — выше, в рамке.'});
+  r.labelCheck=()=>stActive===s; r.pickCheck=()=>stActive===s;
+  return r;
+}
+hooks.post.push(function(){ STORIES.forEach(s=>{ const r=byId['pl_'+s.id]; if(r){ const on=stActive===s; r.node.visible=on;
+  if(on) r.spr.scale.setScalar(clamp(camera.position.distanceTo(B.worldPos(r))*0.04,0.05,3)); } }); });
+function needCat(fn){ const c=V8.cat; if(c&&c.ready) fn(); else { toast('КАТАЛОГ СПУТНИКОВ ЗАГРУЖАЕТСЯ…','',2200); setTimeout(()=>needCat(fn),1500); } }
+function openStory(s){
+  if(fl) stopFlight(true); if(lh) lhClose();
+  closeStory(); stActive=s;
+  document.querySelectorAll('.stRow').forEach(e=>e.classList.toggle('on',e.dataset.id===s.id));
+  const g=s.go; let r=null;
+  if(g.rec) r=byId[g.rec];
+  else if(g.name) r=B.recs.find(x=>x.name===g.name);
+  else if(g.body) r=NEWB[g.body];
+  else if(g.earth) r=placeRec(s);
+  if(r){ if(r.cat==='asteroid'&&!B.toggles.asteroids){ const b=$('tAsteroids'); if(b) b.click(); else { B.toggles.asteroids=true; B.applyVisibility(); } }
+    if(r.cat==='probe'&&!B.toggles.probes){ const b=$('tProbes'); if(b) b.click(); else { B.toggles.probes=true; B.applyVisibility(); } }
+    stTarget=r; B.select(r); B.focusOn(r); renderStory(s); return; }
+  if(g.sat!=null) return needCat(()=>{ if(stActive!==s) return;
+    const c=V8.cat, x=typeof g.sat==='number'?c.byNorad.get(g.sat):c.list.find(q=>g.sat.test(q.N)&&!q.bad);
+    if(x){ stTarget=V8.satRec(x); V8.openSat(x,true); renderStory(s); } else { stTarget=EARTH; B.select(EARTH); B.focusOn(EARTH); renderStory(s); } });
+  if(g.deb) return needCat(()=>{ if(stActive!==s) return;
+    V8.loadApprox&&V8.loadApprox().catch(()=>{});
+    stTarget=EARTH; B.select(EARTH); B.focusOn(EARTH); V8.setMode('deb');
+    const t=q=>g.deb.test(q.N); t._story=1; V8.setHighlight(t,'story'); stHL=true; renderStory(s);
+    const n=V8.cat.list.filter(q=>!q.bad&&g.deb.test(q.N)).length;
+    toast(n?'☄ ПОДСВЕЧЕНО ОБЛОМКОВ: '+fmtNum(n):'ОБЛОМКОВ ЭТОГО СОБЫТИЯ В КАТАЛОГЕ УЖЕ НЕТ — БОЛЬШИНСТВО СГОРЕЛО','ok',3200); });
+}
+hooks.select.push(function(r){ if(stActive&&r!==stTarget) closeStory(); });
+
+/* ════ 7. ЗВУК «СПУТНИКА-1» В «ИСТОРИИ ОРБИТЫ» ═══════════════════════
+   4 октября 1957 года весь мир слушал «бип-бип» первого спутника. Когда шкала истории проходит
+   эту дату, звучит похожий сигнал (если звук карты включён). */
+let beeped=false;
+function sputnikBeep(){
+  if(!(B.sound&&B.sound.on&&B.sound.on())) return;
+  try{ const AC=new (window.AudioContext||window.webkitAudioContext)(), g=AC.createGain(), f=AC.createBiquadFilter(), o=AC.createOscillator();
+    o.type='square'; f.type='lowpass'; f.frequency.value=1900; g.gain.value=0; o.connect(f); f.connect(g); g.connect(AC.destination);
+    const t0=AC.currentTime+0.05; o.start(t0);
+    for(let i=0;i<10;i++){ const a=t0+i*0.62; o.frequency.setValueAtTime(i%2?880:1040,a);
+      g.gain.setValueAtTime(0,a); g.gain.linearRampToValueAtTime(0.045,a+0.012); g.gain.setValueAtTime(0.045,a+0.3); g.gain.linearRampToValueAtTime(0,a+0.315); }
+    o.stop(t0+10*0.62); setTimeout(()=>{ try{ AC.close(); }catch(e){} },8000); }catch(e){}
+}
+hooks.post.push(function(){
+  const h=V11.hist&&V11.hist();
+  if(!h){ beeped=false; return; }
+  if(!beeped&&h.y>=1957.75&&h.y<1958.4){ beeped=true; sputnikBeep(); }
+  if(h.y<1957.7) beeped=false;
+});
+
+/* ════ 8. КЛАВИШИ, СПРАВКА, ОТЛАДКА ═══════════════════════════════════ */
+hooks.key.unshift(function(e){
+  if(e.ctrlKey||e.altKey||e.metaKey) return false;
+  if(e.code==='KeyJ'&&(lh||nearMoon())){ lhToggle(); return true; }
+  if(e.key==='Escape'&&fl){ stopFlight(true); return true; }
+  if(e.key==='Escape'&&lh){ lhClose(); return true; }
+  if(e.key===' '&&fl){ $('flPlay').click(); return true; }
+  if(e.key===' '&&lh){ $('lhPlay').click(); return true; }
+  return false;
+});
+(function(){ const hb=$('helpBox'); if(!hb) return; const sec=mk('div','hsec');
+  sec.innerHTML='<h3>НОВОЕ В v0.15</h3><table>'+
+   '<tr><td>Луна: ◌ · ⚑ · ◎</td><td>у Луны внизу переключатель: спутники Луны, миссии (места посадок) или всё вместе</td></tr>'+
+   '<tr><td>J у Луны</td><td>история освоения Луны 1959 → сейчас: посадки и спутники появляются в свой год</td></tr>'+
+   '<tr><td>Щелчок по миссии</td><td>полёт по реальным датам: старт, перелёт к той точке, где будет Луна, орбита и посадка; камера «◉ С БОРТА» показывает восход Земли</td></tr>'+
+   '<tr><td>◬ · ✸</td><td>вкладки «Аномалии» и «Катастрофы» над списком: 72 истории; на карте появились Эрида, Седна, Хаумеа, Макемаке, Аррокот, Фаэтон, Камоалева, Дидим, «Улисс» и Tesla Roadster</td></tr>'+
+   '<tr><td>Сейчас падает</td><td>вверху вкладки «Катастрофы» — самые низкие объекты каталога, которые скоро сгорят</td></tr>'+
+   '<tr><td>1957 в истории</td><td>когда шкала «Истории орбиты» проходит 4 октября 1957, звучит «бип-бип» первого спутника</td></tr></table>';
+  hb.insertBefore(sec,hb.children[1]||null); })();
+window.__v15={LSR:LSR, lfr:lfr, moonRel:moonRel, siteOff:siteOff, padRel:padRel, fl:()=>fl, lh:()=>lh, startFlight:startFlight, stopFlight:stopFlight,
+  lhOpen:lhOpen, lhClose:lhClose, setMoonMode:setMoonMode, moonMode:()=>moonMode, nearMoon:nearMoon, STORIES:STORIES, openStory:openStory, closeStory:closeStory,
+  NEWB:NEWB, buildFlight:buildFlight, MT:MT, drawFalling:drawFalling};
+})();
+</script>
+
 </body>
 </html>
