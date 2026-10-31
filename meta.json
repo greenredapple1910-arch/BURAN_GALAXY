@@ -1,0 +1,11 @@
+{
+ "t": "2026-10-31T12:49:11Z",
+ "files": {
+  "active.tle": "2026-10-31T12:49:11Z",
+  "visual.tle": "2026-10-31T12:49:14Z",
+  "debris.tle": "2026-10-31T12:49:24Z",
+  "satcat.json": "2026-10-30T22:30:26Z",
+  "launches.json": "2026-10-31T12:49:27Z"
+ },
+ "source": "CelesTrak (T. S. Kelso), https://celestrak.org; Launch Library 2 — The Space Devs, https://thespacedevs.com"
+}
